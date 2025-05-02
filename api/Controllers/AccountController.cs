@@ -1,15 +1,35 @@
 namespace api.Controllers;
 
-public class AccountController : BaseApiController
+public class AccountController(IAccountRepository accountRepository) : BaseApiController
 {
-     #region Db and Token Settings
-    private readonly IMongoCollection<AppUser> _collection;
+    //  [HttpPost("create")]
+    // public ActionResult<AppUser> Register(AppUser userInput)
+    // {
+    //     if (userInput.Password != userInput.ConfirmPassword)
+    //     {
+    //         return BadRequest("Passwords do not match");
+    //     }
 
-    // constructor - dependency injections
-    public UserController(IMongoClient client, IMongoDbSettings dbSettings)
-    {
-        var dbName = client.GetDatabase(dbSettings.DatabaseName);
-        _collection = dbName.GetCollection<AppUser>("users");
-    }
-    #endregion
+    //     AppUser user = _collection.Find<AppUser>(doc => doc.Email == userInput.Email.Trim().ToLower()).FirstOrDefault();
+
+    //     if (user is null)
+    //     {
+    //         AppUser appUser = new AppUser(
+    //                 Id: null,
+    //                 Email: userInput.Email.Trim().ToLower(),
+    //                 Name: userInput.Name,
+    //                 Age: userInput.Age,
+    //                 Password: userInput.Password,
+    //                 ConfirmPassword: userInput.ConfirmPassword,
+    //                 City: userInput.City,
+    //                 Country: userInput.Country
+    //                 );
+
+    //         _collection.InsertOne(appUser);
+
+    //         return appUser;
+    //     }
+
+    //     return BadRequest("This Email already Exists!");
+    // }
 }
