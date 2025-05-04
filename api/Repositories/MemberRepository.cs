@@ -1,6 +1,6 @@
 namespace api.Repositories;
 
-public class MemberRepository
+public class MemberRepository : IMemberRepository
 {
     #region Db and Token Settings
     private readonly IMongoCollection<AppUser> _collection;
