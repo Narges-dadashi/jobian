@@ -1,4 +1,4 @@
-namespace api;
+namespace api.Repositoreis;
 
 public class AccountRepository : IAccountRepository
 {
@@ -29,5 +29,34 @@ public class AccountRepository : IAccountRepository
         );
 
         return loggedInDto;
+    }
+
+    public async Task<LoggedInDto?> LoginAsync(LoginDto userInput, CancellationToken cancellationToken)
+    {
+        AppUser user = await _collection.Find(doc =>
+        doc.Email == userInput.Email && doc.Password == userInput.Password)
+        .FirstOrDefaultAsync(cancellationToken);
+
+        if (user is null)
+            return null;
+
+        LoggedInDto loggedInDto = new(
+            Email: user.Email,
+            Name: user.Name
+        );
+
+        return loggedInDto;
+    }
+
+    public async Task<DeleteResult?> DeleteByIdAsync(string userId, CancellationToken cancellationToken)
+    {
+        AppUser appUser = await _collection.Find<AppUser>(doc =>
+        doc.Id == userId).FirstOrDefaultAsync(cancellationToken);
+
+        if (appUser is null)
+            return null;
+
+        return await _collection.DeleteOneAsync<AppUser>(doc =>
+        doc.Id == userId, cancellationToken);
     }
 }
