@@ -30,7 +30,7 @@ export class AccountService {
       )
   }
 
-  getAllMember(loggedInUser: LoggedIn): Observable<Member[]> {
+  getAllMember(): Observable<Member[]> {
     return this.http.get<Member[]>(this._baseApiUrl + 'member');
   }
 
