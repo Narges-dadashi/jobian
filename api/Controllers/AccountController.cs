@@ -26,4 +26,15 @@ public class AccountController(IAccountRepository accountRepository) : BaseApiCo
 
         return loggedInDto;
     }
+
+    [HttpDelete("delete/{userId}")]
+    public async Task<ActionResult<DeleteResult>> DeleteById(string userId, CancellationToken cancellationToken)
+    {
+        DeleteResult? deleteResult = await accountRepository.DeleteByIdAsync(userId, cancellationToken);
+
+        if (deleteResult is null)
+            return BadRequest("Opration failed");
+
+        return deleteResult;
+    }
 }
