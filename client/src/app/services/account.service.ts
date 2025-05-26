@@ -6,6 +6,7 @@ import { Login } from '../../../models/login.model';
 import { AppUser } from '../../../models/app-user.model';
 import { Member } from '../../../models/member.model';
 import { isPlatformBrowser } from '@angular/common';
+import { Router } from 'express';
 
 @Injectable({
   providedIn: 'root'
@@ -14,6 +15,7 @@ export class AccountService {
   http = inject(HttpClient);
   private readonly _baseApiUrl: string = 'http://localhost:5000/api/';
   platformId = inject(PLATFORM_ID);
+  router = inject(Router);
 
   register(user: AppUser): Observable<LoggedIn> {
     return this.http.post<LoggedIn>(this._baseApiUrl + 'account/register', user);
@@ -27,11 +29,7 @@ export class AccountService {
 
           return userResponse;
         })
-      )
-  }
-
-  getAllMember(): Observable<Member[]> {
-    return this.http.get<Member[]>(this._baseApiUrl + 'member');
+      );
   }
 
   setCurrentUser(loggedInUser: LoggedIn): void {
