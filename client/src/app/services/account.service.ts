@@ -4,9 +4,8 @@ import { map, Observable } from 'rxjs';
 import { LoggedIn } from '../../../models/logged-in.model';
 import { Login } from '../../../models/login.model';
 import { AppUser } from '../../../models/app-user.model';
-import { Member } from '../../../models/member.model';
 import { isPlatformBrowser } from '@angular/common';
-import { Router } from 'express';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -17,23 +16,46 @@ export class AccountService {
   platformId = inject(PLATFORM_ID);
   router = inject(Router);
 
-  register(user: AppUser): Observable<LoggedIn> {
-    return this.http.post<LoggedIn>(this._baseApiUrl + 'account/register', user);
+  register(userInput: AppUser): Observable<LoggedIn | null> {
+    return this.http.post<LoggedIn>(this._baseApiUrl + 'account/register', userInput).pipe(
+      map(res => {
+        if (res) {
+          this.setCurrentUser(res);
+
+          return res;
+        }
+
+        return null;
+      })
+    );
   }
 
-  login(userInput: Login): Observable<LoggedIn> {
+  login(userInput: Login): Observable<LoggedIn | null> {
     return this.http.post<LoggedIn>(
       this._baseApiUrl + 'account/login', userInput).pipe(
-        map(userResponse => {
-          this.setCurrentUser(userResponse);
+        map(res => {
+          if (res) {
+            this.setCurrentUser(res);
 
-          return userResponse;
+            return res;
+          }
+
+          return null;
         })
       );
   }
 
   setCurrentUser(loggedInUser: LoggedIn): void {
-    if (isPlatformBrowser(this.platformId))
+    if (isPlatformBrowser(this.platformId)) {
       localStorage.setItem('loggedInUser', JSON.stringify(loggedInUser));
+    }
+  }
+
+  logout(): void {
+    if (isPlatformBrowser(this.platformId)) {
+      localStorage.clear();
+    }
+
+    this.router.navigateByUrl('account/login');
   }
 }
