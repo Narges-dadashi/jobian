@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { AccountService } from './services/account.service';
 
 @Component({
   selector: 'app-root',
@@ -8,6 +9,14 @@ import { RouterOutlet } from '@angular/router';
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
-export class AppComponent {
-  
+export class AppComponent implements OnInit {
+  accountService = inject(AccountService);
+
+  ngOnInit(): void {
+    let loggedInUser: string | null = localStorage.getItem('loggedInUser');
+    console.log(loggedInUser);
+
+    if (loggedInUser != null)
+      this.accountService.setCurrentUser(JSON.parse(loggedInUser));
+  }
 }
