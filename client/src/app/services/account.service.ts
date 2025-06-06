@@ -1,9 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable, PLATFORM_ID, signal } from '@angular/core';
 import { map, Observable } from 'rxjs';
-import { LoggedIn } from '../../../models/logged-in.model';
-import { Login } from '../../../models/login.model';
-import { AppUser } from '../../../models/app-user.model';
+import { LoggedIn } from '../models/logged-in.model';
+import { Login } from '../models/login.model';
+import { AppUser } from '../models/app-user.model';
 import { isPlatformBrowser } from '@angular/common';
 import { Router } from '@angular/router';
 
