@@ -32,6 +32,8 @@ export class AccountService {
   }
 
   login(userInput: Login): Observable<LoggedIn | null> {
+    console.log('login');
+    
     return this.http.post<LoggedIn>(
       this._baseApiUrl + 'account/login', userInput).pipe(
         map(res => {

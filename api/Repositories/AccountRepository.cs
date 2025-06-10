@@ -51,12 +51,12 @@ public class AccountRepository : IAccountRepository
     public async Task<DeleteResult?> DeleteByIdAsync(string userId, CancellationToken cancellationToken)
     {
         AppUser appUser = await _collection.Find<AppUser>(doc =>
-        doc.Id == userId).FirstOrDefaultAsync(cancellationToken);
+            doc.Id == userId).FirstOrDefaultAsync(cancellationToken);
 
         if (appUser is null)
             return null;
 
         return await _collection.DeleteOneAsync<AppUser>(doc =>
-        doc.Id == userId, cancellationToken);
+            doc.Id == userId, cancellationToken);
     }
 }
