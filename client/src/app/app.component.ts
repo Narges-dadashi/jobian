@@ -14,11 +14,11 @@ import { FooterComponent } from "./components/footer/footer.component";
 export class AppComponent {
   accountService = inject(AccountService);
 
-  // ngOnInit(): void {
-  //   let loggedInUser: string | null = localStorage.getItem('loggedInUser');
-  //   console.log(loggedInUser);
+  ngOnInit(): void {
+    let loggedInUser: string | null = localStorage.getItem('loggedInUser');
+    console.log(loggedInUser);
 
-  //   if (loggedInUser != null)
-  //     this.accountService.setCurrentUser(JSON.parse(loggedInUser));
-  // }
+    if (loggedInUser != null)
+      this.accountService.setCurrentUser(JSON.parse(loggedInUser));
+  }
 }
