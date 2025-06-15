@@ -1,4 +1,4 @@
-namespace api.Repositoreis;
+namespace api.Repositories;
 
 public class AccountRepository : IAccountRepository
 {
@@ -16,7 +16,7 @@ public class AccountRepository : IAccountRepository
     public async Task<LoggedInDto?> RegisterAsync(AppUser userInput, CancellationToken cancellationToken)
     {
         AppUser user = await _collection.Find<AppUser>(doc =>
-        doc.Email == userInput.Email.Trim().ToLower()).FirstOrDefaultAsync(cancellationToken);
+            doc.Email == userInput.Email.Trim().ToLower()).FirstOrDefaultAsync(cancellationToken);
 
         if (user is not null)
             return null;
@@ -34,8 +34,8 @@ public class AccountRepository : IAccountRepository
     public async Task<LoggedInDto?> LoginAsync(LoginDto userInput, CancellationToken cancellationToken)
     {
         AppUser user = await _collection.Find(doc =>
-        doc.Email == userInput.Email && doc.Password == userInput.Password)
-        .FirstOrDefaultAsync(cancellationToken);
+            doc.Email == userInput.Email && doc.Password == userInput.Password)
+            .FirstOrDefaultAsync(cancellationToken);
 
         if (user is null)
             return null;

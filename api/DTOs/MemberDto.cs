@@ -1,6 +1,6 @@
 namespace api.DTOs;
 
-public record MemberDto(
+public record MemberDto (
     string Email,
     string Name,
     int Age,

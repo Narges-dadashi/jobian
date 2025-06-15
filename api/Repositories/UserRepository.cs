@@ -16,13 +16,13 @@ public class UserRepository : IUserRepository
     public async Task<LoggedInDto?> UpdateByIdAsync(string userId, AppUser userInput, CancellationToken cancellationToken)
     {
         UpdateDefinition<AppUser> updateDef = Builders<AppUser>.Update
-        .Set(user => user.Email, userInput.Email.Trim().ToLower());
+            .Set(user => user.Email, userInput.Email.Trim().ToLower());
 
         await _collection.UpdateOneAsync(user =>
-        user.Id == userId, updateDef, null, cancellationToken);
+            user.Id == userId, updateDef, null, cancellationToken);
 
         AppUser appUser = await _collection.Find(user =>
-        user.Id == userId).FirstOrDefaultAsync(cancellationToken);
+            user.Id == userId).FirstOrDefaultAsync(cancellationToken);
 
         if (appUser is null)
             return null;

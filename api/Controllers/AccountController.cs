@@ -11,7 +11,7 @@ public class AccountController(IAccountRepository accountRepository) : BaseApiCo
         LoggedInDto? loggedInDto = await accountRepository.RegisterAsync(userInput, cancellationToken);
 
         if (loggedInDto is null)
-            return BadRequest("This email is already taken.");
+            return BadRequest("This email is already taken");
 
         return Ok(loggedInDto);
     }
