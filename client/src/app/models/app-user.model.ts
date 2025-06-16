@@ -3,7 +3,7 @@ export interface AppUser {
     name: string;
     password: string;
     confirmPassword: string;
-    age: number;
-    city: string;
-    country: string;
+    dateOfBirth: string;
+    gender: string;
+    role: string;
 }
