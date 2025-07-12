@@ -8,6 +8,9 @@ import { provideClientHydration } from '@angular/platform-browser';
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    provideZoneChangeDetection({ eventCoalescing: true }), provideRouter(routes), provideClientHydration(), provideAnimationsAsync(),
-    provideHttpClient(withFetch())]
+    provideRouter(routes),
+    provideClientHydration(),
+    provideHttpClient(),
+    provideAnimationsAsync()
+  ]
 };
