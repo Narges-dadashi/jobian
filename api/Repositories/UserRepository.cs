@@ -4,12 +4,16 @@ public class UserRepository : IUserRepository
 {
     #region Db and Token Settings
     private readonly IMongoCollection<AppUser> _collection;
+    private readonly ITokenService _tokenService;
 
     // constructor - dependency injections
-    public UserRepository(IMongoClient client, IMongoDbSettings dbSettings)
+    public UserRepository(IMongoClient client, IMongoDbSettings dbSettings, ITokenService tokenSerive)
     {
         var dbName = client.GetDatabase(dbSettings.DatabaseName);
         _collection = dbName.GetCollection<AppUser>("users");
+
+        _tokenService = tokenService;
+
     }
     #endregion
 
@@ -27,6 +31,8 @@ public class UserRepository : IUserRepository
         if (appUser is null)
             return null;
 
-        return Mappers.ConvertAppUserToLoggedInDto(appUser);
+        string? token = _tokenService.CreateToken(appUser);
+
+        return Mappers.ConvertAppUserToLoggedInDto(appUser, token);
     }
 }
