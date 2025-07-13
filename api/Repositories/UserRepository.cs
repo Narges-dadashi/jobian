@@ -7,7 +7,7 @@ public class UserRepository : IUserRepository
     private readonly ITokenService _tokenService;
 
     // constructor - dependency injections
-    public UserRepository(IMongoClient client, IMongoDbSettings dbSettings, ITokenService tokenSerive)
+    public UserRepository(IMongoClient client, IMongoDbSettings dbSettings, ITokenService tokenService)
     {
         var dbName = client.GetDatabase(dbSettings.DatabaseName);
         _collection = dbName.GetCollection<AppUser>("users");
