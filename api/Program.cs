@@ -6,6 +6,7 @@ builder.Services.AddControllers();
 
 builder.Services.AddApplicationService(builder.Configuration);
 builder.Services.AddRepositoryService();
+builder.Services.AddIdentityService(builder.Configuration);
 
 var app = builder.Build();
 
