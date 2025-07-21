@@ -11,3 +11,7 @@ global using api.Interfaces;
 global using api.Repositories;
 global using api.Controllers.Helpers;
 global using api.Extensions;
+global using System.IdentityModel.Tokens.Jwt;
+global using System.Security.Claims;
+global using System.Text;
+global using Microsoft.IdentityModel.Tokens;
