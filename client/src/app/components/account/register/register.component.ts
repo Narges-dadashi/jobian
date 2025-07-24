@@ -24,20 +24,20 @@ export class RegisterComponent {
 
   registerFg = this.fB.group({
     emailCtrl: ['', [Validators.required, Validators.email]],
-    nameCtrl: '',
+    userNameCtrl: '',
     passwordCtrl: '',
     confirmPasswordCtrl: '',
-    ageCtrl: 0,
-    cityCtrl: '',
-    countryCtrl: ''
+    dateOfBirthCtrl: '',
+    genderCtrl: '',
+    roleCtrl: ''
   });
 
   get EmailCtrl(): FormControl {
     return this.registerFg.get('emailCtrl') as FormControl;
   }
 
-  get NameCtrl(): FormControl {
-    return this.registerFg.get('nameCtrl') as FormControl;
+  get UserNameCtrl(): FormControl {
+    return this.registerFg.get('userNameCtrl') as FormControl;
   }
 
   get PasswordCtrl(): FormControl {
@@ -48,27 +48,27 @@ export class RegisterComponent {
     return this.registerFg.get('confirmPasswordCtrl') as FormControl;
   }
 
-  get AgeCtrl(): FormControl {
-    return this.registerFg.get('ageCtrl') as FormControl;
+  get DateOfBirthCtrl(): FormControl {
+    return this.registerFg.get('dateOfBirthCtrl') as FormControl;
   }
 
-  get CityCtrl(): FormControl {
-    return this.registerFg.get('cityCtrl') as FormControl;
+  get GenderCtrl(): FormControl {
+    return this.registerFg.get('genderCtrl') as FormControl;
   }
 
-  get CountryCtrl(): FormControl {
-    return this.registerFg.get('countryCtrl') as FormControl;
+  get RoleCtrl(): FormControl {
+    return this.registerFg.get('roleCtrl') as FormControl;
   }
 
   register(): void {
     let user: AppUser = {
       email: this.EmailCtrl.value,
-      name: this.NameCtrl.value,
+      userName: this.UserNameCtrl.value,
       password: this.PasswordCtrl.value,
       confirmPassword: this.ConfirmPasswordCtrl.value,
-      age: this.AgeCtrl.value,
-      city: this.CityCtrl.value,
-      country: this.CountryCtrl.value
+      dateOfBirth: this.DateOfBirthCtrl.value,
+      gender: this.GenderCtrl.value,
+      role: this.RoleCtrl.value
     }
 
     this.accountService.register(user).subscribe({

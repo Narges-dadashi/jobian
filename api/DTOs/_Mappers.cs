@@ -6,7 +6,7 @@ public static class Mappers
     {
         return new(
             Email: appUser.Email,
-            Name: appUser.Name,
+            UserName: appUser.UserName,
             Token: tokenValue
         );
     }

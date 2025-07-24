@@ -11,7 +11,7 @@ import { FooterComponent } from "./components/footer/footer.component";
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
-export class AppComponent {
+export class AppComponent implements OnInit{
   accountService = inject(AccountService);
 
   ngOnInit(): void {

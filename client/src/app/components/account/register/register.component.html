@@ -7,8 +7,8 @@
             </mat-form-field>
 
             <mat-form-field appearance="outline">
-                <mat-label>Name</mat-label>
-                <input type="text" [formControl]="NameCtrl" matInput>
+                <mat-label>UserName</mat-label>
+                <input type="text" [formControl]="UserNameCtrl" matInput>
             </mat-form-field>
 
             <mat-form-field appearance="outline">
@@ -22,21 +22,21 @@
             </mat-form-field>
 
             <mat-form-field appearance="outline">
-                <mat-label>Age</mat-label>
-                <input type="number" [formControl]="AgeCtrl" matInput>
+                <mat-label>DateOfBirth</mat-label>
+                <input type="text" [formControl]="DateOfBirthCtrl" matInput>
             </mat-form-field>
 
             <mat-form-field appearance="outline">
-                <mat-label>City</mat-label>
-                <input type="text" [formControl]="CityCtrl" matInput>
+                <mat-label>Gender</mat-label>
+                <input type="text" [formControl]="GenderCtrl" matInput>
             </mat-form-field>
 
             <mat-form-field appearance="outline">
-                <mat-label>Country</mat-label>
-                <input type="text" [formControl]="CountryCtrl" matInput>
+                <mat-label>Role</mat-label>
+                <input type="text" [formControl]="RoleCtrl" matInput>
             </mat-form-field>
 
-            <button routerLink="/members" (click)="register()" mat-flat-button color="parimary"
+            <button (click)="register()" mat-flat-button color="parimary"
                 [disabled]="registerFg.invalid">
                 Register
             </button>
