@@ -7,7 +7,7 @@ public record AppUser (
     [Length(3, 30)] string UserName,
     [Length(8, 16)] string Password,
     string ConfirmPassword,
-    string DateOfBirth,
+    DateOnly DateOfBirth,
     string Gender,
     string Role
 );
