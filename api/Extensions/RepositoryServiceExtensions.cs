@@ -1,5 +1,3 @@
-using api.Services;
-
 namespace api.Extensions;
 
 public static class RepositoryServiceExtensions

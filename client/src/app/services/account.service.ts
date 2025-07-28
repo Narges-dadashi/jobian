@@ -23,6 +23,8 @@ export class AccountService {
         if (res) {
           this.setCurrentUser(res);
 
+          this.router.navigateByUrl('/');
+
           return res;
         }
 
@@ -33,12 +35,14 @@ export class AccountService {
 
   login(userInput: Login): Observable<LoggedIn | null> {
     console.log('login');
-    
+
     return this.http.post<LoggedIn>(
       this._baseApiUrl + 'account/login', userInput).pipe(
         map(res => {
           if (res) {
             this.setCurrentUser(res);
+
+            this.router.navigateByUrl('/');
 
             return res;
           }

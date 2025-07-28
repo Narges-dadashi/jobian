@@ -17,6 +17,7 @@ public class UserRepository : IUserRepository
     }
     #endregion
 
+    [Authorize]
     public async Task<LoggedInDto?> UpdateByIdAsync(string userId, AppUser userInput, CancellationToken cancellationToken)
     {
         UpdateDefinition<AppUser> updateDef = Builders<AppUser>.Update

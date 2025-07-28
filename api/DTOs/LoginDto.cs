@@ -1,6 +1,6 @@
 namespace api.DTOs;
 
-public record LoginDto (
+public record LoginDto(
     string Email,
     string Password
 );
