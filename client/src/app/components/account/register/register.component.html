@@ -2,7 +2,7 @@
     <div class="item-1">
         <form>
             <mat-form-field appearance="outline">
-                <mat-label>Email</mat-label>
+                <mat-label>Email</mat-label>>
                 <input type="email" [formControl]="EmailCtrl" matInput>
             </mat-form-field>
 
@@ -22,8 +22,15 @@
             </mat-form-field>
 
             <mat-form-field appearance="outline">
-                <mat-label>DateOfBirth</mat-label>
-                <input type="text" [formControl]="DateOfBirthCtrl" matInput>
+                <mat-label>Date of Birth</mat-label>
+                <input [formControl]="DateOfBirthCtrl" [min]="minDate" [max]="maxDate" matInput
+                    [matDatepicker]="dp3" placeholder="Enter your date off birth">
+                <mat-hint>Between {{minDate.getFullYear()}} to {{maxDate.getFullYear()}}</mat-hint>
+                <mat-datepicker-toggle matIconSuffix [for]="dp3"></mat-datepicker-toggle>
+                <mat-datepicker #dp3 touchUi disabled="false"></mat-datepicker>
+                @if (DateOfBirthCtrl.hasError('required')) {
+                <mat-error>This field is required.</mat-error>
+                }
             </mat-form-field>
 
             <mat-form-field appearance="outline">
