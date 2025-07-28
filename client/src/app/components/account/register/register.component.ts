@@ -6,6 +6,7 @@ import { AppUser } from '../../../models/app-user.model';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 
 @Component({
   selector: 'app-register',
@@ -13,7 +14,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
   imports: [
     RouterLink,
     FormsModule, ReactiveFormsModule,
-    MatButtonModule, MatInputModule, MatFormFieldModule
+    MatButtonModule, MatInputModule, MatFormFieldModule, MatDatepickerModule
   ],
   templateUrl: './register.component.html',
   styleUrl: './register.component.scss'
@@ -22,12 +23,15 @@ export class RegisterComponent {
   accountService = inject(AccountService);
   fB = inject(FormBuilder);
 
+  minDate = new Date();
+  maxDate = new Date();
+
   registerFg = this.fB.group({
     emailCtrl: ['', [Validators.required, Validators.email]],
     userNameCtrl: '',
     passwordCtrl: '',
     confirmPasswordCtrl: '',
-    dateOfBirthCtrl: '',
+    dateOfBirthCtrl: ['', [Validators.required]],
     genderCtrl: '',
     roleCtrl: ''
   });
@@ -61,19 +65,36 @@ export class RegisterComponent {
   }
 
   register(): void {
-    let user: AppUser = {
-      email: this.EmailCtrl.value,
-      userName: this.UserNameCtrl.value,
-      password: this.PasswordCtrl.value,
-      confirmPassword: this.ConfirmPasswordCtrl.value,
-      dateOfBirth: this.DateOfBirthCtrl.value,
-      gender: this.GenderCtrl.value,
-      role: this.RoleCtrl.value
-    }
+    const dob: string | undefined = this.getDateOnly(this.DateOfBirthCtrl.value);
 
-    this.accountService.register(user).subscribe({
-      next: (res) => console.log(res),
-      error: (err) => console.log(err.error)
-    });
+    if (this.PasswordCtrl.value === this.ConfirmPasswordCtrl.value) {
+      let user: AppUser = {
+        email: this.EmailCtrl.value,
+        userName: this.UserNameCtrl.value,
+        password: this.PasswordCtrl.value,
+        confirmPassword: this.ConfirmPasswordCtrl.value,
+        dateOfBirth: dob,
+        gender: this.GenderCtrl.value,
+        role: this.RoleCtrl.value
+      }
+
+      let registerResponse$ = this.accountService.register(user);
+
+      registerResponse$.subscribe({
+        next: (res) => console.log(res),
+        error: (err) => console.log(err.error)
+      });
+    }
+    // else {
+    //   this.passwordsNotMatch = true;
+    // }
   }
-}
+
+    getDateOnly(dob: string | null): string | undefined {
+      if (!dob) return undefined;
+
+      let theDob: Date = new Date(dob);
+      return new Date(theDob.setMinutes(theDob.getMinutes() - theDob.getTimezoneOffset())).toISOString().slice(0, 10);
+      // gets the first 10 chars from this date YYYY-MM-DDTHH:mm:ss.sssZ the output is YYYY-MM-DD
+    }
+  }
