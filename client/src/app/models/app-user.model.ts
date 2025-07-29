@@ -3,7 +3,7 @@ export interface AppUser {
     userName: string;
     password: string;
     confirmPassword: string;
-    dateOfBirth: string| undefined;
+    dateOfBirth: string | undefined;
     gender: string;
     role: string;
 }

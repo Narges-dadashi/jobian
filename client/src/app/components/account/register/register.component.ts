@@ -78,23 +78,18 @@ export class RegisterComponent {
         role: this.RoleCtrl.value
       }
 
-      let registerResponse$ = this.accountService.register(user);
-
-      registerResponse$.subscribe({
-        next: (res) => console.log(res),
-        error: (err) => console.log(err.error)
-      });
-    }
-    // else {
-    //   this.passwordsNotMatch = true;
-    // }
-  }
-
-    getDateOnly(dob: string | null): string | undefined {
-      if (!dob) return undefined;
-
-      let theDob: Date = new Date(dob);
-      return new Date(theDob.setMinutes(theDob.getMinutes() - theDob.getTimezoneOffset())).toISOString().slice(0, 10);
-      // gets the first 10 chars from this date YYYY-MM-DDTHH:mm:ss.sssZ the output is YYYY-MM-DD
+      this.accountService.register(user);
+      // else {
+      //   this.passwordsNotMatch = true;
+      // }
     }
   }
+
+  getDateOnly(dob: string | null): string | undefined {
+    if (!dob) return undefined;
+
+    let theDob: Date = new Date(dob);
+    return new Date(theDob.setMinutes(theDob.getMinutes() - theDob.getTimezoneOffset())).toISOString().slice(0, 10);
+    // gets the first 10 chars from this date YYYY-MM-DDTHH:mm:ss.sssZ the output is YYYY-MM-DD
+  }
+}
