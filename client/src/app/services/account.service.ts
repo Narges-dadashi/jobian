@@ -23,7 +23,7 @@ export class AccountService {
         if (res) {
           this.setCurrentUser(res);
 
-          this.router.navigateByUrl('/');
+          this.router.navigateByUrl('/job');
 
           return res;
         }
@@ -40,7 +40,7 @@ export class AccountService {
           if (res) {
             this.setCurrentUser(res);
 
-            this.router.navigateByUrl('/');
+            this.router.navigateByUrl('/job');
 
             return res;
           }
