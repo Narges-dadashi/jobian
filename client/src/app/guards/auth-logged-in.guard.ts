@@ -16,14 +16,14 @@ export const authLoggedInGuard: CanActivateFn = (route, state) => {
       snackbar.open('You are already logged in.', 'Close', {
         verticalPosition: 'top',
         horizontalPosition: 'center',
-        duration: 7000
+        duration: 5000
       });
 
-      router.navigateByUrl('account/login')
+      router.navigateByUrl('/job')
 
       return false;
     }
   }
 
-  return false;
+  return true;
 };
