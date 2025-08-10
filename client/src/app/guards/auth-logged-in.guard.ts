@@ -19,7 +19,7 @@ export const authLoggedInGuard: CanActivateFn = (route, state) => {
         duration: 5000
       });
 
-      router.navigateByUrl('/job')
+      router.navigateByUrl('job')
 
       return false;
     }
