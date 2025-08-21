@@ -43,4 +43,8 @@ public class AccountController(IAccountRepository accountRepository) : BaseApiCo
 
         return deleteResult;
     }
+
+    // [Authorize]
+    // [HttpGet]
+    // public 
 }
