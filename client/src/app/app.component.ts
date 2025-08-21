@@ -17,16 +17,15 @@ import { isPlatformBrowser } from '@angular/common';
 })
 export class AppComponent implements OnInit {
   accountService = inject(AccountService);
-  platformId =  inject(PLATFORM_ID);
+  
+  ngOnInit(): void { // initialize user on page refresh
+    let loggedInUserStr: string | null  = localStorage.getItem('loggedInUser');
+      console.log(loggedInUserStr);
+    
+    if (loggedInUserStr != null) {
+      this.accountService.authorizeLoggedInUser();
 
-  ngOnInit(): void {
-
-    if (isPlatformBrowser(this.platformId)) {
-      let loggedInUser: string | null = localStorage.getItem('loggedInUser');
-      console.log(loggedInUser);
-      
-      if (loggedInUser != null)
-        this.accountService.setCurrentUser(JSON.parse(loggedInUser));
+      this.accountService.setCurrentUser(JSON.parse(loggedInUserStr))
     }
   }
 }

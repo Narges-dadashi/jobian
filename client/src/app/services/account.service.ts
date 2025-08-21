@@ -51,6 +51,22 @@ export class AccountService {
       );
   }
 
+  authorizeLoggedInUser(): void {
+    console.log('ok');
+
+    this.http.get<LoggedIn>(this._baseApiUrl + 'account').subscribe({
+      next: (res) => {
+        if (res)
+          console.log(res);
+        this.setCurrentUser(res);
+      },
+      error: (err) => {
+        console.log(err.error);
+        this.logout();
+      }
+    });
+  }
+
   setCurrentUser(loggedInUser: LoggedIn): void {
     this.loggedInUserSig.set(loggedInUser);
 
