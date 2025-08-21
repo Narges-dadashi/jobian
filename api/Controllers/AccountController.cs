@@ -44,7 +44,28 @@ public class AccountController(IAccountRepository accountRepository) : BaseApiCo
         return deleteResult;
     }
 
-    // [Authorize]
-    // [HttpGet]
-    // public 
+    [Authorize]
+    [HttpGet]
+    public async Task<ActionResult<LoggedInDto>> ReloadLoggedInUser(CancellationToken cancellationToken)
+    {
+        string? token = null;
+
+        bool isTokenValid = HttpContext.Request.Headers.TryGetValue("Authorize", out var authHeader);
+
+        if (isTokenValid)
+            token = authHeader.ToString().Split(' ').Last();
+
+        if (string.IsNullOrEmpty(token))
+            return Unauthorized("Token is expired or invalid. logged in again!");
+
+        string? userId = User.GetUserId();
+
+        if (userId is null)
+            return Unauthorized();
+
+        LoggedInDto? loggedInDto =
+        await accountRepository.ReloadLoggedInUserAsync(userId, token, cancellationToken);
+
+        return loggedInDto is null ? Unauthorized("User is logged out or unauthorize. Logged in again!") : loggedInDto;
+    }
 }
