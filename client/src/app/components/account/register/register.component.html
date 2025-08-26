@@ -46,6 +46,10 @@
             <button (click)="register()" mat-flat-button color="parimary" [disabled]="registerFg.invalid">
                 Register
             </button>
+
+            @if (passwordsNotMatch) {
+            <p>Passwords don't match!</p>
+            }
         </form>
     </div>
 </section>

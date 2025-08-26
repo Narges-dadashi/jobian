@@ -7,14 +7,16 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { Subscription } from 'rxjs';
+import { RouterLink } from "@angular/router";
 
 @Component({
   selector: 'app-register',
   standalone: true,
   imports: [
     FormsModule, ReactiveFormsModule,
-    MatButtonModule, MatFormFieldModule, MatInputModule, MatDatepickerModule
-  ],
+    MatButtonModule, MatFormFieldModule, MatInputModule, MatDatepickerModule,
+    RouterLink
+],
   templateUrl: './register.component.html',
   styleUrl: './register.component.scss'
 })
