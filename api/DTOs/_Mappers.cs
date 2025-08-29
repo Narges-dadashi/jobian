@@ -7,9 +7,9 @@ public static class Mappers
         return new AppUser(
             Id: null,
             Email: registerDto.Email,
-            UserName: registerDto.UserName,
             Password: registerDto.Password,
             ConfirmPassword: registerDto.ConfirmPassword,
+            UserName: "",
             DateOfBirth: registerDto.DateOfBirth,
             Gender: "",
             Role: "",
