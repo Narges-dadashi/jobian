@@ -7,21 +7,6 @@
             </mat-form-field>
 
             <mat-form-field appearance="outline">
-                <mat-label>UserName</mat-label>
-                <input type="text" [formControl]="UserNameCtrl" matInput>
-            </mat-form-field>
-
-            <mat-form-field appearance="outline">
-                <mat-label>Password</mat-label>
-                <input type="password" [formControl]="PasswordCtrl" matInput>
-            </mat-form-field>
-
-            <mat-form-field appearance="outline">
-                <mat-label>Confirm Password</mat-label>
-                <input type="password" [formControl]="ConfirmPasswordCtrl" matInput>
-            </mat-form-field>
-
-            <mat-form-field appearance="outline">
                 <mat-label>Date of Birth</mat-label>
                 <input [formControl]="DateOfBirthCtrl" [min]="minDate" [max]="maxDate" matInput [matDatepicker]="dp3"
                     placeholder="Enter your date of birth">
@@ -34,14 +19,15 @@
             </mat-form-field>
 
             <mat-form-field appearance="outline">
-                <mat-label>Gender</mat-label>
-                <input type="text" [formControl]="GenderCtrl" matInput>
+                <mat-label>Password</mat-label>
+                <input type="password" [formControl]="PasswordCtrl" matInput>
             </mat-form-field>
 
             <mat-form-field appearance="outline">
-                <mat-label>Role</mat-label>
-                <input type="text" [formControl]="RoleCtrl" matInput>
+                <mat-label>Confirm Password</mat-label>
+                <input type="password" [formControl]="ConfirmPasswordCtrl" matInput>
             </mat-form-field>
+
 
             <button (click)="register()" mat-flat-button color="parimary" [disabled]="registerFg.invalid">
                 Register
