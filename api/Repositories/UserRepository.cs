@@ -81,4 +81,57 @@ public class UserRepository : IUserRepository
 
         return null;
     }
+
+    public async Task<UpdateResult?> SetMainPhotoAsync(string userId, string photoUrlIn, CancellationToken cancellationToken)
+    {
+        #region  UNSET the previous main photo: Find the photo with IsMain True; update IsMain to False
+        FilterDefinition<AppUser>? filterOld = Builders<AppUser>.Filter
+            .Where(appUser =>
+                appUser.Id == userId && appUser.Photos.Any<Photo>(photo => photo.IsMain == true));
+
+        UpdateDefinition<AppUser>? updateOld = Builders<AppUser>.Update
+            .Set(appUser => appUser.Photos.FirstMatchingElement().IsMain, false);
+
+        await _collection.UpdateOneAsync(filterOld, updateOld, null, cancellationToken);
+        #endregion
+
+        #region  SET the new main photo: find new photo by its Url_165; update IsMain to True
+        FilterDefinition<AppUser>? filterNew = Builders<AppUser>.Filter
+            .Where(appUser =>
+                appUser.Id == userId && appUser.Photos.Any<Photo>(photo => photo.Url_165 == photoUrlIn));
+
+        UpdateDefinition<AppUser>? updateNew = Builders<AppUser>.Update
+            .Set(appUser => appUser.Photos.FirstMatchingElement().IsMain, true);
+
+        return await _collection.UpdateOneAsync(filterNew, updateNew, null, cancellationToken);
+        #endregion
+    }
+
+    public async Task<UpdateResult?> DeletePhotoAsync(string userId, string? url_165_In, CancellationToken cancellationToken)
+    {
+        if (string.IsNullOrEmpty(url_165_In)) return null;
+
+        Photo photo = await _collection.AsQueryable()
+            .Where(appUser => appUser.Id == userId)
+            .SelectMany(appUser => appUser.Photos)
+            .Where(photo => photo.Url_165 == url_165_In)
+            .FirstOrDefaultAsync(cancellationToken);
+
+        if (photo is null) return null;
+
+        if (photo.IsMain) return null;
+
+        bool isDeleteSuccess = await _photoService.DeletePhotoFromDisk(photo);
+        if (!isDeleteSuccess)
+        {
+            _logger.LogError("Delete Photo form disk failed");
+
+            return null;
+        }
+
+        UpdateDefinition<AppUser> update = Builders<AppUser>.Update
+            .PullFilter(appUser => appUser.Photos, photo => photo.Url_165 == url_165_In);
+
+        return await _collection.UpdateOneAsync<AppUser>(appUser => appUser.Id == userId, update, null, cancellationToken);
+    }
 }
