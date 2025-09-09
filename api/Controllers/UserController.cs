@@ -4,14 +4,14 @@ namespace api.Controllers;
 public class UserController(IUserRepository userRepository) : BaseApiController
 {
     [HttpPut("update")]
-    public async Task<ActionResult<LoggedInDto>> UpdateById(AppUser userInput, CancellationToken cancellationToken)
+    public async Task<ActionResult<UpdateDto>> UpdateById(RegisterDto userInput, CancellationToken cancellationToken)
     {
         var userId = User.GetUserId();
 
         if (userId is null)
             return Unauthorized("You are not logged. Please log in again.");
 
-        LoggedInDto? loggedInDto = await userRepository.UpdateByIdAsync(userId, userInput, cancellationToken);
+        UpdateDto? loggedInDto = await userRepository.UpdateByIdAsync(userId, userInput, cancellationToken);
 
         if (loggedInDto is null)
             return BadRequest("Operation failed");
