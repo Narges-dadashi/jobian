@@ -4,11 +4,11 @@ namespace api.Controllers;
 public class UserController(IUserRepository userRepository) : BaseApiController
 {
     [HttpPut("update")]
-    public async Task<ActionResult<LoggedInDto>> UpdateById(string userId, AppUser userInput, CancellationToken cancellationToken)
+    public async Task<ActionResult<LoggedInDto>> UpdateById(AppUser userInput, CancellationToken cancellationToken)
     {
-        var memberId = User.GetUserId();
+        var userId = User.GetUserId();
 
-        if (memberId is null)
+        if (userId is null)
             return Unauthorized("You are not logged. Please log in again.");
 
         LoggedInDto? loggedInDto = await userRepository.UpdateByIdAsync(userId, userInput, cancellationToken);
@@ -19,7 +19,6 @@ public class UserController(IUserRepository userRepository) : BaseApiController
         return loggedInDto;
     }
 
-    [Authorize] 
     [HttpPut("add-photo")]
     public async Task<ActionResult<Photo>> AddPhoto(
         [AllowedFileExtensions, FileSize(250_000, 4_000_000)]

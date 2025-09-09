@@ -1,6 +1,5 @@
 namespace api.Repositories;
 
-[AllowAnonymous]
 public class AccountRepository : IAccountRepository
 {
     #region Db and Token Settings
@@ -49,7 +48,6 @@ public class AccountRepository : IAccountRepository
         return Mappers.ConvertAppUserToLoggedInDto(user, token);
     }
 
-    [Authorize]
     public async Task<DeleteResult?> DeleteByIdAsync(string userId, CancellationToken cancellationToken)
     {
         AppUser appUser = await _collection.Find<AppUser>(doc =>

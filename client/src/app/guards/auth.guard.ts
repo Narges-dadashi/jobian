@@ -1,7 +1,7 @@
+import { isPlatformBrowser } from '@angular/common';
 import { inject, PLATFORM_ID } from '@angular/core';
 import { CanActivateFn, Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { isPlatformBrowser } from '@angular/common';
 
 export const authGuard: CanActivateFn = (route, state) => {
   const platformId = inject(PLATFORM_ID);
@@ -21,7 +21,7 @@ export const authGuard: CanActivateFn = (route, state) => {
       duration: 5000
     });
 
-    router.navigateByUrl('account/login');  
+    router.navigateByUrl('account/login')
   }
 
   return false;

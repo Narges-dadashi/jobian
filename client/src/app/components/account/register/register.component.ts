@@ -1,21 +1,16 @@
 import { Component, inject, OnDestroy, OnInit } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import { AccountService } from '../../../services/account.service';
 import { FormBuilder, FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { MatButtonModule } from '@angular/material/button';
-import { MatInputModule } from '@angular/material/input';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatDatepickerModule } from '@angular/material/datepicker';
 import { Subscription } from 'rxjs';
-import { RouterLink } from "@angular/router";
 import { Register } from '../../../models/register.model';
 
 @Component({
   selector: 'app-register',
   standalone: true,
   imports: [
+    RouterLink,
     FormsModule, ReactiveFormsModule,
-    MatButtonModule, MatFormFieldModule, MatInputModule, MatDatepickerModule,
-    RouterLink
   ],
   templateUrl: './register.component.html',
   styleUrl: './register.component.scss'
@@ -37,18 +32,23 @@ export class RegisterComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.subscribedRegisterUser?.unsubscribe();
+      this.subscribedRegisterUser?.unsubscribe();
   }
 
   registerFg = this.fB.group({
     emailCtrl: ['', [Validators.required, Validators.email]],
+    userNameCtrl: ['', [Validators.required]],
     dateOfBirthCtrl: ['', [Validators.required]],
     passwordCtrl: ['', [Validators.required]],
-    confirmPasswordCtrl: ['', [Validators.required]],
+    confirmPasswordCtrl: ['', [Validators.required]]
   });
 
   get EmailCtrl(): FormControl {
     return this.registerFg.get('emailCtrl') as FormControl;
+  }
+
+  get UserNameCtrl(): FormControl {
+    return this.registerFg.get('userNameCtrl') as FormControl;
   }
 
   get DateOfBirthCtrl(): FormControl {
@@ -69,6 +69,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
     if (this.PasswordCtrl.value === this.ConfirmPasswordCtrl.value) {
       let user: Register = {
         email: this.EmailCtrl.value,
+        userName: this.UserNameCtrl.value,
         dateOfBirth: dob,
         password: this.PasswordCtrl.value,
         confirmPassword: this.ConfirmPasswordCtrl.value
@@ -89,6 +90,5 @@ export class RegisterComponent implements OnInit, OnDestroy {
 
     let theDob: Date = new Date(dob);
     return new Date(theDob.setMinutes(theDob.getMinutes() - theDob.getTimezoneOffset())).toISOString().slice(0, 10);
-    // gets the first 10 chars from this date YYYY-MM-DDTHH:mm:ss.sssZ the output is YYYY-MM-DD
   }
 }

@@ -1,41 +1,23 @@
 <section>
-    <div class="item-1">
-        <form>
-            <mat-form-field appearance="outline">
-                <mat-label>Email</mat-label>
-                <input type="email" [formControl]="EmailCtrl" matInput>
-            </mat-form-field>
-
-            <mat-form-field appearance="outline">
-                <mat-label>Date of Birth</mat-label>
-                <input [formControl]="DateOfBirthCtrl" [min]="minDate" [max]="maxDate" matInput [matDatepicker]="dp3"
-                    placeholder="Enter your date of birth">
-                <mat-hint>Between {{minDate.getFullYear()}} to {{maxDate.getFullYear()}}</mat-hint>
-                <mat-datepicker-toggle matIconSuffix [for]="dp3"></mat-datepicker-toggle>
-                <mat-datepicker #dp3 touchUi disabled="false"></mat-datepicker>
-                @if (DateOfBirthCtrl.hasError('required')) {
-                <mat-error>This field is required.</mat-error>
+    <div class="container">
+        <div class="heading">Register</div>
+            <form class="form">
+                    <input class="input" type="email" [formControl]="EmailCtrl" placeholder="E-mail">
+                    <input class="input" type="text" [formControl]="UserNameCtrl" placeholder="UserName">
+                    <input class="input" [formControl]="DateOfBirthCtrl" [min]="minDate" [max]="maxDate"
+                        placeholder="Enter your date of birth">
+                    <input class="input" type="password" [formControl]="PasswordCtrl" placeholder="Password">
+                    <input class="input" type="password" [formControl]="ConfirmPasswordCtrl" placeholder="ConfirmPassword">
+        
+                <button class="register" type="submit" (click)="register()" mat-flat-button color="parimary" [disabled]="registerFg.invalid">
+                    Register
+                </button>
+        
+                @if (passwordsNotMatch) {
+                <p>Passwords don't match!</p>
                 }
-            </mat-form-field>
-
-            <mat-form-field appearance="outline">
-                <mat-label>Password</mat-label>
-                <input type="password" [formControl]="PasswordCtrl" matInput>
-            </mat-form-field>
-
-            <mat-form-field appearance="outline">
-                <mat-label>Confirm Password</mat-label>
-                <input type="password" [formControl]="ConfirmPasswordCtrl" matInput>
-            </mat-form-field>
-
-
-            <button (click)="register()" mat-flat-button color="parimary" [disabled]="registerFg.invalid">
-                Register
-            </button>
-
-            @if (passwordsNotMatch) {
-            <p>Passwords don't match!</p>
-            }
-        </form>
+            </form>
     </div>
+
+
 </section>

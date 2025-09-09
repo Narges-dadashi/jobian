@@ -1,13 +1,10 @@
-import { Component, inject, OnDestroy } from '@angular/core';
-import { FormBuilder, FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Component, inject } from '@angular/core';
 import { AccountService } from '../../../services/account.service';
+import { FormBuilder, FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Login } from '../../../models/login.model';
-import { MatButtonModule } from '@angular/material/button';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
-import { MatCardModule } from '@angular/material/card';
 import { RouterLink } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { Observable } from 'rxjs';
+import { LoggedIn } from '../../../models/logged-in.model';
 
 @Component({
   selector: 'app-login',
@@ -15,20 +12,14 @@ import { Subscription } from 'rxjs';
   imports: [
     RouterLink,
     FormsModule, ReactiveFormsModule,
-    MatCardModule,
-    MatButtonModule, MatFormFieldModule, MatInputModule
   ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'
 })
-export class LoginComponent implements OnDestroy {
+export class LoginComponent {
   accountService = inject(AccountService);
   fB = inject(FormBuilder);
-  subscribedRegisterUser: Subscription | undefined;
-
-  ngOnDestroy(): void {
-    this.subscribedRegisterUser?.unsubscribe();
-  }
+  loggedInRes: LoggedIn | undefined | null;
 
   loginFg = this.fB.group({
     emailCtrl: ['', [Validators.required, Validators.email]],
@@ -49,6 +40,13 @@ export class LoginComponent implements OnDestroy {
       password: this.PasswordCtrl.value
     }
 
-    this.accountService.login(userInput).subscribe();
+    let loginResponse$: Observable<LoggedIn | null> = this.accountService.login(userInput);
+
+    loginResponse$.subscribe({
+      next: (res => {
+        console.log(res);
+        this.loggedInRes = res;
+      })
+    });
   }
 }

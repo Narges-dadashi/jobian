@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable, PLATFORM_ID, signal } from '@angular/core';
-import { map, Observable } from 'rxjs';
 import { LoggedIn } from '../models/logged-in.model';
+import { map, Observable } from 'rxjs';
 import { Login } from '../models/login.model';
 import { isPlatformBrowser } from '@angular/common';
 import { Router } from '@angular/router';
@@ -35,20 +35,18 @@ export class AccountService {
   }
 
   login(userInput: Login): Observable<LoggedIn | null> {
-    return this.http.post<LoggedIn>(
-      this._baseApiUrl + 'account/login', userInput).pipe(
-        map(res => {
-          if (res) {
-            this.setCurrentUser(res);
+    return this.http.post<LoggedIn>(this._baseApiUrl + 'account/login', userInput).pipe(
+      map(res => {
+        if (res) {
+          this.setCurrentUser(res);
 
-            this.router.navigateByUrl('job');
+          this.router.navigateByUrl('job');
 
-            return res;
-          }
-
-          return null;
-        })
-      );
+          return res;
+        }
+        return null;
+      })
+    );
   }
 
   authorizeLoggedInUser(): void {
@@ -67,11 +65,10 @@ export class AccountService {
     });
   }
 
-  setCurrentUser(loggedInUser: LoggedIn): void {
-    this.loggedInUserSig.set(loggedInUser);
-
+  setCurrentUser(loggedIn: LoggedIn): void {
+    this.loggedInUserSig.set(loggedIn);
     if (isPlatformBrowser(this.platformId)) {
-      localStorage.setItem('loggedInUser', JSON.stringify(loggedInUser));
+      localStorage.setItem('loggedInUser', JSON.stringify(loggedIn));
     }
   }
 

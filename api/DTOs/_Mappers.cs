@@ -7,13 +7,13 @@ public static class Mappers
         return new AppUser(
             Id: null,
             Email: registerDto.Email,
+            UserName: registerDto.UserName,
+            DateOfBirth: registerDto.DateOfBirth,
             Password: registerDto.Password,
             ConfirmPassword: registerDto.ConfirmPassword,
-            UserName: "",
-            DateOfBirth: registerDto.DateOfBirth,
             Gender: "",
             Role: "",
-            Photos: new List<Photo>()
+            Photos: []
         );
     }
 
