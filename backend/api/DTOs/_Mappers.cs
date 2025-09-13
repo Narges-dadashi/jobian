@@ -22,7 +22,7 @@ public static class Mappers
         return new(
             Email: appUser.Email,
             UserName: appUser.UserName,
-            Age: DateTimeExtensions.CalculateAge(appUser.DateOfBirth),
+            Age: Extensions.DateTimeExtensions.CalculateAge(appUser.DateOfBirth),
             Token: tokenValue
         );
     }

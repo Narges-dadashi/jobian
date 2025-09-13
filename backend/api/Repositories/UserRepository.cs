@@ -4,16 +4,14 @@ public class UserRepository : IUserRepository
 {
     #region Db and Token Settings
     private readonly IMongoCollection<AppUser> _collection;
-    private readonly ITokenService _tokenService;
     private readonly IPhotoService _photoService;
     private readonly ILogger<UserRepository> _logger;
 
-    public UserRepository(IMongoClient client, IMongoDbSettings dbSettings, ITokenService tokenService, IPhotoService photoService, ILogger<UserRepository> logger)
+    public UserRepository(IMongoClient client, IMongoDbSettings dbSettings, IPhotoService photoService, ILogger<UserRepository> logger)
     {
         var dbName = client.GetDatabase(dbSettings.DatabaseName);
         _collection = dbName.GetCollection<AppUser>("users");
 
-        _tokenService = tokenService;
         _photoService = photoService;
         _logger = logger;
 
@@ -43,8 +41,6 @@ public class UserRepository : IUserRepository
 
         if (appUser is null)
             return null;
-
-        string? token = _tokenService.CreateToken(appUser);
 
         return Mappers.ConvertRegisterDtoToUpdateDto(userInput);
     }

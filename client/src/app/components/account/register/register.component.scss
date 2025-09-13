@@ -43,6 +43,17 @@ section {
       }
     }
 
+    .login {
+      margin-top: 15px;
+      margin-left: 8px;
+      font-size: 15px;
+      color: rgb(16, 137, 211);
+
+      &:hover {
+        cursor: pointer;
+      }
+    }
+
     .register {
       display: flex;
       justify-content: center;
