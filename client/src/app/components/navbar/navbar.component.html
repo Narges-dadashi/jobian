@@ -1,13 +1,14 @@
 <mat-toolbar>
     <section class="left">
+        <mat-icon class="list">view_headline</mat-icon>
         <a class="brand" routerLink="/">
             Jobian
         </a>
     </section>
     <section class="tabs">
-        <p class="p">Search Jobs</p>
-        <p class="p">Resume Builder</p>
-        <p class="p">Employer's section</p>
+        <span class="tab-items">Job opportunities</span>
+        <span class="tab-items">Resume builder</span>
+        <span class="tab-items">Employer's section</span>
     </section>
     <section class="right">
         @if (accountService.loggedInUserSig(); as user) {
