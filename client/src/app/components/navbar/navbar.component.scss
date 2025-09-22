@@ -6,6 +6,7 @@ mat-toolbar {
     margin: 5px;
     width: 99%;
     justify-self: center;
+    z-index: 9999;
 
     .left {
         .list {
