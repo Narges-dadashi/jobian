@@ -3,4 +3,5 @@ export interface LoggedIn {
     userName: string;
     age: number;
     token: string;
+    profilePhotoUrl: string | undefined;
 }
