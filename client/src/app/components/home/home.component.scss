@@ -10,13 +10,13 @@ section {
     background: url('https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1470&q=80') no-repeat center center/cover;
     direction: rtl;
 
-    &::before {
-        content: '';
-        position: absolute;
-        inset: 0;
-        background: rgba(10, 40, 80, 0.45);
-        z-index: 1;
-    }
+    // &::before {
+    //     content: '';
+    //     position: absolute;
+    //     inset: 0;
+    //     background: rgba(10, 40, 80, 0.45);
+    //     z-index: 1;
+    // }
 
     .title {
         position: absolute;
@@ -29,15 +29,12 @@ section {
         font-weight: 900;
         text-align: center;
         background: linear-gradient(90deg, #40e0ff, #2ca3ff, #a28aff);
-        /* گرادیانت روشن‌تر */
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         animation: shine 4s infinite linear;
         max-width: 700px;
         width: 90%;
     }
-
-
 }
 
 @keyframes shine {
@@ -49,7 +46,6 @@ section {
         background-position: 200% center;
     }
 }
-
 
 .search {
     display: flex;
@@ -69,12 +65,12 @@ section {
 
     .input {
         width: 100%;
-        height: 40px;
+        height: 50px;
         line-height: 28px;
         padding: 0 1rem;
         padding-left: 2.5rem;
         border: 2px solid transparent;
-        border-radius: 8px;
+        border-radius: 10px;
         outline: none;
         background-color: #f3f3f4;
         color: #0d0c22;
@@ -93,5 +89,3 @@ section {
         }
     }
 }
-
-.introduction {}

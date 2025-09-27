@@ -5,11 +5,6 @@
             Jobian
         </a>
     </section>
-    <section class="tabs">
-        <span class="tab-items">Job opportunities</span>
-        <span class="tab-items">Resume builder</span>
-        <span class="tab-items">Employer's section</span>
-    </section>
     <section class="right">
         @if (accountService.loggedInUserSig(); as user) {
         <button [mat-menu-trigger-for]="appMenu" class="menu-button" mat-mini-fab>
