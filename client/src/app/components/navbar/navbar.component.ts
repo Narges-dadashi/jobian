@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterLink, RouterModule } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { MatTabsModule } from '@angular/material/tabs';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { AccountService } from '../../services/account.service';
 import { MatMenuModule } from '@angular/material/menu';
@@ -14,11 +15,11 @@ import { environment } from '../../../environments/environment.development';
   selector: 'app-navbar',
   standalone: true,
   imports: [
-    RouterLink, CommonModule,
+    RouterLink, CommonModule, RouterModule,
     MatButtonModule, MatToolbarModule,
     MatIconModule, MatMenuModule,
     MatDividerModule, MatListModule,
-    RouterModule
+    MatTabsModule
   ],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.scss'

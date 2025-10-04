@@ -5,6 +5,12 @@
             Jobian
         </a>
     </section>
+
+    <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="start" class="tabs">
+        <mat-tab label="Job Opportunities"></mat-tab>
+        <mat-tab label="Resume builder"></mat-tab>
+    </mat-tab-group>
+
     <section class="right">
         @if (accountService.loggedInUserSig(); as user) {
         <button [mat-menu-trigger-for]="appMenu" class="menu-button" mat-mini-fab>
