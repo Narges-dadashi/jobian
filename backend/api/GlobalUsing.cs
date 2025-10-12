@@ -22,3 +22,4 @@ global using image_processing.Interfaces;
 global using image_processing.Services;
 global using api.Extensions.Validations;
 global using MongoDB.Driver.Linq;
+global using api.Helpers;
