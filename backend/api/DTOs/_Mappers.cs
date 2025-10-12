@@ -11,7 +11,7 @@ public static class Mappers
             Password: registerDto.Password,
             ConfirmPassword: registerDto.ConfirmPassword,
             DateOfBirth: registerDto.DateOfBirth,
-            LastActivity: DateTime.UtcNow,
+            LastActive: DateTime.UtcNow,
             Gender: string.Empty,
             Role: string.Empty,
             City: string.Empty,
@@ -27,13 +27,6 @@ public static class Mappers
             Age: Extensions.DateTimeExtensions.CalculateAge(appUser.DateOfBirth),
             Token: tokenValue,
             ProfilePhotoUrl: appUser.Photos.FirstOrDefault(photo => photo.IsMain)?.Url_165
-        );
-    }
-
-    public static UpdateDto ConvertRegisterDtoToUpdateDto(RegisterDto registerDto)
-    {
-        return new(
-            Email: registerDto.Email
         );
     }
 
