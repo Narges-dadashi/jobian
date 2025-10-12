@@ -4,19 +4,22 @@ namespace api.Controllers;
 public class UserController(IUserRepository userRepository) : BaseApiController
 {
     [HttpPut("update")]
-    public async Task<ActionResult<UpdateDto>> UpdateById(RegisterDto userInput, CancellationToken cancellationToken)
+    public async Task<ActionResult<Response>> UpdateById(UserUpdateDto userInput, CancellationToken cancellationToken)
     {
         var userId = User.GetUserId();
 
+        Console.WriteLine(userId);
+
         if (userId is null)
-            return Unauthorized("You are not logged. Please log in again.");
+            return Unauthorized("You are not logged. Please login again");
 
-        UpdateDto? loggedInDto = await userRepository.UpdateByIdAsync(userId, userInput, cancellationToken);
+        UpdateResult result = await userRepository.UpdateByIdAsync(userId, userInput, cancellationToken);
 
-        if (loggedInDto is null)
-            return BadRequest("Operation failed");
-
-        return loggedInDto;
+        return result is null || result.ModifiedCount == 0
+            ? BadRequest("Update failed, Try again later.")
+            : Ok(new Response(
+                Message: "User has been updated successfully."
+            ));
     }
 
     [HttpPut("add-photo")]

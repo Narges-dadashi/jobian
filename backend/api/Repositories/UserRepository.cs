@@ -28,21 +28,15 @@ public class UserRepository : IUserRepository
         return appUser;
     }
 
-    public async Task<UpdateDto?> UpdateByIdAsync(string userId, RegisterDto userInput, CancellationToken cancellationToken)
+    public async Task<UpdateResult> UpdateByIdAsync(string userId, UserUpdateDto userInput, CancellationToken cancellationToken)
     {
         UpdateDefinition<AppUser> updateDef = Builders<AppUser>.Update
-            .Set(user => user.Email, userInput.Email.Trim().ToLower());
+        .Set(appUser => appUser.Gender, userInput.Gender.Trim())
+        .Set(appUser => appUser.Role, userInput.Role.Trim())
+        .Set(appUser => appUser.City, userInput.City.Trim().ToLower());
 
-        await _collection.UpdateOneAsync(user =>
-            user.Id == userId, updateDef, null, cancellationToken);
-
-        AppUser appUser = await _collection.Find(user =>
-            user.Id == userId).FirstOrDefaultAsync(cancellationToken);
-
-        if (appUser is null)
-            return null;
-
-        return Mappers.ConvertRegisterDtoToUpdateDto(userInput);
+        return await _collection.UpdateOneAsync(user
+            => user.Id == userId, updateDef, null, cancellationToken);
     }
 
     public async Task<Photo?> UploadPhotoAsync(IFormFile file, string userId, CancellationToken cancellationToken)
