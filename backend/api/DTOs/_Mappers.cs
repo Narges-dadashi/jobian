@@ -6,13 +6,15 @@ public static class Mappers
     {
         return new AppUser(
             Id: null,
-            Email: registerDto.Email,
-            UserName: registerDto.UserName,
-            DateOfBirth: registerDto.DateOfBirth,
+            Email: registerDto.Email.Trim().ToLower(),
+            UserName: registerDto.UserName.Trim().ToLower(),
             Password: registerDto.Password,
             ConfirmPassword: registerDto.ConfirmPassword,
-            Gender: "",
-            Role: "",
+            DateOfBirth: registerDto.DateOfBirth,
+            LastActivity: DateTime.UtcNow,
+            Gender: string.Empty,
+            Role: string.Empty,
+            City: string.Empty,
             Photos: []
         );
     }

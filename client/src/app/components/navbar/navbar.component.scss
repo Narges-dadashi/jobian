@@ -1,104 +1,212 @@
 mat-toolbar {
-    background-color: rgb(10, 160, 253);
+  background-color: rgb(162, 247, 250);
+  display: flex;
+  justify-content: space-between;
+  border-radius: 20px;
+  margin: 5px;
+  width: 99%;
+  justify-self: center;
+  z-index: 9999;
+
+  .left {
+    .list {
+      color: #0f172a;
+      cursor: pointer;
+      font-size: larger;
+    }
+
+    .brand {
+      display: inline;
+      color: #6ff5d4;
+      text-decoration: none;
+      font-size: 2rem;
+      font-weight: bold;
+    }
+  }
+
+  .right {
     display: flex;
-    justify-content: space-between;
-    // border-radius: 20px;
-    // margin: 5px;
-    // width: 99%;
-    justify-self: center;
-    z-index: 9999;
+    gap: 1rem;
 
-    .left {
-        .list {
-            color: white;
-            cursor: pointer;
-            font-size: larger;
-        }
-
-        .brand {
-            color: white;
-            text-decoration: none;
-            font-size: 2rem;
-        }
+    .menu-button {
+      font-size: 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.699);
+      border-radius: 100%;
     }
-
-    .right {
-        display: flex;
-        gap: 1rem;
-
-        .menu-button {
-            font-size: 2rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.699);
-            border-radius: 100%;
-        }
-    }
+  }
 }
 
 ::ng-deep .mat-menu {
-    .user-info {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 10px;
-        padding: 0.5rem;
+  .user-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    padding: 0.5rem;
 
-        * {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .profile-info {
-            * {
-                margin: 0;
-            }
-
-            font-size: 3rem;
-            background-color: rgb(246, 209, 164);
-            width: 4rem;
-            height: 4rem;
-            border-radius: 50%;
-            box-shadow: 3px 3px 3px rgb(144, 144, 144);
-
-            img {
-                height: 4rem;
-                width: 4rem;
-                border-radius: 50%;
-            }
-        }
+    * {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
     }
 
-    mat-list {
-        padding: 0;
+    .profile-info {
+      * {
         margin: 0;
+      }
 
-        mat-list-item {
-            padding: 0;
-        }
+      font-size: 3rem;
+      background-color: rgb(246, 209, 164);
+      width: 4rem;
+      height: 4rem;
+      border-radius: 50%;
+      box-shadow: 3px 3px 3px rgb(144, 144, 144);
 
-        .menu-items {
-            display: flex;
-            align-items: center;
-            gap: 5px;
-            line-height: 47px;
-            padding-left: 1rem;
-            padding-right: 5rem;
+      img {
+        height: 4rem;
+        width: 4rem;
+        border-radius: 50%;
+      }
+    }
+  }
 
-            &:hover {
-                background-color: rgb(255, 176, 255);
-                cursor: pointer;
-            }
-        }
+  mat-list {
+    padding: 0;
+    margin: 0;
+
+    mat-list-item {
+      padding: 0;
     }
 
-    .logout {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        padding: 1rem;
+    .menu-items {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      line-height: 47px;
+      padding-left: 1rem;
+      padding-right: 5rem;
+
+      &:hover {
+        background-color: rgb(255, 176, 255);
+        cursor: pointer;
+      }
     }
+  }
+
+  .logout {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+  }
 }
+
+// .navbar {
+//   background: #b9fff4;
+//   color: #0f172a;
+//   display: flex;
+//   justify-content: space-between;
+//   align-items: center;
+//   padding: 1rem 2rem;
+//   font-family: 'Poppins', sans-serif;
+//   position: sticky;
+//   top: 0;
+//   z-index: 100;
+//   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+
+//   &__left {
+//     display: flex;
+//     align-items: center;
+//     gap: 0.8rem;
+
+//     .navbar__menu {
+//       background: none;
+//       border: none;
+//       font-size: 1.5rem;
+//       color: #0f172a;
+//       cursor: pointer;
+//       display: none; // برای دسکتاپ مخفی
+//     }
+
+//     .navbar__brand {
+//       font-size: 1.5rem;
+//       font-weight: 700;
+//       color: #0f172a;
+//       text-decoration: none;
+//     }
+//   }
+
+//   &__links {
+//     list-style: none;
+//     display: flex;
+//     gap: 2rem;
+//     margin: 0;
+
+//     li a {
+//       color: #0f172a;
+//       text-decoration: none;
+//       font-weight: 500;
+//       position: relative;
+//       transition: color 0.3s ease;
+
+//       &:hover {
+//         color: #007bff;
+//       }
+
+//       &::after {
+//         content: '';
+//         position: absolute;
+//         bottom: -5px;
+//         left: 0;
+//         width: 0%;
+//         height: 2px;
+//         background: #007bff;
+//         transition: width 0.3s ease;
+//       }
+
+//       &:hover::after {
+//         width: 100%;
+//       }
+//     }
+//   }
+
+//   &__right {
+//     .navbar__auth {
+//       background: #ffffff;
+//       color: #007bff;
+//       border: 2px solid #007bff;
+//       padding: 8px 20px;
+//       border-radius: 50px;
+//       font-weight: 500;
+//       cursor: pointer;
+//       transition: all 0.3s ease;
+//       box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+//       &:hover {
+//         background: #007bff;
+//         color: #fff;
+//       }
+//     }
+//   }
+
+//   // 🔹 نسخه موبایل
+//   @media (max-width: 768px) {
+//     flex-wrap: wrap;
+
+//     &__links {
+//       display: none; // فعلاً ساده (بعداً میشه dropdown منو ساخت)
+//     }
+
+//     .navbar__menu {
+//       display: block;
+//     }
+
+//     .navbar__auth {
+//       padding: 8px 16px;
+//     }
+//   }
+// }
