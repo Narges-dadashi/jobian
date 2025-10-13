@@ -6,10 +6,15 @@
         </a>
     </section>
 
-    <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="start" class="tabs">
+    <ul class="navbar-links">
+        <li><a href="#">Job Opportunities</a></li>
+        <li><a href="#">Resume Builder</a></li>
+    </ul>
+
+    <!-- <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="start" class="tabs">
         <mat-tab label="Job Opportunities"></mat-tab>
         <mat-tab label="Resume builder"></mat-tab>
-    </mat-tab-group>
+    </mat-tab-group> -->
 
     <section class="right">
         @if (accountService.loggedInUserSig(); as user) {

@@ -1,41 +1,77 @@
 mat-toolbar {
-  background-color: rgb(162, 247, 250);
+  background-color: rgb(68, 192, 245);
   display: flex;
   justify-content: space-between;
   border-radius: 20px;
   margin: 5px;
   width: 99%;
+  font-family: 'Poppins', sans-serif;
   justify-self: center;
   z-index: 9999;
 
   .left {
     .list {
-      color: #0f172a;
+      color: #ffffff;
       cursor: pointer;
       font-size: larger;
     }
 
     .brand {
       display: inline;
-      color: #6ff5d4;
+      color: #ffffff;
       text-decoration: none;
       font-size: 2rem;
       font-weight: bold;
     }
   }
 
-  .right {
+  .navbar-links {
+    list-style: none;
     display: flex;
-    gap: 1rem;
+    gap: 2rem;
+    margin: 0;
 
-    .menu-button {
-      font-size: 2rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.699);
-      border-radius: 100%;
+    li a {
+      color: #0f172a;
+      text-decoration: none;
+      font-weight: 500;
+      position: relative;
+      transition: color 0.3s ease;
+
+      &:hover {
+        color: #007bff;
+      }
+
+      &::after {
+        content: '';
+        position: absolute;
+        bottom: -5px;
+        left: 0;
+        width: 0%;
+        height: 2px;
+        background: #007bff;
+        transition: width 0.3s ease;
+      }
+
+      &:hover::after {
+        width: 100%;
+      }
     }
+  }
+}
+
+
+.right {
+  display: flex;
+  gap: 1rem;
+
+  .menu-button {
+    font-size: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.699);
+    border-radius: 100%;
   }
 }
 

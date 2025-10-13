@@ -1,7 +1,7 @@
 .hero-dark {
     position: relative;
     height: 85vh;
-    // background: url('https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=1350&q=80') no-repeat center center/cover;
+    background: url('https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=1350&q=80') no-repeat center center/cover;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -91,24 +91,24 @@
         }
     }
 
-    // &__tags {
-    //     margin-top: 0.5rem;
-    //     font-size: 0.95rem;
-    //     opacity: 0.9;
+    &__tags {
+        margin-top: 0.5rem;
+        font-size: 0.95rem;
+        opacity: 0.9;
 
-    //     span {
-    //         color: #ccc;
-    //     }
+        span {
+            color: #ccc;
+        }
 
-    //     a {
-    //         color: #61a5ff;
-    //         margin-left: 10px;
-    //         text-decoration: none;
-    //         transition: color 0.3s ease;
+        a {
+            color: #61a5ff;
+            margin-left: 10px;
+            text-decoration: none;
+            transition: color 0.3s ease;
 
-    //         &:hover {
-    //             color: #fff;
-    //         }
-    //     }
-    // }
+            &:hover {
+                color: #fff;
+            }
+        }
+    }
 }
