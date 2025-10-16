@@ -10,7 +10,6 @@ import { Photo } from '../../../models/photo.model';
 import { take } from 'rxjs';
 import { ApiResponse } from '../../../models/helpers/apiResponse.model';
 import { MatCardModule } from '@angular/material/card';
-// import { NgClass } from "../../../../../node_modules/@angular/common/index";
 import { MatIcon } from "@angular/material/icon";
 import { MatButton } from "@angular/material/button";
 import { CommonModule } from '@angular/common';
