@@ -6,16 +6,17 @@ import { AccountService } from './services/account.service';
 import { NavbarComponent } from "./components/navbar/navbar.component";
 import { FooterComponent } from "./components/footer/footer.component";
 import { isPlatformBrowser } from '@angular/common';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 @Component({
   selector: 'app-root',
   standalone: true,
   imports: [
-    RouterOutlet, RouterModule, 
+    RouterOutlet, RouterModule,
     FormsModule, ReactiveFormsModule,
     MatButtonModule,
     NavbarComponent,
-    FooterComponent
+    FooterComponent, NgxSpinnerModule
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
