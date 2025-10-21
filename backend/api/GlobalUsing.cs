@@ -23,3 +23,6 @@ global using image_processing.Services;
 global using api.Extensions.Validations;
 global using MongoDB.Driver.Linq;
 global using api.Helpers;
+global using System.Net;
+global using System.Text.Json;
+global using api.Models.Errors;
