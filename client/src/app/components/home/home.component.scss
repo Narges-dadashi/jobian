@@ -2,7 +2,10 @@
     position: relative;
     height: 85vh;
     // background: url('https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=1350&q=80') no-repeat center center/cover;
-    background-image: url('/home.jpg');
+    // background-image: url('/home.jpg');
+    // background-image: url('/bgc.png');
+    // background: linear-gradient(180deg, #92cff8 0%, #ffffff 100%);
+    background: linear-gradient(180deg, #ffffff 0%, #92cff8 100%);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -32,7 +35,13 @@
         font-size: 3rem;
         font-weight: 700;
         margin-bottom: 2rem;
-        text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+        transform: translateY(-70px);
+        background: linear-gradient(90deg, #007bff, #5b00ff);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+
+        // text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+        white-space: nowrap;
 
         @media (max-width: 768px) {
             font-size: 2.2rem;
@@ -48,8 +57,10 @@
         border-radius: 8px;
         overflow: hidden;
         box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
-        max-width: 600px;
         margin: 0 auto 1.2rem;
+        width: 100%;
+        max-width: 900px;
+        transform: translateY(-30px);
 
         @media (max-width: 600px) {
             flex-direction: column;
@@ -92,24 +103,24 @@
         }
     }
 
-    &__tags {
-        margin-top: 0.5rem;
-        font-size: 0.95rem;
-        opacity: 0.9;
+    // &__tags {
+    //     margin-top: 0.5rem;
+    //     font-size: 0.95rem;
+    //     opacity: 0.9;
 
-        span {
-            color: #ccc;
-        }
+    //     span {
+    //         color: #ccc;
+    //     }
 
-        a {
-            color: #61a5ff;
-            margin-left: 10px;
-            text-decoration: none;
-            transition: color 0.3s ease;
+    //     a {
+    //         color: #61a5ff;
+    //         margin-left: 10px;
+    //         text-decoration: none;
+    //         transition: color 0.3s ease;
 
-            &:hover {
-                color: #fff;
-            }
-        }
-    }
+    //         &:hover {
+    //             color: #fff;
+    //         }
+    //     }
+    // }
 }

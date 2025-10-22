@@ -34,16 +34,16 @@ export const errorInterceptor: HttpInterceptorFn = (req, next) => {
 
             router.navigate(['account/login'])
             break;
-          // case 403:
-          //   router.navigate(['/no-access']);
-          //   break;
-          // case 404:
-          //   router.navigate(['/not-found']);
-          //   break;
-          // case 500:
-          //   const navigationExtras: NavigationExtras = { state: { error: err.error } };
-          //   router.navigate(['/server-error'], navigationExtras);
-          //   break;
+          case 403:
+            router.navigate(['/no-access']);
+            break;
+          case 404:
+            router.navigate(['/not-found']);
+            break;
+          case 500:
+            const navigationExtras: NavigationExtras = { state: { error: err.error } };
+            router.navigate(['/server-error'], navigationExtras);
+            break;
           default:
             snack.open('Something unexpected went wrong.', 'Close', { horizontalPosition: 'center', verticalPosition: 'top', duration: 7000 });
             console.log(err);
