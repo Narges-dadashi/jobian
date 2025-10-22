@@ -4,20 +4,38 @@ public static class Mappers
 {
     public static AppUser ConvertRegisterDtoToAppUser(RegisterDto registerDto)
     {
-        return new AppUser(
-            Id: null,
-            Email: registerDto.Email.Trim().ToLower(),
-            UserName: registerDto.UserName.Trim().ToLower(),
-            Password: registerDto.Password,
-            ConfirmPassword: registerDto.ConfirmPassword,
-            DateOfBirth: registerDto.DateOfBirth,
-            LastActive: DateTime.UtcNow,
-            Gender: string.Empty,
-            Role: string.Empty,
-            City: string.Empty,
-            Photos: []
-        );
+        return new AppUser
+        {
+            Id = null,
+            Email = registerDto.Email?.Trim().ToLowerInvariant() ?? string.Empty,
+            UserName = registerDto.UserName?.Trim().ToLowerInvariant() ?? string.Empty,
+            Password = registerDto.Password ?? string.Empty,
+            ConfirmPassword = registerDto.ConfirmPassword ?? string.Empty,
+            DateOfBirth = registerDto.DateOfBirth,
+            LastActive = DateTime.UtcNow,
+            Gender = string.Empty,
+            Role = string.Empty,
+            City = string.Empty,
+            Photos = new()
+        };
     }
+
+    // public static AppUser ConvertRegisterDtoToAppUser(RegisterDto registerDto)
+    // {
+    //     return new AppUser(
+    //         Id: null,
+    //         Email: registerDto.Email.Trim().ToLower(),
+    //         UserName: registerDto.UserName.Trim().ToLower(),
+    //         Password: registerDto.Password,
+    //         ConfirmPassword: registerDto.ConfirmPassword,
+    //         DateOfBirth: registerDto.DateOfBirth,
+    //         LastActive: DateTime.UtcNow,
+    //         Gender: string.Empty,
+    //         Role: string.Empty,
+    //         City: string.Empty,
+    //         Photos: []
+    //     );
+    // }
 
     public static LoggedInDto ConvertAppUserToLoggedInDto(AppUser appUser, string tokenValue)
     {

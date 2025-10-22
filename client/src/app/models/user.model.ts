@@ -1,6 +1,6 @@
 import { Photo } from "./photo.model";
 
-export interface Member {
+export interface User {
     email: string;
     userName: string;
     age: number;
