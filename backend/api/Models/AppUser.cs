@@ -2,34 +2,23 @@ namespace api.Models;
 
 public class AppUser
 {
-    [BsonId, BsonRepresentation(BsonType.ObjectId)]
+    [property: BsonId, BsonRepresentation(BsonType.ObjectId)]
     public string? Id { get; init; }
-
     [EmailAddress]
-    public required string Email { get; init; }
-
+    public string Email { get; init; } = string.Empty;
     [StringLength(30, MinimumLength = 3)]
-    public required string UserName { get; init; }
-
+    public string UserName { get; init; } = string.Empty;
     [StringLength(16, MinimumLength = 8)]
-    public required string Password { get; init; }
-
-    [Compare(nameof(Password))]
-    public required string ConfirmPassword { get; init; }
-
+    public string Password { get; init; } = string.Empty;
+    public string ConfirmPassword { get; init; } = string.Empty;
     [Range(typeof(DateOnly), "1900-01-01", "2050-01-01",
         ErrorMessage = "Date of birth must be between 1900 and 2050.")]
-    public required DateOnly DateOfBirth { get; init; }
-
+    public DateOnly DateOfBirth { get; init; }
     public DateTime LastActive { get; init; }
-
-    public required string Gender { get; init; }
-
-    public required string Role { get; init; }
-
-    public required string City { get; init; }
-
-    public List<Photo> Photos { get; init; } = new();
+    public string Gender { get; init; } = string.Empty;
+    public string Role { get; init; } = string.Empty;
+    public string City { get; init; } = string.Empty;
+    public List<Photo> Photos { get; init; } = [];
 }
 
 
