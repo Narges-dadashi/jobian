@@ -34,4 +34,13 @@ public static class Mappers
             IsMain: isMain
         );
     }
+
+    public static MemberDto ConvertAppUserToMemberDto(AppUser appUser)
+    {
+        return new(
+            UserName: appUser.UserName,
+            Age: Extensions.DateTimeExtensions.CalculateAge(appUser.DateOfBirth),
+            Photos: appUser.Photos
+        );
+    }
 }
