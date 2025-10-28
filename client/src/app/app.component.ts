@@ -1,7 +1,7 @@
 import { Component, inject, OnInit, PLATFORM_ID } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { RouterOutlet, RouterModule, RouterLink } from '@angular/router';
+import { RouterOutlet, RouterModule } from '@angular/router';
 import { AccountService } from './services/account.service';
 import { NavbarComponent } from "./components/navbar/navbar.component";
 import { FooterComponent } from "./components/footer/footer.component";

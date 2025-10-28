@@ -11,6 +11,7 @@ import { authGuard } from './guards/auth.guard';
 import { UserEditComponent } from './components/user/user-edit/user-edit.component';
 import { NoAccessComponent } from './components/errors/no-access/no-access.component';
 import { ServerErrorComponent } from './components/errors/server-error/server-error.component';
+import { MemberComponent } from './components/member/member.component';
 
 export const routes: Routes = [
     { path: '', component: HomeComponent },
@@ -20,7 +21,8 @@ export const routes: Routes = [
         canActivate: [authGuard],
         children: [
             { path: 'user/user-edit', component: UserEditComponent },
-            { path: 'no-access', component: NoAccessComponent }
+            { path: 'no-access', component: NoAccessComponent },
+            { path: 'member', component: MemberComponent }
         ]
     },
     {
