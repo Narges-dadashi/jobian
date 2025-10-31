@@ -2,15 +2,23 @@ namespace api.DTOs;
 
 public static class Mappers
 {
-    public static AppUser ConvertRegisterDtoToAppUser(RegisterDto registerDto)
+    public static AppUser ConvertJobSeekerRegisterDtoToAppUser(JobSeekerRegisterDto jobSeekerRegisterDto)
     {
         return new AppUser
         {
-            Email = registerDto.Email.Trim().ToLowerInvariant(),
-            UserName = registerDto.UserName.Trim().ToLowerInvariant(),
-            DateOfBirth = registerDto.DateOfBirth,
-            Password = registerDto.Password,
-            ConfirmPassword = registerDto.ConfirmPassword,
+            Email = jobSeekerRegisterDto.Email.Trim().ToLower(),
+            UserName = jobSeekerRegisterDto.UserName.Trim().ToLower(),
+            Password = jobSeekerRegisterDto.Password
+        };
+    }
+
+    public static AppUser ConvertEmployserRegisterDtoToAppUser(EmployerRegisterDto employerRegisterDto)
+    {
+        return new AppUser
+        {
+            Email = employerRegisterDto.Email.Trim().ToLower(),
+            CompanyName = employerRegisterDto.CompanyName.Trim().ToLower(),
+            Password = employerRegisterDto.Password
         };
     }
 

@@ -10,35 +10,13 @@ public class AppUser
     public string UserName { get; init; } = string.Empty;
     [StringLength(16, MinimumLength = 8)]
     public string Password { get; init; } = string.Empty;
-    public string ConfirmPassword { get; init; } = string.Empty;
     [Range(typeof(DateOnly), "1900-01-01", "2050-01-01",
         ErrorMessage = "Date of birth must be between 1900 and 2050.")]
     public DateOnly DateOfBirth { get; init; }
-    public DateTime LastActive { get; init; }
-    public string Gender { get; init; } = string.Empty;
-    public string Role { get; init; } = string.Empty;
     public string City { get; init; } = string.Empty;
+    // ?
+    public string CompanyName { get; init; } = string.Empty;
+    [StringLength(30, MinimumLength = 8)]
+
     public List<Photo> Photos { get; init; } = [];
 }
-
-
-
-
-
-// namespace api.Models;
-
-// public record AppUser(
-//     [property: BsonId, BsonRepresentation(BsonType.ObjectId)]
-//     string? Id,
-//     [EmailAddress] string Email,
-//     [Length(3, 30)] string UserName,
-//     [Length(8, 16)] string Password,
-//     string ConfirmPassword,
-//     [Range(typeof(DateOnly), "1900-01-01", "2050-01-01", ErrorMessage = "Date of birth must be between 1900 and 2050.")]
-//     DateOnly DateOfBirth,
-//     DateTime LastActive,
-//     string Gender,
-//     string Role,
-//     string City,
-//     List<Photo> Photos
-// );
