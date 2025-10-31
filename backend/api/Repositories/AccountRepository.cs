@@ -17,7 +17,7 @@ public class AccountRepository : IAccountRepository
     }
     #endregion
 
-    public async Task<LoggedInDto?> RegisterAsync(RegisterDto userInput, CancellationToken cancellationToken)
+    public async Task<LoggedInDto?> RegisterJobSeekerAsync(JobSeekerRegisterDto userInput, CancellationToken cancellationToken)
     {
         AppUser user = await _collection.Find<AppUser>(doc =>
             doc.Email == userInput.Email.Trim().ToLower()).FirstOrDefaultAsync(cancellationToken);
@@ -25,7 +25,24 @@ public class AccountRepository : IAccountRepository
         if (user is not null)
             return null;
 
-        AppUser appUser = Mappers.ConvertRegisterDtoToAppUser(userInput);
+        AppUser appUser = Mappers.ConvertJobSeekerRegisterDtoToAppUser(userInput);
+
+        await _collection.InsertOneAsync(appUser, null, cancellationToken);
+
+        string? token = _tokenService.CreateToken(appUser);
+
+        return Mappers.ConvertAppUserToLoggedInDto(appUser, token);
+    }
+
+    public async Task<LoggedInDto?> RegisterEmployerAsync(EmployerRegisterDto userInput, CancellationToken cancellationToken)
+    {
+        AppUser user = await _collection.Find<AppUser>(doc =>
+            doc.Email == userInput.Email.Trim().ToLower()).FirstOrDefaultAsync(cancellationToken);
+
+        if (user is not null)
+            return null;
+
+        AppUser appUser = Mappers.ConvertEmployserRegisterDtoToAppUser(userInput);
 
         await _collection.InsertOneAsync(appUser, null, cancellationToken);
 
@@ -68,15 +85,5 @@ public class AccountRepository : IAccountRepository
             return null;
 
         return Mappers.ConvertAppUserToLoggedInDto(appUser, token);
-    }
-
-    public async Task<UpdateResult?> UpdateLastActive(string userId, CancellationToken cancellationToken)
-    {
-        if (userId is null) return null;
-
-        UpdateDefinition<AppUser> updateUserLastActive = Builders<AppUser>.Update.
-            Set(appUser => appUser.LastActive, DateTime.UtcNow);
-
-        return await _collection.UpdateOneAsync(doc => doc.Id == userId, updateUserLastActive, null, cancellationToken);
     }
 }
