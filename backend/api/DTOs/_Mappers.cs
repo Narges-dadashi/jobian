@@ -27,7 +27,7 @@ public static class Mappers
         return new(
             Email: appUser.Email,
             UserName: appUser.UserName,
-            Age: Extensions.DateTimeExtensions.CalculateAge(appUser.DateOfBirth),
+            // Age: Extensions.DateTimeExtensions.CalculateAge(appUser.DateOfBirth),
             Token: tokenValue,
             ProfilePhotoUrl: appUser.Photos.FirstOrDefault(photo => photo.IsMain)?.Url_165
         );

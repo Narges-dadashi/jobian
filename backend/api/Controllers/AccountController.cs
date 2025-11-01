@@ -2,13 +2,21 @@ namespace api.Controllers;
 
 public class AccountController(IAccountRepository accountRepository) : BaseApiController
 {
-    [HttpPost("register")]
-    public async Task<ActionResult<LoggedInDto>> Register(RegisterDto userInput, CancellationToken cancellationToken)
+    [HttpPost("register-job-seeker")]
+    public async Task<ActionResult<LoggedInDto>> RegisterJobSeeker(JobSeekerRegisterDto userInput, CancellationToken cancellationToken)
     {
-        if (userInput.Password != userInput.ConfirmPassword)
-            return BadRequest("Your passwords do not match!");
+        LoggedInDto? loggedInDto = await accountRepository.RegisterJobSeekerAsync(userInput, cancellationToken);
 
-        LoggedInDto? loggedInDto = await accountRepository.RegisterAsync(userInput, cancellationToken);
+        if (loggedInDto is null)
+            return BadRequest("This email is already taken");
+
+        return Ok(loggedInDto);
+    }
+
+    [HttpPost("register-employer")]
+    public async Task<ActionResult<LoggedInDto>> RegisterEmployer(EmployerRegisterDto userInput, CancellationToken cancellationToken)
+    {
+        LoggedInDto? loggedInDto = await accountRepository.RegisterEmployerAsync(userInput, cancellationToken);
 
         if (loggedInDto is null)
             return BadRequest("This email is already taken");

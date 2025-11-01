@@ -31,8 +31,8 @@ public class UserRepository : IUserRepository
     public async Task<UpdateResult> UpdateByIdAsync(string userId, UserUpdateDto userInput, CancellationToken cancellationToken)
     {
         UpdateDefinition<AppUser> updateDef = Builders<AppUser>.Update
-        .Set(appUser => appUser.Gender, userInput.Gender.Trim())
-        .Set(appUser => appUser.Role, userInput.Role.Trim())
+        // .Set(appUser => appUser.Gender, userInput.Gender.Trim())
+        // .Set(appUser => appUser.Role, userInput.Role.Trim())
         .Set(appUser => appUser.City, userInput.City.Trim().ToLower());
 
         return await _collection.UpdateOneAsync(user
