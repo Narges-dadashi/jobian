@@ -22,7 +22,8 @@ export const routes: Routes = [
         children: [
             { path: 'user/user-edit', component: UserEditComponent },
             { path: 'no-access', component: NoAccessComponent },
-            { path: 'member', component: MemberComponent }
+            { path: 'member', component: MemberComponent },
+            { path: 'job', component: JobComponent }
         ]
     },
     {
@@ -38,6 +39,5 @@ export const routes: Routes = [
     { path: 'footer', component: FooterComponent },
     { path: 'server-error', component: ServerErrorComponent },
     { path: '**', component: NotFoundComponent, pathMatch: 'full' },
-    { path: '**', component: NotFoundComponent },
-    { path: 'job', component: JobComponent }
+    { path: '**', component: NotFoundComponent }
 ];

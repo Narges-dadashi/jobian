@@ -6,7 +6,8 @@ import { Login } from '../models/login.model';
 import { isPlatformBrowser } from '@angular/common';
 import { Router } from '@angular/router';
 import { environment } from '../../environments/environment.development';
-import { Register } from '../models/register.model';
+import { JobSeekerRegister } from '../models/job-seeker-register.model';
+import { EmployerRegister } from '../models/employer-register.model';
 
 @Injectable({
   providedIn: 'root'
@@ -18,13 +19,29 @@ export class AccountService {
   router = inject(Router);
   loggedInUserSig = signal<LoggedIn | null>(null);
 
-  register(userInput: Register): Observable<LoggedIn | null> {
-    return this.http.post<LoggedIn>(this._baseApiUrl + 'account/register', userInput).pipe(
+  jobSeekerRegister(userInput: JobSeekerRegister): Observable<LoggedIn | null> {
+    return this.http.post<LoggedIn>(this._baseApiUrl + 'account/register-job-seeker', userInput).pipe(
       map(res => {
         if (res) {
           this.setCurrentUser(res);
 
-          this.router.navigateByUrl('member');
+          this.router.navigateByUrl('job');
+
+          return res;
+        }
+
+        return null;
+      })
+    );
+  }
+
+  employerRegister(userInput: EmployerRegister): Observable<LoggedIn | null> {
+    return this.http.post<LoggedIn>(this._baseApiUrl + 'account/register-employer', userInput).pipe(
+      map(res => {
+        if (res) {
+          this.setCurrentUser(res);
+
+          this.router.navigateByUrl('job');
 
           return res;
         }
@@ -40,7 +57,7 @@ export class AccountService {
         if (res) {
           this.setCurrentUser(res);
 
-          this.router.navigateByUrl('member');
+          this.router.navigateByUrl('job');
 
           return res;
         }
