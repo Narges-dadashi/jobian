@@ -6,7 +6,6 @@ public class AccountRepository : IAccountRepository
     private readonly IMongoCollection<AppUser> _collection;
     private readonly ITokenService _tokenService;
 
-    // constructor - dependency injections
     public AccountRepository(IMongoClient client, IMongoDbSettings dbSettings, ITokenService tokenService)
     {
         var dbName = client.GetDatabase(dbSettings.DatabaseName);
@@ -37,7 +36,7 @@ public class AccountRepository : IAccountRepository
     public async Task<LoggedInDto?> RegisterEmployerAsync(EmployerRegisterDto userInput, CancellationToken cancellationToken)
     {
         AppUser user = await _collection.Find<AppUser>(doc =>
-            doc.Email == userInput.Email.Trim().ToLower()).FirstOrDefaultAsync(cancellationToken);
+            doc.Email == userInput.CompanyEmail.Trim().ToLower()).FirstOrDefaultAsync(cancellationToken);
 
         if (user is not null)
             return null;

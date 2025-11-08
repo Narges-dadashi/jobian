@@ -3,7 +3,7 @@ import { RouterLink } from '@angular/router';
 import { AccountService } from '../../../services/account.service';
 import { FormBuilder, FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
-import { Register } from '../../../models/register.model';
+// import { Register } from '../../../models/register.model';
 
 @Component({
   selector: 'app-register',
@@ -15,30 +15,20 @@ import { Register } from '../../../models/register.model';
   templateUrl: './register.component.html',
   styleUrl: './register.component.scss'
 })
-export class RegisterComponent implements OnInit, OnDestroy {
+export class RegisterComponent implements OnDestroy {
   accountService = inject(AccountService);
   fB = inject(FormBuilder);
   subscribedRegisterUser: Subscription | undefined;
 
-  minDate = new Date();
-  maxDate = new Date();
-
   passwordsNotMatch: boolean | undefined;
 
-  ngOnInit(): void {
-    const currentYear = new Date().getFullYear();
-    this.minDate = new Date(currentYear - 99, 0, 1);
-    this.maxDate = new Date(currentYear - 18, 0, 1);
-  }
-
   ngOnDestroy(): void {
-      this.subscribedRegisterUser?.unsubscribe();
+    this.subscribedRegisterUser?.unsubscribe();
   }
 
   registerFg = this.fB.group({
     emailCtrl: ['', [Validators.required, Validators.email]],
     userNameCtrl: ['', [Validators.required]],
-    dateOfBirthCtrl: ['', [Validators.required]],
     passwordCtrl: ['', [Validators.required]],
     confirmPasswordCtrl: ['', [Validators.required]]
   });
@@ -51,10 +41,6 @@ export class RegisterComponent implements OnInit, OnDestroy {
     return this.registerFg.get('userNameCtrl') as FormControl;
   }
 
-  get DateOfBirthCtrl(): FormControl {
-    return this.registerFg.get('dateOfBirthCtrl') as FormControl;
-  }
-
   get PasswordCtrl(): FormControl {
     return this.registerFg.get('passwordCtrl') as FormControl;
   }
@@ -64,13 +50,10 @@ export class RegisterComponent implements OnInit, OnDestroy {
   }
 
   register(): void {
-    const dob: string | undefined = this.getDateOnly(this.DateOfBirthCtrl.value);
-
     if (this.PasswordCtrl.value === this.ConfirmPasswordCtrl.value) {
       let user: Register = {
         email: this.EmailCtrl.value,
         userName: this.UserNameCtrl.value,
-        dateOfBirth: dob,
         password: this.PasswordCtrl.value,
         confirmPassword: this.ConfirmPasswordCtrl.value
       }
@@ -83,12 +66,5 @@ export class RegisterComponent implements OnInit, OnDestroy {
     else {
       this.passwordsNotMatch = true;
     }
-  }
-
-  getDateOnly(dob: string | null): string | undefined {
-    if (!dob) return undefined;
-
-    let theDob: Date = new Date(dob);
-    return new Date(theDob.setMinutes(theDob.getMinutes() - theDob.getTimezoneOffset())).toISOString().slice(0, 10);
   }
 }

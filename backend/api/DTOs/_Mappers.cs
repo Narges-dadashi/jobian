@@ -16,7 +16,7 @@ public static class Mappers
     {
         return new AppUser
         {
-            Email = employerRegisterDto.Email.Trim().ToLower(),
+            Email = employerRegisterDto.CompanyEmail.Trim().ToLower(),
             CompanyName = employerRegisterDto.CompanyName.Trim().ToLower(),
             Password = employerRegisterDto.Password
         };
@@ -27,7 +27,6 @@ public static class Mappers
         return new(
             Email: appUser.Email,
             UserName: appUser.UserName,
-            Age: Extensions.DateTimeExtensions.CalculateAge(appUser.DateOfBirth),
             Token: tokenValue,
             ProfilePhotoUrl: appUser.Photos.FirstOrDefault(photo => photo.IsMain)?.Url_165
         );
@@ -48,7 +47,6 @@ public static class Mappers
         return new(
             Email: appUser.Email,
             UserName: appUser.UserName,
-            Age: Extensions.DateTimeExtensions.CalculateAge(appUser.DateOfBirth),
             Photos: appUser.Photos
         );
     }
