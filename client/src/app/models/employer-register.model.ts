@@ -1,5 +1,5 @@
 export interface EmployerRegister {
-    email: string;
+    companyEmail: string;
     companyName: string;
     password: string;
 }

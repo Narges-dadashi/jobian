@@ -1,5 +1,5 @@
-export interface UserUpdate {
-    gender: string;
-    role: string;
-    city: string;
-}
+// export interface UserUpdate {
+//     gender: string;
+//     role: string;
+//     city: string;
+// }
