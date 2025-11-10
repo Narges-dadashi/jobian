@@ -3,7 +3,7 @@ namespace api.Controllers;
 [Authorize]
 public class UserController(IUserRepository userRepository) : BaseApiController
 {
-    [HttpPut("update")]
+    [HttpPut("update-job-seeker")]
     public async Task<ActionResult<Response>> UpdateById(JobSeekerUpdateDto userInput, CancellationToken cancellationToken)
     {
         var userId = User.GetUserId();
@@ -14,6 +14,25 @@ public class UserController(IUserRepository userRepository) : BaseApiController
             return Unauthorized("You are not logged. Please login again");
 
         UpdateResult result = await userRepository.UpdateJobSeekerByIdAsync(userId, userInput, cancellationToken);
+
+        return result is null || result.ModifiedCount == 0
+            ? BadRequest("Update failed, Try again later.")
+            : Ok(new Response(
+                Message: "User has been updated successfully."
+            ));
+    }
+
+    [HttpPut("update-employer")]
+    public async Task<ActionResult<Response>> UpdateEmployerById(EmployerUpdateDto userInput, CancellationToken cancellationToken)
+    {
+        var userId = User.GetUserId();
+
+        Console.WriteLine(userId);
+
+        if (userId is null)
+            return Unauthorized("You are not logged. Please login again");
+
+        UpdateResult result = await userRepository.UpdateEmployerByIdAsync(userId, userInput, cancellationToken);
 
         return result is null || result.ModifiedCount == 0
             ? BadRequest("Update failed, Try again later.")

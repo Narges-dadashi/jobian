@@ -4,6 +4,7 @@ public interface IUserRepository
 {
     public Task<AppUser?> GetByIdAsync(string userId, CancellationToken cancellationToken);
     public Task<UpdateResult> UpdateJobSeekerByIdAsync(string userId, JobSeekerUpdateDto userInput, CancellationToken cancellationToken);
+    public Task<UpdateResult> UpdateEmployerByIdAsync(string userId, EmployerUpdateDto userInput, CancellationToken cancellationToken);
     public Task<Photo?> UploadPhotoAsync(IFormFile file, string userId, CancellationToken cancellationToken);
     public Task<UpdateResult?> SetMainPhotoAsync(string userId, string photoUrlIn, CancellationToken cancellationToken);
     public Task<UpdateResult?> DeletePhotoAsync(string userId, string? urlIn, CancellationToken cancellationToken);

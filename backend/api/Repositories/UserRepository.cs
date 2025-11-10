@@ -46,6 +46,24 @@ public class UserRepository : IUserRepository
             => user.Id == userId, updateDef, null, cancellationToken);
     }
 
+    public async Task<UpdateResult> UpdateEmployerByIdAsync(string userId, EmployerUpdateDto userInput, CancellationToken cancellationToken)
+    {
+        UpdateDefinition<AppUser> updateDef = Builders<AppUser>.Update
+        .Set(appUser => appUser.Industry, userInput.Industry.Trim().ToLower())
+        .Set(appUser => appUser.CompanyPhoneNumber, userInput.CompanyPhoneNumber.Trim().ToLower())
+        .Set(appUser => appUser.ContactPhoneNumber, userInput.ContactPhoneNumber.Trim())
+        .Set(appUser => appUser.About, userInput.About.Trim())
+        .Set(appUser => appUser.LogoUrl, userInput.LogoUrl.Trim())
+        .Set(appUser => appUser.CompanyName, userInput.ContactPersonName.Trim())
+        .Set(appUser => appUser.ContactPersonPosition, userInput.ContactPersonPosition.Trim())
+        .Set(appUser => appUser.City, userInput.City.Trim())
+        .Set(appUser => appUser.Province, userInput.Province.Trim())
+        .Set(appUser => appUser.RegisterDate, userInput.RegisterDate);
+
+        return await _collection.UpdateOneAsync(user
+            => user.Id == userId, updateDef, null, cancellationToken);
+    }
+
     public async Task<Photo?> UploadPhotoAsync(IFormFile file, string userId, CancellationToken cancellationToken)
     {
         AppUser? appUser = await GetByIdAsync(userId, cancellationToken);
