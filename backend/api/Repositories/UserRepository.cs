@@ -28,12 +28,19 @@ public class UserRepository : IUserRepository
         return appUser;
     }
 
-    public async Task<UpdateResult> UpdateByIdAsync(string userId, UserUpdateDto userInput, CancellationToken cancellationToken)
+    public async Task<UpdateResult> UpdateJobSeekerByIdAsync(string userId, JobSeekerUpdateDto userInput, CancellationToken cancellationToken)
     {
         UpdateDefinition<AppUser> updateDef = Builders<AppUser>.Update
-        // .Set(appUser => appUser.Gender, userInput.Gender.Trim())
-        // .Set(appUser => appUser.Role, userInput.Role.Trim())
-        .Set(appUser => appUser.City, userInput.City.Trim().ToLower());
+        .Set(appUser => appUser.FirstName, userInput.FirstName.Trim().ToLower())
+        .Set(appUser => appUser.LastName, userInput.LastName.Trim().ToLower())
+        .Set(appUser => appUser.PhoneNumber, userInput.PhoneNumber.Trim())
+        .Set(appUser => appUser.ResumeFileUrl, userInput.ResumeFileUrl.Trim())
+        .Set(appUser => appUser.Bio, userInput.Bio.Trim())
+        .Set(appUser => appUser.Skills, userInput.Skills)
+        .Set(appUser => appUser.EducationLevel, userInput.EducationLevel.Trim())
+        .Set(appUser => appUser.ExperienceYears, userInput.ExperienceYears)
+        .Set(appUser => appUser.City, userInput.City.Trim())
+        .Set(appUser => appUser.Province, userInput.Province.Trim());
 
         return await _collection.UpdateOneAsync(user
             => user.Id == userId, updateDef, null, cancellationToken);
