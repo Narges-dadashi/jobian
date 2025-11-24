@@ -1,26 +1,17 @@
 namespace api.Models;
 
-public class AppUser
+[CollectionName("users")]
+public class AppUser : MongoIdentityUser<ObjectId>
 {
     // Common
-    [property: BsonId, BsonRepresentation(BsonType.ObjectId)]
-    public string? Id { get; init; }
-    [StringLength(16, MinimumLength = 8)]
-    public string Password { get; init; } = string.Empty;
     public string City { get; init; } = string.Empty;
     public string Province { get; init; } = string.Empty;
     public List<Photo> Photos { get; init; } = [];
 
     // Job Seeker
-    [EmailAddress]
-    public string Email { get; init; } = string.Empty;
-    [StringLength(30, MinimumLength = 3)]
-    public string UserName { get; init; } = string.Empty;
-    [StringLength(30, MinimumLength = 3)]
     public string FirstName { get; init; } = string.Empty;
     [StringLength(30, MinimumLength = 3)]
     public string LastName { get; init; } = string.Empty;
-    public string PhoneNumber { get; init; } = string.Empty;
     public string ResumeFileUrl { get; init; } = string.Empty;
     public string Bio { get; init; } = string.Empty;
     public List<string> Skills { get; init; } = [];
@@ -41,3 +32,16 @@ public class AppUser
     public string? ContactPersonPosition { get; init; } = string.Empty;
     public DateTime RegisterDate { get; init; }
 }
+
+// Common
+// public string? Id { get; init; }
+// [StringLength(16, MinimumLength = 8)]
+//     public string Password { get; init; } = string.Empty;
+
+// JobSeeker
+// [EmailAddress]
+// public string Email { get; init; } = string.Empty;
+// [StringLength(30, MinimumLength = 3)]
+// // public string UserName { get; init; } = string.Empty;
+// [StringLength(30, MinimumLength = 3)]
+// public string PhoneNumber { get; init; } = string.Empty;
