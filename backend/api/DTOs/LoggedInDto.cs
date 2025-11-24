@@ -2,15 +2,12 @@ using System.Runtime.InteropServices;
 
 namespace api.DTOs;
 
-public record LoggedInDto(
-    [Optional]
-    string Email,
-    [Optional]
-    string CompanyEmail,
-    [Optional]
-    string UserName,
-    [Optional]
-    string CompanyName,
-    string Token,
-    [Optional] string? ProfilePhotoUrl
-);
+public class LoggedInDto
+{
+    public string? Email { get; init; }
+    public string? CompanyEmail { get; init; }
+    public string? UserName { get; init; }
+    public string? CompanyName { get; init; }
+    public string? ProfilePhotoUrl { get; init; }
+    public string? Token { get; init; }
+}
