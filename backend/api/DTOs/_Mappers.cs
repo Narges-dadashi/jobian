@@ -6,8 +6,8 @@ public static class Mappers
     {
         return new AppUser
         {
-            Email = jobSeekerRegisterDto.Email.Trim().ToLower(),
-            UserName = jobSeekerRegisterDto.UserName.Trim().ToLower(),
+            Email = jobSeekerRegisterDto.Email,
+            UserName = jobSeekerRegisterDto.UserName,
             Password = jobSeekerRegisterDto.Password
         };
     }
@@ -16,19 +16,30 @@ public static class Mappers
     {
         return new AppUser
         {
-            Email = employerRegisterDto.CompanyEmail.Trim().ToLower(),
-            CompanyName = employerRegisterDto.CompanyName.Trim().ToLower(),
-            Password = employerRegisterDto.Password
+            Email = employerRegisterDto.CompanyEmail,
+            CompanyName = employerRegisterDto.CompanyName
         };
     }
 
     public static LoggedInDto ConvertAppUserToLoggedInDto(AppUser appUser, string tokenValue)
     {
+        return new LoggedInDto
+        {
+            Email = appUser.Email,
+            CompanyEmail = appUser.CompanyEmail,
+            UserName = appUser.UserName,
+            CompanyName = appUser.CompanyName,
+            Token = tokenValue,
+            ProfilePhotoUrl = appUser.Photos.FirstOrDefault(photo => photo.IsMain)?.Url_165
+        };
+    }
+
+    public static MemberDto ConvertAppUserToMemberDto(AppUser appUser)
+    {
         return new(
-            Email: appUser.Email,
-            UserName: appUser.UserName,
-            Token: tokenValue,
-            ProfilePhotoUrl: appUser.Photos.FirstOrDefault(photo => photo.IsMain)?.Url_165
+            Email: appUser.Email!,
+            UserName: appUser.UserName!,
+            Photos: appUser.Photos
         );
     }
 
@@ -39,15 +50,6 @@ public static class Mappers
             Url_256: photoUrls[1],
             Url_enlarged: photoUrls[2],
             IsMain: isMain
-        );
-    }
-
-    public static MemberDto ConvertAppUserToMemberDto(AppUser appUser)
-    {
-        return new(
-            Email: appUser.Email,
-            UserName: appUser.UserName,
-            Photos: appUser.Photos
         );
     }
 }

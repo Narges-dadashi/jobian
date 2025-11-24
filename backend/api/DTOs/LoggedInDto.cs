@@ -8,6 +8,8 @@ public class LoggedInDto
     public string? CompanyEmail { get; init; }
     public string? UserName { get; init; }
     public string? CompanyName { get; init; }
-    public string? ProfilePhotoUrl { get; init; }
     public string? Token { get; init; }
+    public bool IsWrongCreds { get; set; }
+    public List<string> Errors { get; set; } = [];
+    public string? ProfilePhotoUrl { get; init; }
 }

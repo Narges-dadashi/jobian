@@ -4,6 +4,8 @@ namespace api.Models;
 public class AppUser : MongoIdentityUser<ObjectId>
 {
     // Common
+    [StringLength(16, MinimumLength = 8)]
+    public string Password { get; init; } = string.Empty;
     public string City { get; init; } = string.Empty;
     public string Province { get; init; } = string.Empty;
     public List<Photo> Photos { get; init; } = [];
