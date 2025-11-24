@@ -12,7 +12,7 @@ public static class Mappers
         };
     }
 
-    public static AppUser ConvertEmployserRegisterDtoToAppUser(EmployerRegisterDto employerRegisterDto)
+    public static AppUser ConvertEmployerRegisterDtoToAppUser(EmployerRegisterDto employerRegisterDto)
     {
         return new AppUser
         {
