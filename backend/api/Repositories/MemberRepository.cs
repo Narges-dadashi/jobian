@@ -5,7 +5,7 @@ public class MemberRepository : IMemberRepository
     #region Db and Token Settings
     private readonly IMongoCollection<AppUser> _collection;
 
-    public MemberRepository(IMongoClient client, IMongoDbSettings dbSettings, ITokenService tokenService)
+    public MemberRepository(IMongoClient client, IMyMongoDbSettings dbSettings, ITokenService tokenService)
     {
         var dbName = client.GetDatabase(dbSettings.DatabaseName);
         _collection = dbName.GetCollection<AppUser>("users");

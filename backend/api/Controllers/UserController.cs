@@ -8,8 +8,6 @@ public class UserController(IUserRepository userRepository) : BaseApiController
     {
         var userId = User.GetUserId();
 
-        Console.WriteLine(userId);
-
         if (userId is null)
             return Unauthorized("You are not logged. Please login again");
 
@@ -26,8 +24,6 @@ public class UserController(IUserRepository userRepository) : BaseApiController
     public async Task<ActionResult<Response>> UpdateEmployerById(EmployerUpdateDto userInput, CancellationToken cancellationToken)
     {
         var userId = User.GetUserId();
-
-        Console.WriteLine(userId);
 
         if (userId is null)
             return Unauthorized("You are not logged. Please login again");

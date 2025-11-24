@@ -5,10 +5,18 @@ public class AccountController(IAccountRepository accountRepository) : BaseApiCo
     [HttpPost("register-job-seeker")]
     public async Task<ActionResult<LoggedInDto>> RegisterJobSeeker(JobSeekerRegisterDto userInput, CancellationToken cancellationToken)
     {
+        if (userInput.Password != userInput.ConfirmPassword)
+            return BadRequest("Your passwords do not match!");
+
         LoggedInDto? loggedInDto = await accountRepository.RegisterJobSeekerAsync(userInput, cancellationToken);
 
-        if (loggedInDto is null)
-            return BadRequest("This email is already taken");
+        if (loggedInDto?.Errors.Count() > 0)
+        {
+            foreach (var error in loggedInDto.Errors)
+            {
+                return BadRequest(error);
+            }
+        }
 
         return Ok(loggedInDto);
     }
@@ -16,10 +24,18 @@ public class AccountController(IAccountRepository accountRepository) : BaseApiCo
     [HttpPost("register-employer")]
     public async Task<ActionResult<LoggedInDto>> RegisterEmployer(EmployerRegisterDto userInput, CancellationToken cancellationToken)
     {
+        if (userInput.Password != userInput.ConfirmPassword)
+            return BadRequest("Your passwords do not match!");
+
         LoggedInDto? loggedInDto = await accountRepository.RegisterEmployerAsync(userInput, cancellationToken);
 
-        if (loggedInDto is null)
-            return BadRequest("This email is already taken");
+        if (loggedInDto?.Errors.Count() > 0)
+        {
+            foreach (var error in loggedInDto.Errors)
+            {
+                return BadRequest(error);
+            }
+        }
 
         return Ok(loggedInDto);
     }
@@ -29,7 +45,7 @@ public class AccountController(IAccountRepository accountRepository) : BaseApiCo
     {
         LoggedInDto? loggedInDto = await accountRepository.LoginAsync(userInput, cancellationToken);
 
-        if (loggedInDto is null)
+        if (loggedInDto!.IsWrongCreds)
             return BadRequest("Email or Password is wrong");
 
         return loggedInDto;
