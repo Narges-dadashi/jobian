@@ -9,7 +9,7 @@ public class ExceptionMiddleWare
 
     public ExceptionMiddleWare(
         RequestDelegate next, IHostEnvironment env,
-        IMongoClient client, IMongoDbSettings dbSettings,
+        IMongoClient client, IMyMongoDbSettings dbSettings,
         ILogger<ExceptionMiddleWare> logger)
     {
         _next = next;
