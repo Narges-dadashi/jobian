@@ -33,3 +33,4 @@ global using AspNetCore.Identity.MongoDbCore.Infrastructure;
 global using Microsoft.AspNetCore.Identity;
 global using AspNetCore.Identity.MongoDbCore.Models;
 global using MongoDbGenericRepository.Attributes;
+global using Microsoft.AspNetCore.Identity;
