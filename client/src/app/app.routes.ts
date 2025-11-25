@@ -12,6 +12,7 @@ import { NoAccessComponent } from './components/errors/no-access/no-access.compo
 import { ServerErrorComponent } from './components/errors/server-error/server-error.component';
 import { MemberComponent } from './components/member/member.component';
 import { EmployerRegisterComponent } from './components/account/register/employer-register/employer-register.component';
+import { JobSeekerRegisterComponent } from './components/account/register/job-seeker-register/job-seeker-register.component';
 
 export const routes: Routes = [
     { path: '', component: HomeComponent },
@@ -32,7 +33,9 @@ export const routes: Routes = [
         canActivate: [authLoggedInGuard],
         children: [
             { path: 'account/login', component: LoginComponent },
-            { path: 'account/register', component: EmployerRegisterComponent } //??
+            { path: 'account/register', component: EmployerRegisterComponent }, //??
+            { path: 'account/register', component: JobSeekerRegisterComponent } //??
+
         ]
     },
     { path: 'navbar', component: NavbarComponent },
