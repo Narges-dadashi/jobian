@@ -36,7 +36,7 @@ export class AccountService {
   }
 
   employerRegister(userInput: EmployerRegister): Observable<LoggedIn | null> {
-    return this.http.post<LoggedIn>(this._baseApiUrl + 'account/register-employer', userInput).pipe(
+    return this.http.post<LoggedIn>(this._baseApiUrl + 'account/register-employer ', userInput).pipe(
       map(res => {
         if (res) {
           this.setCurrentUser(res);
@@ -66,9 +66,7 @@ export class AccountService {
     );
   }
 
-  authorizeLoggedInUser(): void {
-    console.log('ok');
-
+  authorizeLoggedInUser(): void { 
     this.http.get<LoggedIn>(this._baseApiUrl + 'account').subscribe({
       next: (res) => {
         if (res)
