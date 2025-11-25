@@ -1,7 +1,6 @@
 import { Routes } from '@angular/router';
 import { HomeComponent } from './components/home/home.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
-import { RegisterComponent } from './components/account/register/register.component';
 import { LoginComponent } from './components/account/login/login.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
@@ -12,6 +11,7 @@ import { UserEditComponent } from './components/user/user-edit/user-edit.compone
 import { NoAccessComponent } from './components/errors/no-access/no-access.component';
 import { ServerErrorComponent } from './components/errors/server-error/server-error.component';
 import { MemberComponent } from './components/member/member.component';
+import { EmployerRegisterComponent } from './components/account/register/employer-register/employer-register.component';
 
 export const routes: Routes = [
     { path: '', component: HomeComponent },
@@ -32,7 +32,7 @@ export const routes: Routes = [
         canActivate: [authLoggedInGuard],
         children: [
             { path: 'account/login', component: LoginComponent },
-            { path: 'account/register', component: RegisterComponent }
+            { path: 'account/register', component: EmployerRegisterComponent } //??
         ]
     },
     { path: 'navbar', component: NavbarComponent },
