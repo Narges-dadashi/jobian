@@ -18,7 +18,6 @@ public class SeedController : BaseApiController
     }
     #endregion
 
-    // Add Roles, Admin, and Moderator to DB
     [HttpPost]
     public async Task<ActionResult> CreateDummyMembers()
     {
@@ -49,29 +48,28 @@ public class SeedController : BaseApiController
         #region Create Roles
         await _roleManager.CreateAsync(new AppRole { Name = "admin" });
         await _roleManager.CreateAsync(new AppRole { Name = "moderator" });
-        await _roleManager.CreateAsync(new AppRole { Name = "member" });
+        await _roleManager.CreateAsync(new AppRole { Name = "employer" });
+        await _roleManager.CreateAsync(new AppRole { Name = "jobSeeker" });
         #endregion
 
         #region Create Admin and Moderator
-        // Admin
         AppUser admin = new()
         {
             UserName = "admin",
             Email = "admin@a.com"
         };
 
-        await _userManager.CreateAsync(admin, "Aaaaaaaa/"); // Create admin
-        await _userManager.AddToRolesAsync(admin, ["admin", "moderator"]); // Add admin to two roles of "admin" and "moderator"
+        await _userManager.CreateAsync(admin, "Aaaaaaaa/");
+        await _userManager.AddToRolesAsync(admin, ["admin", "moderator"]);
 
-        // Moderator
         AppUser moderator = new()
         {
             Email = "moderator@a.com",
             UserName = "moderator"
         };
 
-        await _userManager.CreateAsync(moderator, "Aaaaaaaa/"); // Create moderator
-        await _userManager.AddToRoleAsync(moderator, "moderator"); // Add moderator to a role of "moderator"
+        await _userManager.CreateAsync(moderator, "Aaaaaaaa/");
+        await _userManager.AddToRoleAsync(moderator, "moderator");
 
         #endregion Create Admin and Moderator
 
