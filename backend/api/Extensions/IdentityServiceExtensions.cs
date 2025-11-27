@@ -59,7 +59,7 @@ public static class IdentityServiceExtensions
             .AddDefaultTokenProviders();
 
         services.AddAuthorizationBuilder()
-            .AddPolicy("RequiredAdminRole", policy => policy.RequireRole("admin"));
+            .AddPolicy("RequiredAdminRole", policy => policy.RequireRole("admin"))
             .AddPolicy("ModerateRole", policy => policy.RequireRole("admin", "moderator"));
             // .AddPolicy("RequiredEmployerRole", policy => policy.RequireRole("employer"));
         #endregion
