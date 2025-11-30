@@ -66,7 +66,7 @@ export class AccountService {
     );
   }
 
-  authorizeLoggedInUser(): void { 
+  authorizeLoggedInUser(): void {
     this.http.get<LoggedIn>(this._baseApiUrl + 'account').subscribe({
       next: (res) => {
         if (res)
@@ -81,10 +81,20 @@ export class AccountService {
   }
 
   setCurrentUser(loggedIn: LoggedIn): void {
+    this.setLoggedInUserRoles(loggedIn);
+
     this.loggedInUserSig.set(loggedIn);
     if (isPlatformBrowser(this.platformId)) {
       localStorage.setItem('loggedInUser', JSON.stringify(loggedIn));
     }
+  }
+
+  setLoggedInUserRoles(loggedInUser: LoggedIn): void {
+    loggedInUser.roles = [];
+
+    const roles: string | string[] = JSON.parse(atob(loggedInUser.token.split('.')[1])).role;
+
+    Array.isArray(roles) ? loggedInUser.roles = roles : loggedInUser.roles.push(roles);
   }
 
   logout(): void {

@@ -5,4 +5,5 @@ export interface LoggedIn {
     companyName?: string;
     token: string;
     profilePhotoUrl: string | undefined;
+    roles: string[];
 }
