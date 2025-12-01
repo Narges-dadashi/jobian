@@ -4,6 +4,7 @@
             <form class="form">
                 <input class="input" type="email" [formControl]="EmailCtrl" placeholder="E-mail">
                 <input class="input" type="password" [formControl]="PasswordCtrl" placeholder="Password">
+                <input class="input" type="password" [formControl]="ConfirmPasswordCtrl" placeholder="ConfirmPassword">
 
             <button class="login" (click)="login()" mat-stroked-button color="accent" [disabled]="loginFg.invalid">
                 Login

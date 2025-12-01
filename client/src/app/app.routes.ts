@@ -33,8 +33,8 @@ export const routes: Routes = [
         canActivate: [authLoggedInGuard],
         children: [
             { path: 'account/login', component: LoginComponent },
-            { path: 'account/register', component: EmployerRegisterComponent }, //??
-            { path: 'account/register', component: JobSeekerRegisterComponent } //??
+            { path: 'account/employer-register', component: EmployerRegisterComponent },
+            { path: 'account/job-seeker-register', component: JobSeekerRegisterComponent }
 
         ]
     },

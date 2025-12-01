@@ -12,11 +12,6 @@
         <li>Resume Builder</li>
     </ul>
 
-    <!-- <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="start" class="tabs">
-        <mat-tab label="Job Opportunities"></mat-tab>
-        <mat-tab label="Resume builder"></mat-tab>
-    </mat-tab-group> -->
-
     <section class="right">
         @if (accountService.loggedInUserSig(); as user) {
         <button [mat-menu-trigger-for]="appMenu" class="menu-button" mat-mini-fab>
@@ -29,7 +24,7 @@
         </button>
         }
         @else {
-        <button routerLink="/account/register" mat-raised-button>Register / Login</button>
+        <button routerLink="/account/job-seeker-register" mat-raised-button>Register</button>
         }
     </section>
 

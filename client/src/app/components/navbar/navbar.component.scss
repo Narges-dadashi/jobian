@@ -1,5 +1,6 @@
 mat-toolbar {
-  background-color: rgb(68, 192, 245);
+  // background-color: rgb(76, 82, 245);
+  background-color: #6d43e2;
   display: flex;
   justify-content: space-between;
   border-radius: 20px;
@@ -40,7 +41,7 @@ mat-toolbar {
       transition: color 0.3s ease;
 
       &:hover {
-        color: #007bff;
+        color: #CE93D8;
         cursor: pointer;
       }
 
@@ -51,7 +52,7 @@ mat-toolbar {
         left: 0;
         width: 0%;
         height: 2px;
-        background: #007bff;
+        background: #CE93D8 ;
         transition: width 0.3s ease;
       }
 

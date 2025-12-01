@@ -11,7 +11,7 @@ import { LoggedIn } from '../../../models/logged-in.model';
   standalone: true,
   imports: [
     RouterLink,
-    FormsModule, ReactiveFormsModule,
+    FormsModule, ReactiveFormsModule
   ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'
@@ -23,8 +23,9 @@ export class LoginComponent {
 
   loginFg = this.fB.group({
     emailCtrl: ['', [Validators.required, Validators.email]],
-    passwordCtrl: ['']
-  })
+    passwordCtrl: ['', [Validators.required]],
+    confirmPasswordCtrl: ['', [Validators.required]]
+  });
 
   get EmailCtrl(): FormControl {
     return this.loginFg.get('emailCtrl') as FormControl;
@@ -34,10 +35,15 @@ export class LoginComponent {
     return this.loginFg.get('passwordCtrl') as FormControl;
   }
 
+  get ConfirmPasswordCtrl(): FormControl {
+    return this.loginFg.get('confirmPasswordCtrl') as FormControl;
+  }
+
   login(): void {
     let userInput: Login = {
       email: this.EmailCtrl.value,
-      password: this.PasswordCtrl.value
+      password: this.PasswordCtrl.value,
+      confirmPassword: this.ConfirmPasswordCtrl.value
     }
 
     let loginResponse$: Observable<LoggedIn | null> = this.accountService.login(userInput);
