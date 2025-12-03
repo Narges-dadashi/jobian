@@ -34,7 +34,7 @@ public class AppUser : MongoIdentityUser<ObjectId>
     public string? LogoUrl { get; init; } = string.Empty;
     public string? ContactPersonName { get; init; } = string.Empty;
     public string? ContactPersonPosition { get; init; } = string.Empty;
-    public DateTime RegisterDate { get; init; }
+    // public DateTime RegisterDate { get; init; }
 }
 
 // Common

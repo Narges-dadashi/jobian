@@ -23,8 +23,7 @@ export class LoginComponent {
 
   loginFg = this.fB.group({
     emailCtrl: ['', [Validators.required, Validators.email]],
-    passwordCtrl: ['', [Validators.required]],
-    confirmPasswordCtrl: ['', [Validators.required]]
+    passwordCtrl: ['', [Validators.required]]
   });
 
   get EmailCtrl(): FormControl {
@@ -35,15 +34,10 @@ export class LoginComponent {
     return this.loginFg.get('passwordCtrl') as FormControl;
   }
 
-  get ConfirmPasswordCtrl(): FormControl {
-    return this.loginFg.get('confirmPasswordCtrl') as FormControl;
-  }
-
   login(): void {
     let userInput: Login = {
       email: this.EmailCtrl.value,
-      password: this.PasswordCtrl.value,
-      confirmPassword: this.ConfirmPasswordCtrl.value
+      password: this.PasswordCtrl.value
     }
 
     let loginResponse$: Observable<LoggedIn | null> = this.accountService.login(userInput);

@@ -56,8 +56,8 @@ public class UserRepository : IUserRepository
         .Set(appUser => appUser.CompanyName, userInput.ContactPersonName.Trim())
         .Set(appUser => appUser.ContactPersonPosition, userInput.ContactPersonPosition.Trim())
         .Set(appUser => appUser.City, userInput.City.Trim())
-        .Set(appUser => appUser.Province, userInput.Province.Trim())
-        .Set(appUser => appUser.RegisterDate, userInput.RegisterDate);
+        .Set(appUser => appUser.Province, userInput.Province.Trim());
+        // .Set(appUser => appUser.RegisterDate, userInput.RegisterDate);
 
         return await _collection.UpdateOneAsync(user
             => user.Id.ToString() == userId, updateDef, null, cancellationToken);

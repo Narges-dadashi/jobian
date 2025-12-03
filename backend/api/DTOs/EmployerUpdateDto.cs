@@ -9,6 +9,6 @@ public record EmployerUpdateDto(
     string ContactPersonName,
     string ContactPersonPosition,
     string City,
-    string Province,
-    DateTime RegisterDate
+    string Province
+    // DateTime RegisterDate
 );

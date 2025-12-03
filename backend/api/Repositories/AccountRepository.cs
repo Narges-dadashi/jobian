@@ -13,6 +13,7 @@ public class AccountRepository : IAccountRepository
         _collection = dbName.GetCollection<AppUser>("users");
 
         _tokenService = tokenService;
+        _userManager = userManager;
     }
     #endregion
 

@@ -4,8 +4,8 @@ namespace api.DTOs;
 
 public record LoginDto(
     [EmailAddress, Optional]
-    string Email,
+    string? Email,
     [EmailAddress, Optional]
-    string CompanyEmail,
+    string? CompanyEmail,
     string Password
 );

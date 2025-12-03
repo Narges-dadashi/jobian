@@ -16,7 +16,7 @@ import { NgxSpinnerModule } from 'ngx-spinner';
     FormsModule, ReactiveFormsModule,
     MatButtonModule,
     NavbarComponent,
-    FooterComponent, NgxSpinnerModule
+    NgxSpinnerModule
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'

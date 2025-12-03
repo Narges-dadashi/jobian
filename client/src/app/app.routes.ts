@@ -35,7 +35,6 @@ export const routes: Routes = [
             { path: 'account/login', component: LoginComponent },
             { path: 'account/employer-register', component: EmployerRegisterComponent },
             { path: 'account/job-seeker-register', component: JobSeekerRegisterComponent }
-
         ]
     },
     { path: 'navbar', component: NavbarComponent },
