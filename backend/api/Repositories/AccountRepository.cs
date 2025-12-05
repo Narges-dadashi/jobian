@@ -35,6 +35,20 @@ public class AccountRepository : IAccountRepository
             };
         }
 
+        var roleResult = await _userManager.AddToRoleAsync(appUser, "jobSeeker");
+
+        if (!roleResult.Succeeded)
+        {
+            var roleErrors = roleResult.Errors
+                .Select(e => e.Description)
+                .ToList();
+
+            return new LoggedInDto
+            {
+                Errors = roleErrors,
+            };
+        }
+
         var token = await _tokenService.CreateToken(appUser);
 
         if (string.IsNullOrEmpty(token))
@@ -66,6 +80,20 @@ public class AccountRepository : IAccountRepository
             };
         }
 
+        var roleResult = await _userManager.AddToRoleAsync(appUser, "employer");
+
+        if (!roleResult.Succeeded)
+        {
+            var roleErrors = roleResult.Errors
+                .Select(e => e.Description)
+                .ToList();
+
+            return new LoggedInDto
+            {
+                Errors = roleErrors,
+            };
+        }
+
         var token = await _tokenService.CreateToken(appUser);
 
         if (string.IsNullOrEmpty(token))
@@ -81,13 +109,13 @@ public class AccountRepository : IAccountRepository
 
     public async Task<LoggedInDto?> LoginAsync(LoginDto userInput, CancellationToken cancellationToken)
     {
-        AppUser? appUser = await _userManager.FindByEmailAsync(userInput.Email);
+        AppUser? appUser = await _userManager.FindByEmailAsync(userInput.Email!);
 
         if (appUser is null)
         {
             return new LoggedInDto
             {
-                IsWrongCreds = true,
+                IsWrongCreds = true
             };
         }
 

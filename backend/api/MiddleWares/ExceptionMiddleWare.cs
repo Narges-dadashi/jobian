@@ -1,16 +1,16 @@
 namespace api.MiddleWares;
 
-public class ExceptionMiddleWare
+public class ExceptionMiddleware
 {
     private readonly RequestDelegate _next;
     private readonly IHostEnvironment _env;
     private readonly IMongoCollection<ApiException> _collection;
-    private readonly ILogger<ExceptionMiddleWare> _logger;
+    private readonly ILogger<ExceptionMiddleware> _logger;
 
-    public ExceptionMiddleWare(
+    public ExceptionMiddleware(
         RequestDelegate next, IHostEnvironment env,
         IMongoClient client, IMyMongoDbSettings dbSettings,
-        ILogger<ExceptionMiddleWare> logger)
+        ILogger<ExceptionMiddleware> logger)
     {
         _next = next;
         _logger = logger;
@@ -33,18 +33,17 @@ public class ExceptionMiddleWare
             context.Response.ContentType = "application/json";
             context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
 
-            ApiException response = new()
+            ApiException response = new ApiException()
             {
                 StatusCode = context.Response.StatusCode,
                 Message = ex.Message,
-                Details = ex.StackTrace?.ToString(),
+                Details = ex.StackTrace,
                 Time = DateTime.Now
             };
 
             await _collection.InsertOneAsync(response);
 
-            if (_env.IsProduction())
-                response.Details = "Internal Server Error.";
+            response.Details = "Internal Server Error.";
 
             var options = new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase };
 

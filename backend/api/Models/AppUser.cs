@@ -4,10 +4,6 @@ namespace api.Models;
 public class AppUser : MongoIdentityUser<ObjectId>
 {
     // Common
-    [StringLength(16, MinimumLength = 8)]
-    public string Password { get; init; } = string.Empty;
-    [StringLength(16, MinimumLength = 8)]
-    public string ConfirmPassword { get; init; } = string.Empty;
     public string City { get; init; } = string.Empty;
     public string Province { get; init; } = string.Empty;
     public List<Photo> Photos { get; init; } = [];
@@ -34,7 +30,6 @@ public class AppUser : MongoIdentityUser<ObjectId>
     public string? LogoUrl { get; init; } = string.Empty;
     public string? ContactPersonName { get; init; } = string.Empty;
     public string? ContactPersonPosition { get; init; } = string.Empty;
-    // public DateTime RegisterDate { get; init; }
 }
 
 // Common

@@ -18,6 +18,9 @@
             @if (user.profilePhotoUrl) {
             <img src="{{apiUrl + user.profilePhotoUrl}}" alt="">
             }
+            @if (user.roles.includes("employer")) {
+            <span>{{user.companyName![0] | titlecase}}</span>
+            }
             @else {
             <span>{{user.userName![0] | titlecase}}</span>
             }
@@ -25,6 +28,7 @@
         }
         @else {
         <button routerLink="/account/job-seeker-register" mat-raised-button>Register</button>
+        <button routerLink="account/employer-register" mat-raised-button>Employers' Section</button>
         }
     </section>
 
