@@ -7,7 +7,7 @@ public static class Mappers
         return new AppUser
         {
             Email = jobSeekerRegisterDto.Email,
-            UserName = jobSeekerRegisterDto.UserName
+            UserName = jobSeekerRegisterDto.UserName,
         };
     }
 
@@ -16,6 +16,7 @@ public static class Mappers
         return new AppUser
         {
             Email = employerRegisterDto.CompanyEmail,
+            // UserName = employerRegisterDto.CompanyName,
             CompanyName = employerRegisterDto.CompanyName
         };
     }
