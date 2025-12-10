@@ -43,6 +43,27 @@ public static class Mappers
         );
     }
 
+    public static AdvertisementResponseDto ConvertAdvertisementToAdvertisementResponseDto(Advertisement advertisement)
+    {
+        return new(
+            Title: advertisement.Title,
+            ShortDescription: advertisement.ShortDescription,
+            Details: advertisement.Details,
+            Location: advertisement.Location,
+            IsRemote: advertisement.IsRemote,
+            EmploymentType: advertisement.EmploymentType,
+            ExperienceLevel: advertisement.ExperienceLevel,
+            EducationLevel: advertisement.EducationLevel!,
+            SalaryFrom: advertisement.SalaryFrom,
+            SalaryTo: advertisement.SalaryTo,
+            Skills: advertisement.Skills,
+            Benefits: advertisement.Benefits,
+            PublishStart: advertisement.PublishStart,
+            ExpiryDate: advertisement.ExpiryDate,
+            Status: advertisement.Status
+        );
+    }
+
     public static Photo ConvertPhotoUrlsToPhoto(string[] photoUrls, bool isMain)
     {
         return new Photo(
