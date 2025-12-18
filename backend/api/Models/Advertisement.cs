@@ -4,6 +4,7 @@ public enum EmploymentType { FullTime, PartTime, Contract, Internship, Temporary
 public enum ExperienceLevel { Entry, Junior, Mid, Senior, Lead, Manager }
 public enum JobStatus { Draft, Published, Closed, Archived }
 
+[CollectionName("advertisements")]
 public class Advertisement
 {
     public string? CreatorId { get; init; }
