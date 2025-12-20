@@ -38,4 +38,9 @@ public class AdvertisementRepository : IAdvertisementRepository
 
         return Mappers.ConvertAdvertisementToAdvertisementResponseDto(advertisement);
     }
+
+    // public async Task<AdvertisementResponseDto?> GetAllAdvertisementsAsync(CancellationToken cancellationToken)
+    // {
+        
+    // }
 }
