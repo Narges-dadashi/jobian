@@ -8,7 +8,6 @@ public record EmployerUpdateDto(
     string LogoUrl,
     string ContactPersonName,
     string ContactPersonPosition,
-    string City,
+    string Location,
     string Province
-    // DateTime RegisterDate
 );

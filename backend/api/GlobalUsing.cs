@@ -32,3 +32,6 @@ global using Microsoft.AspNetCore.Identity;
 global using AspNetCore.Identity.MongoDbCore.Models;
 global using MongoDbGenericRepository.Attributes;
 global using api.MiddleWares;
+global using api.Models.Helpers;
+global using api.Helpers;
+global using MongoDB.Bson.Serialization.Attributes;

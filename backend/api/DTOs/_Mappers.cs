@@ -43,12 +43,13 @@ public static class Mappers
         );
     }
 
-    public static AdvertisementResponseDto ConvertAdvertisementToAdvertisementResponseDto(Advertisement advertisement)
+    public static AdvertisementResponseDto ConvertAdvertisementToAdvertisementResponseDto(Advertisement advertisement, string userName)
     {
         return new(
             Title: advertisement.Title,
             ShortDescription: advertisement.ShortDescription,
             Details: advertisement.Details,
+            CreatorUserName: userName,
             Location: advertisement.Location,
             IsRemote: advertisement.IsRemote,
             EmploymentType: advertisement.EmploymentType,
@@ -58,7 +59,6 @@ public static class Mappers
             SalaryTo: advertisement.SalaryTo,
             Skills: advertisement.Skills,
             Benefits: advertisement.Benefits,
-            PublishStart: advertisement.PublishStart,
             ExpiryDate: advertisement.ExpiryDate,
             Status: advertisement.Status
         );

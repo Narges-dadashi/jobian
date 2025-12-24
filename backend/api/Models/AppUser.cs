@@ -4,7 +4,7 @@ namespace api.Models;
 public class AppUser : MongoIdentityUser<ObjectId>
 {
     // Common
-    public string City { get; init; } = string.Empty;
+    public string Location { get; init; } = string.Empty;
     public string Province { get; init; } = string.Empty;
     public List<Photo> Photos { get; init; } = [];
 

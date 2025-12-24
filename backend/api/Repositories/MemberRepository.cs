@@ -24,4 +24,20 @@ public class MemberRepository : IMemberRepository
 
         return memberDto;
     }
+
+    // public async Task<EmployerDetailsDto?> GetUserNameByIdAsync(string id, CancellationToken cancellationToken)
+    // {
+    //     return await _collection.AsQueryable()
+    //         .Where(doc => doc.Id.ToString() == id)
+    //         .Select(
+    //             doc => new
+    //             {
+    //                 doc.CompanyName,
+    //                 doc.CompanyEmail,
+    //                 doc.CompanyPhoneNumber,
+    //                 doc.LogoUrl,
+    //                 doc.Location
+    //             })
+    //         .FirstOrDefaultAsync(cancellationToken);
+    // }
 }

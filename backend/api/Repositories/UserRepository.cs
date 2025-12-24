@@ -38,7 +38,7 @@ public class UserRepository : IUserRepository
         .Set(appUser => appUser.Skills, userInput.Skills)
         .Set(appUser => appUser.EducationLevel, userInput.EducationLevel.Trim())
         .Set(appUser => appUser.ExperienceYears, userInput.ExperienceYears)
-        .Set(appUser => appUser.City, userInput.City.Trim())
+        .Set(appUser => appUser.Location, userInput.City.Trim())
         .Set(appUser => appUser.Province, userInput.Province.Trim());
 
         return await _collection.UpdateOneAsync(user
@@ -55,7 +55,7 @@ public class UserRepository : IUserRepository
         .Set(appUser => appUser.LogoUrl, userInput.LogoUrl.Trim())
         .Set(appUser => appUser.CompanyName, userInput.ContactPersonName.Trim())
         .Set(appUser => appUser.ContactPersonPosition, userInput.ContactPersonPosition.Trim())
-        .Set(appUser => appUser.City, userInput.City.Trim())
+        .Set(appUser => appUser.Location, userInput.Location.Trim())
         .Set(appUser => appUser.Province, userInput.Province.Trim());
         // .Set(appUser => appUser.RegisterDate, userInput.RegisterDate);
 

@@ -4,6 +4,7 @@ public record AdvertisementResponseDto(
     string Title,
     string? ShortDescription,
     string Details,
+    string CreatorUserName,
     string Location,
     bool IsRemote,
     EmploymentType EmploymentType,
@@ -13,7 +14,6 @@ public record AdvertisementResponseDto(
     decimal? SalaryTo,
     List<string>? Skills,
     List<string>? Benefits,
-    DateTime? PublishStart,
     DateTime? ExpiryDate,
     JobStatus Status
 );
