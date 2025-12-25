@@ -5,6 +5,7 @@ public record AdvertisementResponseDto(
     string? ShortDescription,
     string Details,
     string CreatorUserName,
+    string CompanyEmail,
     string Location,
     bool IsRemote,
     EmploymentType EmploymentType,

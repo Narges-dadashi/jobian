@@ -43,13 +43,14 @@ public static class Mappers
         );
     }
 
-    public static AdvertisementResponseDto ConvertAdvertisementToAdvertisementResponseDto(Advertisement advertisement, string userName)
+    public static AdvertisementResponseDto ConvertAdvertisementToAdvertisementResponseDto(Advertisement advertisement, string CompanyName, string CompanyEmail)
     {
         return new(
             Title: advertisement.Title,
             ShortDescription: advertisement.ShortDescription,
             Details: advertisement.Details,
-            CreatorUserName: userName,
+            CreatorUserName: CompanyName,
+            CompanyEmail: CompanyEmail,
             Location: advertisement.Location,
             IsRemote: advertisement.IsRemote,
             EmploymentType: advertisement.EmploymentType,
