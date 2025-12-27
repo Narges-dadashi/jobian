@@ -14,5 +14,5 @@ export class MemberService {
 
   getByUserName(userNameInput: string): Observable<Member | undefined> {
     return this.http.get<Member>(this._baseApiUrl + 'get-by-username/' + userNameInput);
-  } 
+  }
 }

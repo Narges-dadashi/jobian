@@ -9,6 +9,6 @@ public record JobSeekerUpdateDto(
     List<string> Skills,
     string EducationLevel,
     int ExperienceYears,
-    string City,
+    string Location,
     string Province
 );
