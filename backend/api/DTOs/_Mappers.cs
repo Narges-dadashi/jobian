@@ -15,9 +15,8 @@ public static class Mappers
     {
         return new AppUser
         {
-            Email = employerRegisterDto.CompanyEmail,
-            UserName = employerRegisterDto.CompanyName,
-            CompanyName = employerRegisterDto.CompanyName
+            Email = employerRegisterDto.Email,
+            UserName = employerRegisterDto.UserName
         };
     }
 

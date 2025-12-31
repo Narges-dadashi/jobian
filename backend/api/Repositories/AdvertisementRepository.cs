@@ -38,7 +38,7 @@ public class AdvertisementRepository : IAdvertisementRepository
 
         await _collection.InsertOneAsync(advObj, null, cancellationToken);
 
-        EmployerDetailsDto? employerDetailsDto = await _memberRepository.GetUserNameByIdAsync(advObj.CreatorId!, cancellationToken);
+        EmployerDetailsDto? employerDetailsDto = await _memberRepository.GetEmployerDetailsByIdAsync(advObj.CreatorId!, cancellationToken);
 
         return Mappers.ConvertAdvertisementToAdvertisementResponseDto(advObj, employerDetailsDto!.CompanyName, employerDetailsDto.CompanyEmail);
     }

@@ -1,8 +1,8 @@
 namespace api.DTOs;
 
 public record EmployerRegisterDto(
-    string CompanyEmail,
-    string CompanyName,
+    string Email,
+    string UserName,
     string Password,
     string ConfirmPassword
 );

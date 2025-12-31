@@ -48,6 +48,8 @@ public class UserRepository : IUserRepository
     public async Task<UpdateResult> UpdateEmployerByIdAsync(string userId, EmployerUpdateDto userInput, CancellationToken cancellationToken)
     {
         UpdateDefinition<AppUser> updateDef = Builders<AppUser>.Update
+        .Set(appUser => appUser.CompanyEmail, userInput.CompanyEmail.Trim().ToLower())
+        .Set(appUser => appUser.CompanyName, userInput.CompanyName.Trim().ToLower())
         .Set(appUser => appUser.Industry, userInput.Industry.Trim().ToLower())
         .Set(appUser => appUser.CompanyPhoneNumber, userInput.CompanyPhoneNumber.Trim().ToLower())
         .Set(appUser => appUser.ContactPhoneNumber, userInput.ContactPhoneNumber.Trim())
@@ -57,7 +59,6 @@ public class UserRepository : IUserRepository
         .Set(appUser => appUser.ContactPersonPosition, userInput.ContactPersonPosition.Trim())
         .Set(appUser => appUser.Location, userInput.Location.Trim())
         .Set(appUser => appUser.Province, userInput.Province.Trim());
-        // .Set(appUser => appUser.RegisterDate, userInput.RegisterDate);
 
         return await _collection.UpdateOneAsync(user
             => user.Id.ToString() == userId, updateDef, null, cancellationToken);

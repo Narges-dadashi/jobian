@@ -3,7 +3,6 @@ import { HomeComponent } from './components/home/home.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { LoginComponent } from './components/account/login/login.component';
 import { FooterComponent } from './components/footer/footer.component';
-import { NotFoundComponent } from './components/not-found/not-found.component';
 import { authLoggedInGuard } from './guards/auth-logged-in.guard';
 import { authGuard } from './guards/auth.guard';
 import { UserEditComponent } from './components/user/user-edit/user-edit.component';
@@ -13,6 +12,7 @@ import { MemberComponent } from './components/member/member.component';
 import { EmployerRegisterComponent } from './components/account/register/employer-register/employer-register.component';
 import { JobSeekerRegisterComponent } from './components/account/register/job-seeker-register/job-seeker-register.component';
 import { AdvertisementComponent } from './components/advertisement/advertisement.component';
+import { NotFoundComponent } from './components/errors/not-found/not-found.component';
 
 export const routes: Routes = [
     { path: '', component: HomeComponent },
@@ -41,5 +41,5 @@ export const routes: Routes = [
     { path: 'footer', component: FooterComponent },
     { path: 'server-error', component: ServerErrorComponent },
     { path: '**', component: NotFoundComponent, pathMatch: 'full' },
-    { path: '**', component: NotFoundComponent }
+    // { path: '**', component: NotFoundComponent }
 ];

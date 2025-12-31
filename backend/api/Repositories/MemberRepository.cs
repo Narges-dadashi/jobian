@@ -25,7 +25,7 @@ public class MemberRepository : IMemberRepository
         return memberDto;
     }
 
-    public async Task<EmployerDetailsDto?> GetUserNameByIdAsync(string id, CancellationToken cancellationToken)
+    public async Task<EmployerDetailsDto?> GetEmployerDetailsByIdAsync(string id, CancellationToken cancellationToken)
     {
         return await _collection.AsQueryable()
             .Where(doc => doc.Id.ToString() == id)
