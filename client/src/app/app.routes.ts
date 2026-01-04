@@ -11,7 +11,6 @@ import { ServerErrorComponent } from './components/errors/server-error/server-er
 import { MemberComponent } from './components/member/member.component';
 import { EmployerRegisterComponent } from './components/account/register/employer-register/employer-register.component';
 import { JobSeekerRegisterComponent } from './components/account/register/job-seeker-register/job-seeker-register.component';
-import { AdvertisementComponent } from './components/advertisement/advertisement.component';
 import { NotFoundComponent } from './components/errors/not-found/not-found.component';
 
 export const routes: Routes = [
@@ -24,7 +23,6 @@ export const routes: Routes = [
             { path: 'user/user-edit', component: UserEditComponent },
             { path: 'no-access', component: NoAccessComponent },
             { path: 'member', component: MemberComponent },
-            { path: 'advertisements', component: AdvertisementComponent }
         ]
     },
     {
