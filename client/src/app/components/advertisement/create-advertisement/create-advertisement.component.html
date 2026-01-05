@@ -1,1 +1,113 @@
-<p>create-advertisement works!</p>
+<form [formGroup]="adForm" (ngSubmit)="createAdvertisement()">
+    <div class="advertisement-form">
+        <h3>Create Your Advertisement Form</h3>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Company Name</mat-label>
+            <input type="text" [formControl]="CompanyNameCtrl" matInput>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Company Email</mat-label>
+            <input type="email" [formControl]="CompanyEmailCtrl" matInput>
+            @if (CompanyEmailCtrl.hasError('pattern')) {
+            <mat-error>Enter a valid email.</mat-error>
+            }
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Title</mat-label>
+            <input type="text" [formControl]="TitleCtrl" matInput>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Short Description</mat-label>
+            <input type="text" [formControl]="ShortDescriptionCtrl" matInput>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Details</mat-label>
+            <input type="text" [formControl]="DetailsCtrl" matInput>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Location</mat-label>
+            <input type="text" [formControl]="LocationCtrl" matInput>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Logo Url</mat-label>
+            <input type="text" [formControl]="LogoUrlCtrl" matInput>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Is Remote?</mat-label>
+            <input type="text" [formControl]="IsRemoteCtrl" matInput>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Employment Type</mat-label>
+            <input type="text" [formControl]="EmploymentTypeCtrl" matInput>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Experience Level</mat-label>
+            <input type="text" [formControl]="ExperienceLevelCtrl" matInput>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Education Level</mat-label>
+            <input type="text" [formControl]="EducationLevelCtrl" matInput>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Salary From</mat-label>
+            <input type="text" [formControl]="SalaryFromCtrl" matInput>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Salary To</mat-label>
+            <input type="text" [formControl]="SalaryToCtrl" matInput>
+        </mat-form-field>
+
+        <div class="skills-section" formArrayName="skillsCtrl">
+            <h4>Skills</h4>
+            @for (skill of SkillsCtrl.controls; track $index) {
+            <div class="skill-row d-flex align-items-center mb-2">
+                <mat-form-field appearance="outline" class="flex-grow-1">
+                    <mat-label>Skill {{$index + 1}}</mat-label>
+                    <input type="text" [formControlName]="$index" matInput placeholder="e.g. Angular">
+                </mat-form-field>
+
+                <button type="button" mat-icon-button color="warn" (click)="removeSkill($index)">
+                    <span class="material-icons">delete</span>
+                </button>
+            </div>
+            }
+            <button type="button" mat-stroked-button color="primary" (click)="addSkill()">
+                + Add New Skill
+            </button>
+        </div>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Benefits</mat-label>
+            <input type="text" [formControl]="BenefitsCtrl" matInput>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Expiry Date</mat-label>
+            <input type="text" [formControl]="ExpiryDateCtrl" matInput>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Status</mat-label>
+            <input type="text" [formControl]="StatusCtrl" matInput>
+        </mat-form-field>
+
+        <div class="form-actions mt-3">
+            <button mat-raised-button color="primary" type="submit" [disabled]="adForm.invalid">
+                Create Advertisement
+            </button>
+        </div>
+    </div>
+</form>

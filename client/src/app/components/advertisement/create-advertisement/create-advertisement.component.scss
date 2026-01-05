@@ -1,0 +1,140 @@
+$primary-purple: #673ab7;
+$light-purple: #f3e5f5;
+$dark-purple: #4527a0;
+$white: #ffffff;
+$error-red: #f44336;
+
+.advertisement-form {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: $white;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(103, 58, 183, 0.1);
+  border: 1px solid $light-purple;
+
+  h3 {
+    color: $primary-purple;
+    text-align: center;
+    font-weight: 700;
+    margin-bottom: 2rem;
+    font-size: 1.8rem;
+    border-bottom: 2px solid $light-purple;
+    padding-bottom: 1rem;
+  }
+
+  mat-form-field {
+    width: 100%;
+    margin-bottom: 1rem;
+
+    ::ng-deep .mat-mdc-form-field-label {
+      color: rgba($primary-purple, 0.7);
+    }
+
+    ::ng-deep .mdc-notched-outline__leading,
+    ::ng-deep .mdc-notched-outline__notch,
+    ::ng-deep .mdc-notched-outline__trailing {
+      border-color: $light-purple !important;
+    }
+
+    &.mat-focused {
+      ::ng-deep .mdc-notched-outline__leading,
+      ::ng-deep .mdc-notched-outline__notch,
+      ::ng-deep .mdc-notched-outline__trailing {
+        border-color: $primary-purple !important;
+        border-width: 2px !important;
+      }
+    }
+  }
+
+  .skills-section {
+    background-color: rgba($light-purple, 0.3);
+    padding: 1.5rem;
+    border-radius: 12px;
+    margin: 1.5rem 0;
+    border: 1px dashed $primary-purple;
+
+    h4 {
+      color: $dark-purple;
+      margin-bottom: 1rem;
+      font-size: 1.1rem;
+      display: flex;
+      align-items: center;
+      
+      &::before {
+        content: "star";
+        font-family: 'Material Icons';
+        margin-right: 8px;
+        font-size: 1.2rem;
+      }
+    }
+
+    .skill-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      animation: fadeIn 0.3s ease-in;
+
+      mat-form-field {
+        margin-bottom: 0;
+      }
+
+      button[mat-icon-button] {
+        margin-top: -15px;
+        color: $error-red;
+        
+        &:hover {
+          background-color: rgba($error-red, 0.1);
+        }
+      }
+    }
+
+    .add-skill-btn {
+      margin-top: 1rem;
+      width: 100%;
+      border: 1px solid $primary-purple;
+      color: $primary-purple;
+      
+      &:hover {
+        background-color: $primary-purple;
+        color: $white;
+      }
+    }
+  }
+
+  .form-actions {
+    display: flex;
+    justify-content: center;
+    margin-top: 2rem;
+
+    button[type="submit"] {
+      padding: 0.75rem 3rem;
+      font-size: 1.1rem;
+      border-radius: 50px;
+      background-color: $primary-purple;
+      transition: all 0.3s ease;
+
+      &:hover:not(:disabled) {
+        background-color: $dark-purple;
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(103, 58, 183, 0.4);
+      }
+
+      &:disabled {
+        background-color: #ccc;
+      }
+    }
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 600px) {
+  .advertisement-form {
+    margin: 1rem;
+    padding: 1rem;
+  }
+}

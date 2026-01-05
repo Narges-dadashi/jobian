@@ -12,6 +12,7 @@ import { MemberComponent } from './components/member/member.component';
 import { EmployerRegisterComponent } from './components/account/register/employer-register/employer-register.component';
 import { JobSeekerRegisterComponent } from './components/account/register/job-seeker-register/job-seeker-register.component';
 import { NotFoundComponent } from './components/errors/not-found/not-found.component';
+import { CreateAdvertisementComponent } from './components/advertisement/create-advertisement/create-advertisement.component';
 
 export const routes: Routes = [
     { path: '', component: HomeComponent },
@@ -23,6 +24,7 @@ export const routes: Routes = [
             { path: 'user/user-edit', component: UserEditComponent },
             { path: 'no-access', component: NoAccessComponent },
             { path: 'member', component: MemberComponent },
+            { path: 'create-advertisement', component: CreateAdvertisementComponent }
         ]
     },
     {
