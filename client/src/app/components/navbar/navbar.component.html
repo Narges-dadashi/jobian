@@ -1,9 +1,10 @@
 <mat-toolbar>
     <section class="left">
-        <mat-icon class="list">view_headline</mat-icon>
-        <a class="brand" routerLink="/">
-            jobian
-        </a>
+        <button mat-icon-button [matMenuTriggerFor]="mobileMenu" class="mobile-menu-btn">
+            <mat-icon class="list">view_headline</mat-icon>
+        </button>
+
+        <a class="brand" routerLink="/">jobian</a>
     </section>
 
     <ul class="navbar-links">
@@ -31,6 +32,12 @@
         <button routerLink="account/employer-register" mat-raised-button>Employers' Section</button>
         }
     </section>
+
+        <mat-menu #mobileMenu="matMenu">
+        <button mat-menu-item>Job Opportunities</button>
+        <button mat-menu-item>Companies</button>
+        <button mat-menu-item>Resume Builder</button>
+    </mat-menu>
 
     <mat-menu class="mat-menu" #appMenu>
         @if (accountService.loggedInUserSig(); as user) {
@@ -77,6 +84,11 @@
         </div>
     </mat-menu>
 </mat-toolbar>
+
+
+
+
+
 
 <!-- <nav class="navbar">
     <div class="navbar__left">

@@ -136,5 +136,8 @@ $error-red: #f44336;
   .advertisement-form {
     margin: 1rem;
     padding: 1rem;
+    display: flex;
+    // flex-direction: column;
+    // justify-content: center;
   }
 }
