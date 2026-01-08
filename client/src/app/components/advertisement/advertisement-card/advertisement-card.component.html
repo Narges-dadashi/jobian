@@ -1,1 +1,45 @@
-<p>advertisement-card works!</p>
+@if (advertisementIn) {
+<mat-card class="ad-card shadow-sm">
+  <div class="card-img-wrapper">
+    <img src="assets/images/job-default.png" alt="Job Image">
+    
+    <ul class="ad-icons">
+      <li>
+        <button mat-mini-fab color="primary" [matTooltip]="advertisementIn.companyEmail">
+          <mat-icon>email</mat-icon>
+        </button>
+      </li>
+    </ul>
+  </div>
+
+  <mat-card-header>
+    <div class="ad-title-area">
+      <mat-card-title class="purple-text">{{ advertisementIn.title }}</mat-card-title>
+      <mat-card-subtitle>Posted by: {{ advertisementIn.creatorUserName }}</mat-card-subtitle>
+    </div>
+  </mat-card-header>
+
+  <mat-card-content>
+    <div class="info-badges">
+      <span class="badge purple-badge">{{ advertisementIn.location }}</span>
+      <span class="badge" [class.is-remote]="advertisementIn.isRemote">
+        {{ advertisementIn.isRemote ? 'Remote' : 'On-site' }}
+      </span>
+    </div>
+
+    @if (advertisementIn.skills && advertisementIn.skills.length > 0) {
+      <div class="skills-tags mt-2">
+        @for (skill of advertisementIn.skills.slice(0, 3); track skill) {
+          <span class="skill-tag">#{{ skill }}</span>
+        }
+      </div>
+    }
+  </mat-card-content>
+
+  <mat-card-footer class="p-2">
+    <div class="salary-range" *ngIf="advertisementIn.salaryFrom">
+      {{ advertisementIn.salaryFrom | number }} - {{ advertisementIn.salaryTo | number }} USD
+    </div>
+  </mat-card-footer>
+</mat-card>
+}
