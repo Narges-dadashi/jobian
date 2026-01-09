@@ -1,1 +1,28 @@
-<p>advertisement-list works!</p>
+<div class="list-container">
+    <header class="list-header">
+        <h1>Discover Opportunities</h1>
+        <p>Your dream job is just a click away</p>
+    </header>
+
+    <div class="content-wrapper">
+        <div class="ads-grid">
+            @for (ad of advertisements; track $index) {
+            <app-advertisement-card [advertisementInput]="ad" class="fade-in-up" />
+            } @empty {
+            <div class="empty-state">
+                <mat-icon>work_outline</mat-icon>
+                <p>No advertisements available at the moment.</p>
+            </div>
+            }
+        </div>
+
+        @if (pagination && paginationParams) {
+        <div class="pagination-section shadow-sm">
+            <mat-paginator #paginator (page)="handlePageEvent($event)" [length]="pagination.totalItems"
+                [pageSize]="paginationParams.pageSize" [showFirstLastButtons]="true" [pageSizeOptions]="pageSizeOptions"
+                [pageIndex]="paginationParams.pageNumber - 1" class="purple-paginator">
+            </mat-paginator>
+        </div>
+        }
+    </div>
+</div>
