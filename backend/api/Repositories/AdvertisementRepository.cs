@@ -20,6 +20,8 @@ public class AdvertisementRepository : IAdvertisementRepository
         Advertisement advObj = new()
         {
             CreatorId = userId,
+            CompanyName = advertisement.CompanyName,
+            CompanyEmail = advertisement.CompanyEmail,
             Title = advertisement.Title,
             ShortDescription = advertisement.ShortDescription,
             Details = advertisement.Details,

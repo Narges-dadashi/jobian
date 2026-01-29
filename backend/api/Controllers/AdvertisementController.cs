@@ -1,8 +1,8 @@
 namespace api.Controllers;
 
-[Authorize]
 public class AdvertisementController(IAdvertisementRepository advertisementRepository, IMemberRepository memberRepository) : BaseApiController
 {
+    [Authorize]
     [HttpPost("create-advertisement")]
     public async Task<ActionResult<AdvertisementResponseDto>> CreateAdvertisement(Advertisement advertisement, CancellationToken cancellationToken)
     {
@@ -15,13 +15,14 @@ public class AdvertisementController(IAdvertisementRepository advertisementRepos
         return Ok(advertisementResponseDto);
     }
 
+    [AllowAnonymous]
     [HttpGet("get-all")]
     public async Task<ActionResult<IEnumerable<AdvertisementResponseDto>>> GetAllAdvertisements([FromQuery] PaginationParams paginationParams, CancellationToken cancellationToken)
     {
-        var userId = User.GetUserId();
+        // var userId = User.GetUserId();
 
-        if (userId is null)
-            return Unauthorized("You are not login. Please login again");
+        // if (userId is null)
+        //     return Unauthorized("You are not login. Please login again");
 
         PagedList<Advertisement> pagedAdvertisements = await advertisementRepository.GetAllAdvertisementsAsync(paginationParams, cancellationToken);
 

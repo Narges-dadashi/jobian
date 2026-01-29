@@ -48,7 +48,7 @@ public static class Mappers
             Title: advertisement.Title,
             ShortDescription: advertisement.ShortDescription,
             Details: advertisement.Details,
-            CreatorUserName: CompanyName,
+            CreatorUserName: string.IsNullOrEmpty(CompanyName) ? "Unknown Company" : CompanyName,
             CompanyEmail: CompanyEmail,
             Location: advertisement.Location,
             IsRemote: advertisement.IsRemote,

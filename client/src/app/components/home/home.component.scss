@@ -1,11 +1,6 @@
 .hero-dark {
     position: relative;
     height: 85vh;
-    // background: url('https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=1350&q=80') no-repeat center center/cover;
-    // background-image: url('/home.jpg');
-    // background-image: url('/bgc.png');
-    // background: linear-gradient(180deg, #92cff8 0%, #ffffff 100%);
-    // background: linear-gradient(180deg, #ffffff 0%, #92cff8 100%);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -13,6 +8,19 @@
     color: #fff;
     text-align: center;
     overflow: hidden;
+
+    // تغییر مهم: به جای سیاه مطلق، از گرادینت شعاعی استفاده می‌کنیم که به بنفش نوبار نزدیک‌تر است
+    background: radial-gradient(circle at center, #1a1033 0%, #050505 100%);
+
+    &__overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        // یک هاله بنفش بسیار ملایم روی پس‌زمینه
+        background: rgba(109, 67, 226, 0.05);
+    }
 
     &__content {
         position: relative;
@@ -23,7 +31,6 @@
         flex-direction: column;
         align-items: center;
         justify-content: center;
-
         transform: translateY(-30px);
 
         @media (max-width: 768px) {
@@ -32,20 +39,19 @@
     }
 
     &__title {
-        font-size: 3rem;
-        font-weight: 700;
+        font-size: 3.5rem; // کمی بزرگتر برای جذابیت بیشتر
+        font-weight: 800;
         margin-bottom: 2rem;
-        transform: translateY(-70px);
-        background: linear-gradient(90deg, #007bff, #5b00ff);
+        // حذف ترنسفرم شدید قبلی برای جلوگیری از چسبیدن به سقف
+        transform: translateY(0);
+        background: linear-gradient(90deg, #007bff, #8e44ad);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
-
-        // text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
         white-space: nowrap;
 
         @media (max-width: 768px) {
             font-size: 2.2rem;
-            margin-bottom: 1.5rem;
+            white-space: normal; // در موبایل اجازه بده بشکند
         }
     }
 
@@ -54,18 +60,17 @@
         align-items: center;
         justify-content: center;
         background: #fff;
-        border-radius: 8px;
+        border-radius: 12px; // گردتر و مدرن‌تر
         overflow: hidden;
-        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
-        margin: 0 auto 1.2rem;
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+        margin: 0 auto;
         width: 100%;
-        max-width: 900px;
-        transform: translateY(-30px);
+        max-width: 700px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
 
         @media (max-width: 600px) {
             flex-direction: column;
-            width: 90%;
-            border-radius: 6px;
+            width: 95%;
         }
     }
 
@@ -73,55 +78,81 @@
         flex: 1;
         border: none;
         outline: none;
-        padding: 15px 20px;
-        font-size: 1rem;
+        padding: 20px 25px;
+        font-size: 1.1rem;
         color: #333;
 
-        @media (max-width: 600px) {
-            width: 100%;
+        &::placeholder {
+            color: #aaa;
         }
     }
 
     &__button {
-        // background: #007bff;
-        background-color: #6d43e2;
+        background: linear-gradient(135deg, #6d43e2 0%, #5b00ff 100%);
         color: #fff;
         border: none;
-        padding: 15px 35px;
-        font-size: 1rem;
-        font-weight: 500;
+        padding: 20px 40px;
+        font-size: 1.1rem;
+        font-weight: 600;
         cursor: pointer;
-        transition: background 0.3s ease;
-        border-radius: 0 8px 8px 0;
+        transition: all 0.3s ease;
 
         &:hover {
-            background: #0056d2;
-        }
-
-        @media (max-width: 600px) {
-            border-radius: 0 0 6px 6px;
-            width: 100%;
+            filter: brightness(1.2);
+            box-shadow: inset 0 0 10px rgba(255, 255, 255, 0.2);
         }
     }
-
-    // &__tags {
-    //     margin-top: 0.5rem;
-    //     font-size: 0.95rem;
-    //     opacity: 0.9;
-
-    //     span {
-    //         color: #ccc;
-    //     }
-
-    //     a {
-    //         color: #61a5ff;
-    //         margin-left: 10px;
-    //         text-decoration: none;
-    //         transition: color 0.3s ease;
-
-    //         &:hover {
-    //             color: #fff;
-    //         }
-    //     }
-    // }
 }
+
+// --- بخش نمایش لیست آگهی‌ها (بلافاصله بعد از Hero) ---
+
+.ads-section {
+    padding: 80px 0;
+    background-color: #ffffff; // تضاد با بخش Hero
+
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+    }
+
+    .section-title {
+        color: #311b92;
+        font-size: 2rem;
+        font-weight: 700;
+        text-align: center;
+        margin-bottom: 40px;
+        position: relative;
+
+        &::after {
+            content: '';
+            display: block;
+            width: 50px;
+            height: 4px;
+            background: #6d43e2;
+            margin: 10px auto;
+            border-radius: 2px;
+        }
+    }
+}
+
+// &__tags {
+//     margin-top: 0.5rem;
+//     font-size: 0.95rem;
+//     opacity: 0.9;
+
+//     span {
+//         color: #ccc;
+//     }
+
+//     a {
+//         color: #61a5ff;
+//         margin-left: 10px;
+//         text-decoration: none;
+//         transition: color 0.3s ease;
+
+//         &:hover {
+//             color: #fff;
+//         }
+//     }
+// }

@@ -13,6 +13,7 @@ import { EmployerRegisterComponent } from './components/account/register/employe
 import { JobSeekerRegisterComponent } from './components/account/register/job-seeker-register/job-seeker-register.component';
 import { NotFoundComponent } from './components/errors/not-found/not-found.component';
 import { CreateAdvertisementComponent } from './components/advertisement/create-advertisement/create-advertisement.component';
+import { AdvertisementListComponent } from './components/advertisement/advertisement-list/advertisement-list.component';
 
 export const routes: Routes = [
     { path: '', component: HomeComponent },
@@ -40,6 +41,6 @@ export const routes: Routes = [
     { path: 'navbar', component: NavbarComponent },
     { path: 'footer', component: FooterComponent },
     { path: 'server-error', component: ServerErrorComponent },
-    { path: '**', component: NotFoundComponent, pathMatch: 'full' },
-    // { path: '**', component: NotFoundComponent }
+    { path: 'advertisements', component: AdvertisementListComponent },
+    { path: '**', component: NotFoundComponent, pathMatch: 'full' }
 ];
