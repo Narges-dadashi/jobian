@@ -33,11 +33,49 @@ public static class Mappers
         };
     }
 
-    public static MemberDto ConvertAppUserToMemberDto(AppUser appUser)
+    public static JobSeekerDto ConvertAppUserToJobSeekerDto(AppUser appUser)
     {
         return new(
             Email: appUser.Email!,
             UserName: appUser.UserName!,
+            FirstName: appUser.FirstName!,
+            LastName: appUser.LastName!,
+            PhoneNumber: appUser.PhoneNumber!,
+            ResumeFileUrl: appUser.ResumeFileUrl!,
+            Bio: appUser.Bio!,
+            Skills: appUser.Skills!,
+            EducationLevel: appUser.EducationLevel!,
+            ExperienceYears: appUser.ExperienceYears,
+            Location: appUser.Location!,
+            Province: appUser.Province!,
+            Photos: appUser.Photos
+        );
+    }
+
+    public static EmployerDto ConvertAppUserToEmployerDto(AppUser appUser)
+    {
+        return new(
+            CompanyEmail: appUser.CompanyEmail!,
+            CompanyName: appUser.CompanyName!,
+            Industry: appUser.Industry!,
+            CompanyPhoneNumber: appUser.CompanyPhoneNumber,
+            ContactPhoneNumber: appUser.ContactPhoneNumber,
+            About: appUser.About!,
+            LogoUrl: appUser.LogoUrl!,
+            ContactPersonName: appUser.ContactPersonName!,
+            ContactPersonPosition: appUser.ContactPersonPosition!,
+            Location: appUser.Location,
+            Province: appUser.Province
+        );
+    }
+
+    public static MemberDto ConvertAppUserToMemberDto(AppUser appUser)
+    {
+        return new(
+            Email: appUser.Email!,
+            // CompanyEmail: appUser.CompanyEmail!,
+            UserName: appUser.UserName!,
+            // CompanyName: appUser.CompanyName!,
             Photos: appUser.Photos
         );
     }
