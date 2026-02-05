@@ -48,7 +48,7 @@ public class UserRepository : IUserRepository
     public async Task<UpdateResult> UpdateEmployerByIdAsync(string userId, EmployerUpdateDto userInput, CancellationToken cancellationToken)
     {
         UpdateDefinition<AppUser> updateDef = Builders<AppUser>.Update
-        .Set(appUser => appUser.CompanyEmail, userInput.CompanyEmail.Trim().ToLower())
+        // .Set(appUser => appUser.CompanyEmail, userInput.CompanyEmail.Trim().ToLower())
         .Set(appUser => appUser.CompanyName, userInput.CompanyName.Trim().ToLower())
         .Set(appUser => appUser.Industry, userInput.Industry.Trim().ToLower())
         .Set(appUser => appUser.CompanyPhoneNumber, userInput.CompanyPhoneNumber.Trim().ToLower())

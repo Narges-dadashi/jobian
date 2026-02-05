@@ -1,7 +1,6 @@
 namespace api.DTOs;
 
 public record JobSeekerDto(
-    string Email,
     string UserName,
     string FirstName,
     string LastName,

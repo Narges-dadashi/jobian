@@ -13,7 +13,7 @@ export class UserService {
   private _http = inject(HttpClient);
   private readonly _apiUrl = environment.apiUrl + 'api/user/';
 
-  updateUser(userInput: JobSeekerUpdate): Observable<ApiResponse> {
+  updateJobSeeker(userInput: JobSeekerUpdate): Observable<ApiResponse> {
     return this._http.put<ApiResponse>(this._apiUrl + 'update-job-seeker', userInput);
   }
 

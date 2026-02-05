@@ -10,7 +10,7 @@ import { JobSeeker } from '../models/job-seeker.model';
 export class JobSeekerService {
   http = inject(HttpClient);
 
-  private readonly _baseApiUrl: string = environment.apiUrl + 'api/member/';
+  private readonly _baseApiUrl: string = environment.apiUrl + 'api/jobseeker/';
 
   getByUserName(userNameInput: string): Observable<JobSeeker | undefined> {
     return this.http.get<JobSeeker>(this._baseApiUrl + 'get-by-username/' + userNameInput);

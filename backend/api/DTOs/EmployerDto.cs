@@ -1,7 +1,6 @@
 namespace api.DTOs;
 
 public record EmployerDto(
-    string CompanyEmail,
     string CompanyName,
     string Industry,
     string CompanyPhoneNumber,
@@ -11,5 +10,6 @@ public record EmployerDto(
     string ContactPersonName,
     string ContactPersonPosition,
     string Location,
-    string Province
+    string Province,
+    List<Photo> Photos
 );

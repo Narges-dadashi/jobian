@@ -36,7 +36,6 @@ public static class Mappers
     public static JobSeekerDto ConvertAppUserToJobSeekerDto(AppUser appUser)
     {
         return new(
-            Email: appUser.Email!,
             UserName: appUser.UserName!,
             FirstName: appUser.FirstName!,
             LastName: appUser.LastName!,
@@ -55,7 +54,6 @@ public static class Mappers
     public static EmployerDto ConvertAppUserToEmployerDto(AppUser appUser)
     {
         return new(
-            CompanyEmail: appUser.CompanyEmail!,
             CompanyName: appUser.CompanyName!,
             Industry: appUser.Industry!,
             CompanyPhoneNumber: appUser.CompanyPhoneNumber,
@@ -65,7 +63,8 @@ public static class Mappers
             ContactPersonName: appUser.ContactPersonName!,
             ContactPersonPosition: appUser.ContactPersonPosition!,
             Location: appUser.Location,
-            Province: appUser.Province
+            Province: appUser.Province,
+            Photos: appUser.Photos
         );
     }
 

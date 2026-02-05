@@ -7,6 +7,6 @@ export interface JobSeekerUpdate {
     skills: string[]; 
     educationLevel: string;
     experienceYears: number;
-    city: string;
+    location: string;
     province: string;  
 }
