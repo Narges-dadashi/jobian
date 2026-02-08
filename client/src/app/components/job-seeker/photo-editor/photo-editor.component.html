@@ -1,15 +1,16 @@
 <main>
-    @if (loggedInUser) {
+    @if (JobSeeker && loggedInUser) {
     <section class="top">
         <div>
-            <!-- @if (member.photos.length === 0) {
+            @if (JobSeeker.photos.length === 0) {
             <mat-error>Your album is empty. You may upload some photos.</mat-error>
-            } -->
+            }
         </div>
         <div class="gallery">
-            <!-- @for (photo of member.photos; track $index) {
+            @for (photo of JobSeeker.photos; track $index) {
             <div class="photos">
-                <img src="{{apiUrl + photo.url_165}}" width="165" height="165" alt="{{member.userName}} photo">
+                <button (click)="spliceList()">splice</button>
+                <img src="{{apiUrl + photo.url_165}}" width="165" height="165" alt="{{JobSeeker.userName}} photo">
                 <div class="buttons">
                     <button (click)="setMainPhotoComp(photo.url_165)" mat-stroked-button color="primary"
                         [disabled]="photo.isMain">Set profile
@@ -18,28 +19,29 @@
                         [disabled]="photo.isMain">
                         <mat-icon>delete</mat-icon>
                     </button>
-                </div> -->
-        </div>
-        <!-- } -->
+                </div>
+            </div>
+            }
 
-        <div class="upload-photo-area">
-            <mat-card ng2FileDrop (fileOver)="fileOverBase($event)" (click)="fileInput.click()" [uploader]="uploader"
-                [ngClass]="{
-                    'file-not-over': !hasBaseDropZoneOver,
-                    'file-over': hasBaseDropZoneOver
-                }">
-                <mat-card-header>
-                    <mat-card-title>Add photos</mat-card-title>
-                    <mat-card-subtitle>Clicl or Drop photos here</mat-card-subtitle>
-                </mat-card-header>
-                <mat-card-content>
-                    <mat-icon>cloud_upload</mat-icon>
-                </mat-card-content>
-                <mat-card-actions>
-                    <button type="button" mat-raised-button>Choose Photos</button>
-                    <input multiple type="file" #fileInput ng2FileSelect [uploader]="uploader">
-                </mat-card-actions>
-            </mat-card>
+            <div class="upload-photo-area">
+                <mat-card ng2FileDrop (fileOver)="fileOverBase($event)" (click)="fileInput.click()"
+                    [uploader]="uploader" [ngClass]="{
+                        'file-not-over': !hasBaseDropZoneOver,
+                        'file-over': hasBaseDropZoneOver
+                    }">
+                    <mat-card-header>
+                        <mat-card-title>Add Photos</mat-card-title>
+                        <mat-card-subtitle>Click or Drop photos here</mat-card-subtitle>
+                    </mat-card-header>
+                    <mat-card-content>
+                        <mat-icon>cloud_upload</mat-icon>
+                    </mat-card-content>
+                    <mat-card-actions>
+                        <button type="button" mat-raised-button>Choose Photos</button>
+                        <input multiple type="file" #fileInput ng2FileSelect [uploader]="uploader" id="file">
+                    </mat-card-actions>
+                </mat-card>
+            </div>
         </div>
     </section>
     }
@@ -47,7 +49,7 @@
     @if (uploader && uploader.queue && uploader.queue.length) {
     <section class="queue">
         <h2>Upload Queue</h2>
-        <p>Queue length: {{uploader.queue.length}}</p>
+        <p>Queue length: {{ uploader.queue.length }}</p>
 
         <div class="photos-queue">
             <div>
@@ -58,7 +60,7 @@
             <div>
                 <p>{{ item?.file?.name }}</p>
                 @if (uploader.options.isHTML5) {
-                <p>{{ item?.file?.size/ 1024 / 1024 | number}} MB</p>
+                <p> {{ item?.file?.size / 1024 / 1024 | number:'.2' }} MB</p>
                 }
             </div>
             }
@@ -78,8 +80,8 @@
                 </button>
                 <button mat-raised-button color="accent" type="button" (click)="uploader.cancelAll()"
                     [disabled]="!uploader.isUploading">
-                    <mat-icon>cancle</mat-icon>
-                    Cancle all
+                    <mat-icon>cancel</mat-icon>
+                    Cancel all
                 </button>
                 <button mat-raised-button color="warn" type="button" (click)="uploader.clearQueue()"
                     [disabled]="!uploader.queue.length">

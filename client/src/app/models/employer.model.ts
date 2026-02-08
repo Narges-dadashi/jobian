@@ -1,6 +1,7 @@
 import { Photo } from "./photo.model";
 
 export interface Employer {
+    userName: string;
     companyEmail: string;
     companyName: string;
     industry: string;

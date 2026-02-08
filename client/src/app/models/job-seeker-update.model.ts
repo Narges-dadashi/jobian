@@ -4,7 +4,7 @@ export interface JobSeekerUpdate {
     phoneNumber: string;
     resumeFileUrl: string;
     bio: string;
-    skills: string[]; 
+    skills: string[];
     educationLevel: string;
     experienceYears: number;
     location: string;

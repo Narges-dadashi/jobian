@@ -49,7 +49,7 @@ public class UserRepository : IUserRepository
     {
         UpdateDefinition<AppUser> updateDef = Builders<AppUser>.Update
         // .Set(appUser => appUser.CompanyEmail, userInput.CompanyEmail.Trim().ToLower())
-        .Set(appUser => appUser.CompanyName, userInput.CompanyName.Trim().ToLower())
+        // .Set(appUser => appUser.CompanyName, userInput.CompanyName.Trim().ToLower())
         .Set(appUser => appUser.Industry, userInput.Industry.Trim().ToLower())
         .Set(appUser => appUser.CompanyPhoneNumber, userInput.CompanyPhoneNumber.Trim().ToLower())
         .Set(appUser => appUser.ContactPhoneNumber, userInput.ContactPhoneNumber.Trim())

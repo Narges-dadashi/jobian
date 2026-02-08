@@ -11,7 +11,7 @@ public class MemberRepository : IMemberRepository
         _collection = dbName.GetCollection<AppUser>("users");
 
     }
-    #endregion
+    #endregion  
 
     public async Task<MemberDto?> GetByUserNameAsync(string userName, CancellationToken cancellationToken)
     {

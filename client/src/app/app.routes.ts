@@ -14,6 +14,7 @@ import { JobSeekerRegisterComponent } from './components/account/register/job-se
 import { NotFoundComponent } from './components/errors/not-found/not-found.component';
 import { CreateAdvertisementComponent } from './components/advertisement/create-advertisement/create-advertisement.component';
 import { AdvertisementListComponent } from './components/advertisement/advertisement-list/advertisement-list.component';
+import { JobSeekerEditComponent } from './components/job-seeker/job-seeker-edit/job-seeker-edit.component';
 
 export const routes: Routes = [
     { path: '', component: HomeComponent },
@@ -22,7 +23,7 @@ export const routes: Routes = [
         runGuardsAndResolvers: 'always',
         canActivate: [authGuard],
         children: [
-            { path: 'user/user-edit', component: UserEditComponent },
+            { path: 'job-seeker/job-seeker-edit', component: JobSeekerEditComponent },
             { path: 'no-access', component: NoAccessComponent },
             { path: 'member', component: MemberComponent },
             { path: 'create-advertisement', component: CreateAdvertisementComponent }

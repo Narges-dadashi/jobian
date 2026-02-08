@@ -6,6 +6,6 @@ export interface EmployerUpdate {
     logoUrl: string;
     contactPersonName: string;
     contactPersonPosition: string;
-    city: string;
+    location: string;
     province: string;
 }
