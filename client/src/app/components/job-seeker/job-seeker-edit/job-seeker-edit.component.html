@@ -1,0 +1,143 @@
+<div class="container">
+    <section class="head">
+        <h2 class="title">Your Profile</h2>
+    </section>
+    @if (jobSeeker) {
+    <div class="content">
+        <section class="job-seeker-card">
+            <mat-card>
+                @for (photo of jobSeeker.photos; track $index) {
+                @if (photo.isMain) {
+                <img mat-card-image src="{{apiUrl + photo.url_165}}" width="240" height="240"
+                    alt="Photo of {{jobSeeker.userName}}">
+                }
+                }
+                @if (jobSeeker.photos.length === 0) {
+                <img mat-card-image src="member.jpg" width="240" height="240" alt="Photo of {{jobSeeker.userName}}">
+                }
+                <mat-card-content>
+                    <div>
+                        <strong>UserName</strong>
+                        <p>{{ jobSeeker.userName | titlecase }}</p>
+                    </div>
+                    <div>
+                        <strong>Skills</strong>
+                        <p>{{jobSeeker.skills}}</p>
+                    </div>
+                    <div>
+                        <strong>Location</strong>
+                        <p>{{ jobSeeker.location | titlecase }}, {{ jobSeeker.province | titlecase }}</p>
+                    </div>
+                </mat-card-content>
+                <mat-card-actions>
+                    <button type="submit" mat-raised-button color="primary" (click)="updateJobSeeker()"
+                        [disabled]="jobSeekerEditFg.invalid || jobSeekerEditFg.pristine">
+                        Save Changes
+                    </button>
+                </mat-card-actions>
+            </mat-card>
+        </section>
+        <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="start" class="job-seeker-info">
+            <mat-tab label="About {{jobSeeker.userName}}">
+                <div class="tab-contents">
+                    <form class="about-contents">
+                        <mat-form-field appearaance="outline">
+                            <mat-label>FirstName</mat-label>
+                            <textarea cdkTextareaAutosize [formControl]="FirstNameCtrl" [value]="jobSeeker.firstName"
+                                matInput>
+                            {{FirstNameCtrl.value}}
+                            </textarea>
+                            <mat-hint>{{FirstNameCtrl.value?.length}} of {{maxInputChars}}</mat-hint>
+                            @if (FirstNameCtrl.hasError('maxlength')) {
+                            <mat-error>
+                                Maximum of {{maxInputChars}} characters is reached.
+                            </mat-error>
+                            }
+                        </mat-form-field>
+                        <mat-form-field appearaance="outline">
+                            <mat-label>LastName</mat-label>
+                            <textarea cdkTextareaAutosize [formControl]="LastNameCtrl" [value]="jobSeeker.lastName"
+                                matInput>
+                            {{LastNameCtrl.value}}
+                            </textarea>
+                            <mat-hint>{{LastNameCtrl.value?.length}} of {{maxInputChars}}</mat-hint>
+                            @if (FirstNameCtrl.hasError('maxlength')) {
+                            <mat-error>
+                                Maximum of {{maxInputChars}} characters is reached.
+                            </mat-error>
+                            }
+                        </mat-form-field>
+                        <mat-form-field appearaance="outline">
+                            <mat-label>PhoneNumber</mat-label>
+                            <textarea cdkTextareaAutosize [formControl]="PhoneNumberCtrl"
+                                [value]="jobSeeker.phoneNumber" matInput>
+                            {{PhoneNumberCtrl.value}}
+                            </textarea>
+                        </mat-form-field>
+                        <mat-form-field appearaance="outline">
+                            <mat-label>ResumeFileUrl</mat-label>
+                            <textarea cdkTextareaAutosize [formControl]="ResumeFileUrlCtrl"
+                                [value]="jobSeeker.resumeFileUrl" matInput>
+                            {{ResumeFileUrlCtrl.value}}
+                            </textarea>
+                        </mat-form-field>
+                        <mat-form-field appearaance="outline">
+                            <mat-label>Bio</mat-label>
+                            <textarea cdkTextareaAutosize [formControl]="BioCtrl" [value]="jobSeeker.bio"
+                                placeholder="Say something about your self" matInput>
+                            {{BioCtrl.value}}
+                            </textarea>
+                            <mat-hint>{{BioCtrl.value?.length}} of {{maxTextAreaChars}}</mat-hint>
+                            @if (BioCtrl.hasError('maxlength')) {
+                            <mat-error>
+                                Maximum of {{maxTextAreaChars}} characters is reached.
+                            </mat-error>
+                            }
+                        </mat-form-field>
+                        <mat-form-field appearaance="outline">
+                            <mat-label>Skills</mat-label>
+                            <textarea cdkTextareaAutosize [formControl]="SkillsCtrl"
+                                [value]="jobSeeker.skills.join(', ')" matInput>
+                            {{SkillsCtrl.value}}
+                            </textarea>
+                        </mat-form-field>
+                        <mat-form-field appearaance="outline">
+                            <mat-label>EducationLevel</mat-label>
+                            <textarea cdkTextareaAutosize [formControl]="EducationLevelCtrl"
+                                [value]="jobSeeker.educationLevel" matInput>
+                            {{EducationLevelCtrl.value}}
+                            </textarea>
+                        </mat-form-field>
+                        <mat-form-field appearaance="outline">
+                            <mat-label>Experience(Years)</mat-label>
+                            <textarea cdkTextareaAutosize [formControl]="ExperienceYearsCtrl"
+                                [value]="jobSeeker.experienceYears" matInput>
+                            {{ExperienceYearsCtrl.value}}
+                            </textarea>
+                        </mat-form-field>
+                        <mat-form-field appearaance="outline">
+                            <mat-label>Location</mat-label>
+                            <textarea cdkTextareaAutosize [formControl]="LocationCtrl" [value]="jobSeeker.location"
+                                matInput>
+                            {{LocationCtrl.value}}
+                            </textarea>
+                        </mat-form-field>
+                        <mat-form-field appearaance="outline">
+                            <mat-label>Province</mat-label>
+                            <textarea cdkTextareaAutosize [formControl]="ProvinceCtrl" [value]="jobSeeker.province"
+                                matInput>
+                            {{ProvinceCtrl.value}}
+                            </textarea>
+                        </mat-form-field>
+                    </form>
+                </div>
+            </mat-tab>
+            <mat-tab label="Edit Photos">
+                <div class="tab-contents">
+                    <app-photo-editor [jobSeekerInput]="jobSeeker"></app-photo-editor>
+                </div>
+            </mat-tab>
+        </mat-tab-group>
+    </div>
+    }
+</div>
