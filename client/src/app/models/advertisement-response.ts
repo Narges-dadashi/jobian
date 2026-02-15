@@ -1,12 +1,11 @@
 import { EmploymentType, ExperienceLevel, JobStatus } from './advertisement.model';
 
 export interface AdvertisementResponse {
-    companyName: string;
-    companyEmail: string;
     title: string;
     shortDescription?: string;
     details: string;
     creatorUserName: string;
+    companyEmail: string;
     location: string;
     isRemote: boolean;
     employmentType: EmploymentType;
