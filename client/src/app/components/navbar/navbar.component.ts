@@ -27,6 +27,11 @@ import { environment } from '../../../environments/environment.development';
 export class NavbarComponent {
   accountService = inject(AccountService);
   apiUrl = environment.apiUrl;
+  userRole = 'employer';
+
+  get editProfileRoute(): string {
+    return this.userRole === 'employer' ? 'employer/employer-edit' : 'job-seeker/job-seeker-edit';
+  }
 
   logout(): void {
     this.accountService.logout();
