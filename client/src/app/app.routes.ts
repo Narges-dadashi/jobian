@@ -5,16 +5,15 @@ import { LoginComponent } from './components/account/login/login.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { authLoggedInGuard } from './guards/auth-logged-in.guard';
 import { authGuard } from './guards/auth.guard';
-import { UserEditComponent } from './components/user/user-edit/user-edit.component';
 import { NoAccessComponent } from './components/errors/no-access/no-access.component';
 import { ServerErrorComponent } from './components/errors/server-error/server-error.component';
-import { MemberComponent } from './components/member/member.component';
 import { EmployerRegisterComponent } from './components/account/register/employer-register/employer-register.component';
 import { JobSeekerRegisterComponent } from './components/account/register/job-seeker-register/job-seeker-register.component';
 import { NotFoundComponent } from './components/errors/not-found/not-found.component';
 import { CreateAdvertisementComponent } from './components/advertisement/create-advertisement/create-advertisement.component';
 import { AdvertisementListComponent } from './components/advertisement/advertisement-list/advertisement-list.component';
 import { JobSeekerEditComponent } from './components/job-seeker/job-seeker-edit/job-seeker-edit.component';
+import { EmployerEditComponent } from './components/employer/employer-edit/employer-edit.component';
 
 export const routes: Routes = [
     { path: '', component: HomeComponent },
@@ -24,8 +23,8 @@ export const routes: Routes = [
         canActivate: [authGuard],
         children: [
             { path: 'job-seeker/job-seeker-edit', component: JobSeekerEditComponent },
+            { path: 'employer/employer-edit', component: EmployerEditComponent },
             { path: 'no-access', component: NoAccessComponent },
-            { path: 'member', component: MemberComponent },
             { path: 'create-advertisement', component: CreateAdvertisementComponent }
         ]
     },

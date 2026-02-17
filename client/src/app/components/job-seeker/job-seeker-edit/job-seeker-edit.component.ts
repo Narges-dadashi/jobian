@@ -22,8 +22,9 @@ import { PhotoEditorComponent } from '../photo-editor/photo-editor.component';
   standalone: true,
   imports: [
     CommonModule, FormsModule, ReactiveFormsModule,
-    MatCardModule, MatTabsModule, PhotoEditorComponent, MatButtonModule,
-    MatFormFieldModule, MatInputModule
+    MatCardModule, MatTabsModule, MatButtonModule,
+    MatFormFieldModule, MatInputModule,
+    PhotoEditorComponent
   ],
   templateUrl: './job-seeker-edit.component.html',
   styleUrl: './job-seeker-edit.component.scss'

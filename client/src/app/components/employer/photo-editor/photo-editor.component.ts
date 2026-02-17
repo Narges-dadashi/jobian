@@ -1,5 +1,5 @@
 import { Component, inject, Input, OnInit } from '@angular/core';
-import { JobSeeker } from '../../../models/job-seeker.model';
+import { Employer } from '../../../models/employer.model';
 import { LoggedIn } from '../../../models/logged-in.model';
 import { environment } from '../../../../environments/environment.development';
 import { FileUploader, FileUploadModule } from 'ng2-file-upload';
@@ -28,7 +28,7 @@ import { MatButtonModule } from '@angular/material/button';
   styleUrl: './photo-editor.component.scss'
 })
 export class PhotoEditorComponent implements OnInit {
-  @Input('jobSeekerInput') JobSeeker: JobSeeker | undefined;
+  @Input('employerInput') Employer: Employer | undefined;
   loggedInUser: LoggedIn | null | undefined;
   apiUrl: string = environment.apiUrl;
   uploader: FileUploader | undefined;
@@ -66,9 +66,9 @@ export class PhotoEditorComponent implements OnInit {
       this.uploader.onSuccessItem = (item, response) => {
         if (response) {
           const photo: Photo = JSON.parse(response);
-          this.JobSeeker?.photos.push(photo);
+          this.Employer?.photos.push(photo);
 
-          if (this.JobSeeker?.photos.length === 1)
+          if (this.Employer?.photos.length === 1)
             this.setNavbarProfilePhoto(photo.url_165);
         }
       }
@@ -88,9 +88,9 @@ export class PhotoEditorComponent implements OnInit {
       .pipe(take(1))
       .subscribe({
         next: (response: ApiResponse) => {
-          if (response && this.JobSeeker) {
+          if (response && this.Employer) {
 
-            for (const photo of this.JobSeeker.photos) {
+            for (const photo of this.Employer.photos) {
               if (photo.isMain === true)
                 photo.isMain = false;
 
@@ -119,8 +119,8 @@ export class PhotoEditorComponent implements OnInit {
       .pipe(take(1))
       .subscribe({
         next: (response: ApiResponse) => {
-          if (response && this.JobSeeker) {
-            this.JobSeeker.photos.splice(index, 1);
+          if (response && this.Employer) {
+            this.Employer.photos.splice(index, 1);
 
             this._snackBar.open(response.message, 'Close', {
               horizontalPosition: 'center',

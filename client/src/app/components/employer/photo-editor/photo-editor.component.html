@@ -1,15 +1,15 @@
 <main>
-    @if (JobSeeker && loggedInUser) {
+    @if (Employer && loggedInUser) {
     <section class="top">
         <div>
-            @if (JobSeeker.photos.length === 0) {
+            @if (Employer.photos.length === 0) {
             <mat-error>Your album is empty. You may upload some photos.</mat-error>
             }
         </div>
         <div class="gallery">
-            @for (photo of JobSeeker.photos; track $index) {
+            @for (photo of Employer.photos; track $index) {
             <div class="photos">
-                <img src="{{apiUrl + photo.url_165}}" width="165" height="165" alt="{{JobSeeker.userName}} photo">
+                <img src="{{apiUrl + photo.url_165}}" width="165" height="165" alt="{{Employer.userName}} photo">
                 <div class="buttons">
                     <button (click)="setMainPhotoComp(photo.url_165)" mat-stroked-button color="primary"
                         [disabled]="photo.isMain">Set profile
