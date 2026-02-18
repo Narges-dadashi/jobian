@@ -1,1 +1,117 @@
-<p>employer-edit works!</p>
+<div class="container">
+    <section class="head">
+        <h2 class="title">Your Profile</h2>
+    </section>
+    @if (employer) {
+    <div class="content">
+        <section class="employer-card">
+            <mat-card>
+                @for (photo of employer.photos; track $index) {
+                @if (photo.isMain) {
+                <img mat-card-image src="{{apiUrl + photo.url_165}}" width="240" height="240"
+                    alt="Photo of {{employer.userName}}">
+                }
+                }
+                @if (employer.photos.length === 0) {
+                <img mat-card-image src="member.jpg" width="240" height="240" alt="Photo of {{employer.userName}}">
+                }
+                <mat-card-content>
+                    <div>
+                        <strong>UserName</strong>
+                        <p>{{ employer.userName | titlecase }}</p>
+                    </div>
+                    <div>
+                        <strong>CompanyName</strong>
+                        <p>{{employer.companyName}}</p>
+                    </div>
+                    <div>
+                        <strong>Location</strong>
+                        <p>{{ employer.location | titlecase }}, {{ employer.province | titlecase }}</p>
+                    </div>
+                </mat-card-content>
+                <mat-card-actions>
+                    <button type="submit" mat-raised-button color="primary" (click)="updateEmployer()"
+                        [disabled]="employerEditFg.invalid || employerEditFg.pristine">
+                        Save Changes
+                    </button>
+                </mat-card-actions>
+            </mat-card>
+        </section>
+        <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="start" class="employer-info">
+            <mat-tab label="About {{employer.userName}}">
+                <div class="tab-contents">
+                    <form class="about-contents">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Industry</mat-label>
+                            <textarea cdkTextareaAutosize [formControl]="IndustryCtrl" [value]="employer.industry"
+                                matInput>
+                            {{IndustryCtrl.value}}
+                            </textarea>
+                        </mat-form-field>
+                        <mat-form-field appearance="outline">
+                            <mat-label>CompanyPhoneNumber</mat-label>
+                            <textarea cdkTextareaAutosize [formControl]="CompanyPhoneNumberCtrl"
+                                [value]="employer.companyPhoneNumber" matInput>
+                            {{CompanyPhoneNumberCtrl.value}}
+                            </textarea>
+                        </mat-form-field>
+                        <mat-form-field appearance="outline">
+                            <mat-label>ContactPhoneNumber</mat-label>
+                            <textarea cdkTextareaAutosize [formControl]="ContactPhoneNumberCtrl"
+                                [value]="employer.contactPhoneNumber" matInput>
+                            {{ContactPhoneNumberCtrl.value}}
+                            </textarea>
+                        </mat-form-field>
+                        <mat-form-field appearance="outline">
+                            <mat-label>About</mat-label>
+                            <textarea cdkTextareaAutosize [formControl]="AboutCtrl" [value]="employer.about" matInput>
+                            {{AboutCtrl.value}}
+                            </textarea>
+                        </mat-form-field>
+                        <mat-form-field appearance="outline">
+                            <mat-label>LogoUrl</mat-label>
+                            <textarea cdkTextareaAutosize [formControl]="LogoUrlCtrl" [value]="employer.logoUrl"
+                                matInput>
+                            {{LogoUrlCtrl.value}}
+                            </textarea>
+                        </mat-form-field>
+                        <mat-form-field appearance="outline">
+                            <mat-label>ContactPersonName</mat-label>
+                            <textarea cdkTextareaAutosize [formControl]="ContactPersonNameCtrl"
+                                [value]="employer.contactPersonName" matInput>
+                            {{ContactPersonNameCtrl.value}}
+                            </textarea>
+                        </mat-form-field>
+                        <mat-form-field appearance="outline">
+                            <mat-label>ContactPersonPosition</mat-label>
+                            <textarea cdkTextareaAutosize [formControl]="ContactPersonPositionCtrl"
+                                [value]="employer.contactPersonPosition" matInput>
+                            {{ContactPersonPositionCtrl.value}}
+                            </textarea>
+                        </mat-form-field>
+                        <mat-form-field appearance="outline">
+                            <mat-label>Location</mat-label>
+                            <textarea cdkTextareaAutosize [formControl]="LocationCtrl" [value]="employer.location"
+                                matInput>
+                            {{LocationCtrl.value}}
+                            </textarea>
+                        </mat-form-field>
+                        <mat-form-field appearance="outline">
+                            <mat-label>Province</mat-label>
+                            <textarea cdkTextareaAutosize [formControl]="ProvinceCtrl" [value]="employer.province"
+                                matInput>
+                            {{ProvinceCtrl.value}}
+                            </textarea>
+                        </mat-form-field>
+                    </form>
+                </div>
+            </mat-tab>
+            <mat-tab label="Edit Photos">
+                <div class="tab-contents">
+                    <app-photo-editor [employerInput]="employer"></app-photo-editor>
+                </div>
+            </mat-tab>
+        </mat-tab-group>
+    </div>
+    }
+</div>

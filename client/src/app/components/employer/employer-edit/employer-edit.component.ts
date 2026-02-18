@@ -1,20 +1,31 @@
 import { Component, inject, OnInit, PLATFORM_ID } from '@angular/core';
+import { FormBuilder, FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { EmployerService } from '../../../services/employer.service';
 import { UserService } from '../../../services/user.service';
-import { FormBuilder, FormControl, Validators } from '@angular/forms';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { environment } from '../../../../environments/environment.development';
 import { Employer } from '../../../models/employer.model';
 import { EmployerUpdate } from '../../../models/employer-update.model';
 import { take } from 'rxjs';
 import { ApiResponse } from '../../../models/helpers/apiResponse.model';
-import { isPlatformBrowser } from '@angular/common';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { LoggedIn } from '../../../models/logged-in.model';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatInputModule } from '@angular/material/input';
+import { MatCardModule } from '@angular/material/card';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatButtonModule } from '@angular/material/button';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { PhotoEditorComponent } from '../photo-editor/photo-editor.component';
 
 @Component({
   selector: 'app-employer-edit',
   standalone: true,
-  imports: [],
+  imports: [
+    CommonModule, FormsModule, ReactiveFormsModule,
+    MatCardModule, MatTabsModule, MatButtonModule,
+    MatFormFieldModule, MatInputModule,
+    PhotoEditorComponent
+  ],
   templateUrl: './employer-edit.component.html',
   styleUrl: './employer-edit.component.scss'
 })
