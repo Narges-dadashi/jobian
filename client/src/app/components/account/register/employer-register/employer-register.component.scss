@@ -5,7 +5,7 @@ section {
     .container {
         display: flex;
         flex-direction: column;
-        max-width: 300px;
+        max-width: 350px;
         background: #F8F9FD;
         background: matInput linear-gradient(0deg, rgb(255, 255, 255) 0%, rgb(244, 247, 251) 100%);
         border-radius: 40px;
@@ -28,7 +28,8 @@ section {
         .input {
             display: flex;
             align-items: center;
-            width: 150px;
+            width: 100%;
+            box-sizing: border-box;
             background: white;
             border: none;
             padding: 15px 20px;
@@ -43,16 +44,42 @@ section {
             }
         }
 
-        .login {
+        .error-text {
+            display: block;
+            color: black;
+            font-size: 14px;
+            margin-top: 5px;
+            margin-left: 10px;
+        }
+
+        .login-container {
             margin-top: 15px;
             margin-left: 8px;
+            text-align: center;
             font-size: 15px;
-            color: #6d43e2;
+            color: #000;
 
-            &:hover {
-                cursor: pointer;
+            span {
+                color: #6d43e2;
+                font-weight: bold;
+
+                &:hover {
+                    cursor: pointer;
+                    text-decoration: underline;
+                }
             }
         }
+
+        // .login {
+        //     margin-top: 15px;
+        //     margin-left: 8px;
+        //     font-size: 15px;
+        //     color: #6d43e2;
+
+        //     &:hover {
+        //         cursor: pointer;
+        //     }
+        // }
 
         .register {
             display: flex;

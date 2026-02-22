@@ -9,8 +9,7 @@
     text-align: center;
     overflow: hidden;
 
-    // تغییر مهم: به جای سیاه مطلق، از گرادینت شعاعی استفاده می‌کنیم که به بنفش نوبار نزدیک‌تر است
-    background: radial-gradient(circle at center, #1a1033 0%, #050505 100%);
+    background: linear-gradient(to bottom right, #ffffff, #6d43e21a);
 
     &__overlay {
         position: absolute;

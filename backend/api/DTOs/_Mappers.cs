@@ -70,17 +70,6 @@ public static class Mappers
         );
     }
 
-    public static MemberDto ConvertAppUserToMemberDto(AppUser appUser)
-    {
-        return new(
-            Email: appUser.Email!,
-            // CompanyEmail: appUser.CompanyEmail!,
-            UserName: appUser.UserName!,
-            // CompanyName: appUser.CompanyName!,
-            Photos: appUser.Photos
-        );
-    }
-
     public static AdvertisementResponseDto ConvertAdvertisementToAdvertisementResponseDto(Advertisement advertisement, string CompanyName, string CompanyEmail)
     {
         return new(

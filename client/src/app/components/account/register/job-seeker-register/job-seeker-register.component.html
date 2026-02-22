@@ -1,6 +1,72 @@
 <section>
     <div class="container">
         <div class="heading">Register</div>
+        <form [formGroup]="registerFg" class="form">
+
+            <div>
+                <input class="input" type="email" formControlName="emailCtrl" placeholder="E-mail">
+                @if (registerFg.get('emailCtrl')?.touched && registerFg.get('emailCtrl')?.invalid) {
+                @if (registerFg.get('emailCtrl')?.hasError('required')) {
+                <span class="error-text">Email is required.</span>
+                }
+                @if (registerFg.get('emailCtrl')?.hasError('pattern')) {
+                <span class="error-text">Enter a valid email address.</span>
+                }
+                }
+            </div>
+
+            <div>
+                <input class="input" type="text" formControlName="userNameCtrl" placeholder="UserName">
+                @if (registerFg.get('userNameCtrl')?.touched && registerFg.get('userNameCtrl')?.invalid) {
+                @if (registerFg.get('userNameCtrl')?.hasError('required')) {
+                <span class="error-text">Username is required.</span>
+                }
+                @if (registerFg.get('userNameCtrl')?.hasError('maxlength')) {
+                <span class="error-text">Maximum 30 characters allowed.</span>
+                }
+                }
+            </div>
+
+            <div>
+                <input class="input" type="password" formControlName="passwordCtrl" placeholder="Password">
+                @if (registerFg.get('passwordCtrl')?.touched && registerFg.get('passwordCtrl')?.invalid) {
+                @if (registerFg.get('passwordCtrl')?.hasError('required')) {
+                <span class="error-text">Password is required.</span>
+                }
+                @if (registerFg.get('passwordCtrl')?.hasError('minlength')) {
+                <span class="error-text">Too short. Min 8 characters.</span>
+                }
+                }
+            </div>
+
+            <div>
+                <input class="input" type="password" formControlName="confirmPasswordCtrl"
+                    placeholder="ConfirmPassword">
+                @if (registerFg.get('confirmPasswordCtrl')?.touched && registerFg.get('confirmPasswordCtrl')?.invalid) {
+                @if (registerFg.get('confirmPasswordCtrl')?.hasError('required')) {
+                <span class="error-text">Please confirm your password.</span>
+                }
+                }
+            </div>
+
+            <p class="login-container">
+                Already have an account? <span class="login-link" routerLink="/account/login">Login</span>
+            </p>
+
+            <button class="register" type="submit" (click)="register()" [disabled]="registerFg.invalid">
+                Register
+            </button>
+
+            @if (passwordsNotMatch) {
+            <p>Passwords don't match!</p>
+            }
+        </form>
+    </div>
+</section>
+
+<!-- <section>
+    <div class="container">
+        <div class="heading">Register</div>
         <form class="form">
             <input class="input" type="email" [formControl]="EmailCtrl" placeholder="E-mail">
             <input class="input" type="text" [formControl]="UserNameCtrl" placeholder="UserName">
@@ -18,4 +84,4 @@
             }
         </form>
     </div>
-</section>
+</section> -->

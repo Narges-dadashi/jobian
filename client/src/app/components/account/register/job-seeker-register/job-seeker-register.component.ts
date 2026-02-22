@@ -29,10 +29,10 @@ export class JobSeekerRegisterComponent {
   }
 
   registerFg = this.fB.group({
-    emailCtrl: ['', [Validators.required, Validators.email]],
-    userNameCtrl: ['', [Validators.required]],
-    passwordCtrl: ['', [Validators.required]],
-    confirmPasswordCtrl: ['', [Validators.required]]
+    emailCtrl: ['', [Validators.required, Validators.maxLength(50), Validators.pattern(/^([\w\.\-]+)@([\w\-]+)((\.(\w){2,5})+)$/)]],
+    userNameCtrl: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(50)]],
+    passwordCtrl: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(20)]],
+    confirmPasswordCtrl: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(20)]]
   });
 
   get EmailCtrl(): FormControl {

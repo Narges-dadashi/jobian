@@ -14,6 +14,7 @@ import { CreateAdvertisementComponent } from './components/advertisement/create-
 import { AdvertisementListComponent } from './components/advertisement/advertisement-list/advertisement-list.component';
 import { JobSeekerEditComponent } from './components/job-seeker/job-seeker-edit/job-seeker-edit.component';
 import { EmployerEditComponent } from './components/employer/employer-edit/employer-edit.component';
+import { AdminPanelComponent } from './components/admin/admin-panel/admin-panel.component';
 
 export const routes: Routes = [
     { path: '', component: HomeComponent },
@@ -25,7 +26,8 @@ export const routes: Routes = [
             { path: 'job-seeker/job-seeker-edit', component: JobSeekerEditComponent },
             { path: 'employer/employer-edit', component: EmployerEditComponent },
             { path: 'no-access', component: NoAccessComponent },
-            { path: 'create-advertisement', component: CreateAdvertisementComponent }
+            { path: 'create-advertisement', component: CreateAdvertisementComponent },
+            { path: 'admin', component: AdminPanelComponent }
         ]
     },
     {
