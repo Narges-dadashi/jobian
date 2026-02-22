@@ -23,7 +23,7 @@ public class AppUser : MongoIdentityUser<ObjectId>
     public string CompanyEmail { get; init; } = string.Empty;
     [StringLength(30, MinimumLength = 3)]
     public string CompanyName { get; init; } = string.Empty;
-    public string Industry { get; init; } = string.Empty;
+    public string Industry { get; init; } = string.Empty; // hoze va sanat mesle software development
     public string CompanyPhoneNumber { get; init; } = string.Empty;
     public string ContactPhoneNumber { get; init; } = string.Empty;
     public string? About { get; init; } = string.Empty;

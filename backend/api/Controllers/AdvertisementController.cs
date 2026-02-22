@@ -1,6 +1,6 @@
 namespace api.Controllers;
 
-public class AdvertisementController(IAdvertisementRepository advertisementRepository, IMemberRepository memberRepository) : BaseApiController
+public class AdvertisementController(IAdvertisementRepository advertisementRepository, IEmployerRepository employerRepository) : BaseApiController
 {
     [Authorize]
     [HttpPost("create-advertisement")]
@@ -42,7 +42,7 @@ public class AdvertisementController(IAdvertisementRepository advertisementRepos
 
         foreach (Advertisement advertisement in pagedAdvertisements)
         {
-            EmployerDetailsDto? employerDetailsDto = await memberRepository.GetEmployerDetailsByIdAsync(advertisement.CreatorId!, cancellationToken);
+            EmployerDetailsDto? employerDetailsDto = await employerRepository.GetEmployerDetailsByIdAsync(advertisement.CreatorId!, cancellationToken);
 
             AdvertisementResponseDto advertisementResponseDto = Mappers.ConvertAdvertisementToAdvertisementResponseDto(advertisement, employerDetailsDto!.CompanyName, employerDetailsDto.CompanyEmail);
 

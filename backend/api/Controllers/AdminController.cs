@@ -1,7 +1,7 @@
 namespace api.Controllers;
 
 [Authorize(Policy = "RequiredAdminRole")]
-public class AdminController(AdminRepository _adminRepository) : BaseApiController
+public class AdminController(IAdminRepository _adminRepository) : BaseApiController
 {
     [HttpGet("user-with-roles")]
     public async Task<ActionResult<IEnumerable<UserWithRoleDto>>> UserWithRoles()

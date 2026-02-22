@@ -6,8 +6,8 @@ public static class RepositoryServiceExtensions
     {
         services.AddScoped<IAccountRepository, AccountRepository>();
         services.AddScoped<IUserRepository, UserRepository>();
-        services.AddScoped<IMemberRepository, MemberRepository>();
         services.AddScoped<IAdvertisementRepository, AdvertisementRepository>();
+        services.AddScoped<IAdminRepository, AdminRepository>();
         services.AddScoped<IEmployerRepository, EmployerRepository>();
         services.AddScoped<IJobSeekerRepository, JobSeekerRepository>();
         services.AddScoped<ITokenService, TokenService>();

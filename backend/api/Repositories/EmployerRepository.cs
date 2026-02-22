@@ -24,4 +24,15 @@ public class EmployerRepository : IEmployerRepository
 
         return employerDto;
     }
+
+    public async Task<EmployerDetailsDto?> GetEmployerDetailsByIdAsync(string id, CancellationToken cancellationToken)
+    {
+        return await _collection.AsQueryable()
+            .Where(doc => doc.Id.ToString() == id)
+            .Select(doc => new EmployerDetailsDto(
+                doc.CompanyName,
+                doc.CompanyEmail
+            ))
+            .FirstOrDefaultAsync(cancellationToken);
+    }
 }

@@ -4,14 +4,14 @@ public class AdvertisementRepository : IAdvertisementRepository
 {
     #region Mongodb
     private readonly IMongoCollection<Advertisement> _collection;
-    private readonly IMemberRepository _memberRepository;
+    private readonly IEmployerRepository _employerRepository;
 
-    public AdvertisementRepository(IMongoClient client, IMyMongoDbSettings dbSettings, IMemberRepository memberRepository)
+    public AdvertisementRepository(IMongoClient client, IMyMongoDbSettings dbSettings, IEmployerRepository employerRepository)
     {
         var dbName = client.GetDatabase(dbSettings.DatabaseName);
         _collection = dbName.GetCollection<Advertisement>("advertisements");
 
-        _memberRepository = memberRepository;
+        _employerRepository = employerRepository;
     }
     #endregion
 
@@ -40,7 +40,7 @@ public class AdvertisementRepository : IAdvertisementRepository
 
         await _collection.InsertOneAsync(advObj, null, cancellationToken);
 
-        EmployerDetailsDto? employerDetailsDto = await _memberRepository.GetEmployerDetailsByIdAsync(advObj.CreatorId!, cancellationToken);
+        EmployerDetailsDto? employerDetailsDto = await _employerRepository.GetEmployerDetailsByIdAsync(advObj.CreatorId!, cancellationToken);
 
         return Mappers.ConvertAdvertisementToAdvertisementResponseDto(advObj, employerDetailsDto!.CompanyName, employerDetailsDto.CompanyEmail);
     }

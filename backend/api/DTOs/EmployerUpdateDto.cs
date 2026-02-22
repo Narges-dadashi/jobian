@@ -1,8 +1,6 @@
 namespace api.DTOs;
 
 public record EmployerUpdateDto(
-    // string CompanyEmail,
-    // string CompanyName,
     string Industry,
     string CompanyPhoneNumber,
     string ContactPhoneNumber,

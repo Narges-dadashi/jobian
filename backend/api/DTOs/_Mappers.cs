@@ -54,6 +54,8 @@ public static class Mappers
     public static EmployerDto ConvertAppUserToEmployerDto(AppUser appUser)
     {
         return new(
+            UserName: appUser.UserName!,
+            CompanyEmail: appUser.CompanyEmail,
             CompanyName: appUser.CompanyName!,
             Industry: appUser.Industry!,
             CompanyPhoneNumber: appUser.CompanyPhoneNumber,
