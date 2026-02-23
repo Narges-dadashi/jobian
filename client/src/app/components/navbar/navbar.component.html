@@ -7,11 +7,34 @@
         <a class="brand" routerLink="/">jobian</a>
     </section>
 
+    @if (accountService.loggedInUserSig(); as user) {
     <ul class="navbar-links">
+
+        @if (user.roles?.includes('admin')) {
+        @for (link of linksWithAdmin; track link) {
+        <li routerLinkActive="active" #rla="routerLinkActive" [class.active]="rla.isActive">
+            <a [routerLink]="['/' + link.toLowerCase().replace(' ', '-')]">
+                {{ link | titlecase }}
+            </a>
+        </li>
+        }
+        } @else {
+        @for (link of links; track link) {
+        <li routerLinkActive="active" #rla="routerLinkActive" [class.active]="rla.isActive">
+            <a [routerLink]="['/' + link.toLowerCase().replace(' ', '-')]">
+                {{ link | titlecase }}
+            </a>
+        </li>
+        }
+        }
+    </ul>
+    }
+
+    <!-- <ul class="navbar-links">
         <li>Job Opportunities</li>
         <li>Companies</li>
         <li>Resume Builder</li>
-    </ul>
+    </ul> -->
 
     <section class="right">
         @if (accountService.loggedInUserSig(); as user) {

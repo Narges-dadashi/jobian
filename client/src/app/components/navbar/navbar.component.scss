@@ -34,6 +34,9 @@ mat-toolbar {
     display: flex;
     gap: 2rem;
     padding: 1rem;
+    // text-decoration: none;
+    // color: inherit;
+    // cursor: pointer;
 
     li {
       color: #0f172a;
@@ -151,7 +154,7 @@ mat-toolbar {
 }
 
 @media screen and (max-width: 850px) {
-  
+
   .mobile-menu-btn {
     display: inline-block !important;
     color: white;

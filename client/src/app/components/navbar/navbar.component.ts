@@ -27,6 +27,8 @@ import { environment } from '../../../environments/environment.development';
 export class NavbarComponent {
   accountService = inject(AccountService);
   apiUrl = environment.apiUrl;
+  linksWithAdmin: string[] = ['job opportunities', 'companies', 'resume builder', 'admin'];
+  links: string[] = ['job opportunities', 'companies', 'resume builder'];
   userRole = 'employer';
 
   get editProfileRoute(): string {
