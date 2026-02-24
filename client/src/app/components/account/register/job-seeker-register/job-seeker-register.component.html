@@ -3,6 +3,15 @@
         <div class="heading">Register</div>
         <form [formGroup]="registerFg" class="form">
 
+            <div class="gender">
+                <strong>I am a</strong>
+                <mat-radio-group [formControl]="GenderCtrl" aria-label="Select your gender" color="primary">
+                    <mat-radio-button value="female">Female</mat-radio-button>
+                    <mat-radio-button value="male">Male</mat-radio-button>
+                    <mat-radio-button value="other">Other</mat-radio-button>
+                </mat-radio-group>
+            </div>
+
             <div>
                 <input class="input" type="email" formControlName="emailCtrl" placeholder="E-mail">
                 @if (registerFg.get('emailCtrl')?.touched && registerFg.get('emailCtrl')?.invalid) {

@@ -5,13 +5,15 @@ import { Subscription } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
 import { RouterLink } from '@angular/router';
 import { JobSeekerRegister } from '../../../../models/job-seeker-register.model';
+import { MatRadioModule } from '@angular/material/radio';
 
 @Component({
   selector: 'app-job-seeker-register',
   standalone: true,
   imports: [
     RouterLink,
-    FormsModule, ReactiveFormsModule
+    FormsModule, ReactiveFormsModule,
+    MatRadioModule
   ],
   templateUrl: './job-seeker-register.component.html',
   styleUrl: './job-seeker-register.component.scss'
@@ -31,6 +33,7 @@ export class JobSeekerRegisterComponent {
   registerFg = this.fB.group({
     emailCtrl: ['', [Validators.required, Validators.maxLength(50), Validators.pattern(/^([\w\.\-]+)@([\w\-]+)((\.(\w){2,5})+)$/)]],
     userNameCtrl: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(50)]],
+    genderCtrl: ['', [Validators.required]],
     passwordCtrl: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(20)]],
     confirmPasswordCtrl: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(20)]]
   });
@@ -41,6 +44,10 @@ export class JobSeekerRegisterComponent {
 
   get UserNameCtrl(): FormControl {
     return this.registerFg.get('userNameCtrl') as FormControl;
+  }
+
+  get GenderCtrl(): FormControl {
+    return this.registerFg.get('genderCtrl') as FormControl;
   }
 
   get PasswordCtrl(): FormControl {
@@ -56,6 +63,7 @@ export class JobSeekerRegisterComponent {
       let user: JobSeekerRegister = {
         email: this.EmailCtrl.value,
         userName: this.UserNameCtrl.value,
+        gender: this.GenderCtrl.value,
         password: this.PasswordCtrl.value,
         confirmPassword: this.ConfirmPasswordCtrl.value
       }

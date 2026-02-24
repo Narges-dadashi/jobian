@@ -1,11 +1,14 @@
 namespace api.Models;
 
+// public enum EducationLevelType { Diploma, Associate, Bachelor, Master, Doctorate }
+
 [CollectionName("users")]
 public class AppUser : MongoIdentityUser<ObjectId>
 {
     // Common
     public string Location { get; init; } = string.Empty;
     public string Province { get; init; } = string.Empty;
+    public string Gender { get; init; } = string.Empty;
     public List<Photo> Photos { get; init; } = [];
 
     // Job Seeker
@@ -15,7 +18,7 @@ public class AppUser : MongoIdentityUser<ObjectId>
     public string ResumeFileUrl { get; init; } = string.Empty;
     public string Bio { get; init; } = string.Empty;
     public List<string> Skills { get; init; } = [];
-    public string EducationLevel { get; init; } = string.Empty;
+    public EducationLevel EducationLevel { get; init; } = EducationLevel.Diploma;
     public int ExperienceYears { get; init; } = 0;
 
     // Employer

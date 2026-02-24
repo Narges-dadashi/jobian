@@ -8,7 +8,7 @@ public record JobSeekerDto(
     string ResumeFileUrl,
     string Bio,
     List<string> Skills,
-    string EducationLevel,
+    EducationLevel EducationLevel,
     int ExperienceYears,
     string Location,
     string Province,

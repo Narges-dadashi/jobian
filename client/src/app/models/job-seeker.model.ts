@@ -1,3 +1,4 @@
+import { EducationLevel } from "./advertisement.model";
 import { Photo } from "./photo.model";
 
 export interface JobSeeker {
@@ -8,7 +9,7 @@ export interface JobSeeker {
     resumeFileUrl?: string;
     bio: string;
     skills: string[];
-    educationLevel: string;
+    educationLevel: EducationLevel;
     experienceYears: number;
     location: string;
     province: string;

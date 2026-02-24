@@ -34,19 +34,23 @@ export class CreateAdvertisementComponent implements OnInit, OnDestroy {
   }
 
   adForm = this.fB.group({
-    titleCtrl: ['', [Validators.required, Validators.minLength(5)]],
-    detailsCtrl: ['', [Validators.required]],
-    locationCtrl: ['', [Validators.required]],
     companyNameCtrl: [''],
     companyEmailCtrl: ['', [Validators.required, Validators.maxLength(50), Validators.pattern(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/)]],
+    jobTitleCtrl: ['', [Validators.required, Validators.minLength(5)]],
     shortDescriptionCtrl: [''],
+    detailsCtrl: ['', [Validators.required]],
+    categoryCtrl: ['', [Validators.required]],
+    genderCtrl: [0],
+    militaryServiceRequiredCtrl: [0],
+    isUrgentCtrl: [false],
+    locationCtrl: ['', [Validators.required]],
     logoUrlCtrl: [''],
     isRemoteCtrl: [false],
     employmentTypeCtrl: [0],
     experienceLevelCtrl: [0],
     educationLevelCtrl: [0],
-    salaryFromCtrl: [0],
-    salaryToCtrl: [0],
+    minSalaryCtrl: [0],
+    maxSalaryCtrl: [0],
     skillsCtrl: this.fB.array([]),
     benefitsCtrl: [''],
     expiryDateCtrl: [null],
@@ -61,8 +65,8 @@ export class CreateAdvertisementComponent implements OnInit, OnDestroy {
     return this.adForm.get('companyEmailCtrl') as FormControl;
   }
 
-  get TitleCtrl(): FormControl {
-    return this.adForm.get('titleCtrl') as FormControl;
+  get JobTitleCtrl(): FormControl {
+    return this.adForm.get('jobTitleCtrl') as FormControl;
   }
 
   get ShortDescriptionCtrl(): FormControl {
@@ -71,6 +75,22 @@ export class CreateAdvertisementComponent implements OnInit, OnDestroy {
 
   get DetailsCtrl(): FormControl {
     return this.adForm.get('detailsCtrl') as FormControl;
+  }
+
+  get CategoryCtrl(): FormControl {
+    return this.adForm.get('categoryCtrl') as FormControl;
+  }
+
+  get GenderCtrl(): FormControl {
+    return this.adForm.get('genderCtrl') as FormControl;
+  }
+
+  get MilitaryServiceRequiredCtrl(): FormControl {
+    return this.adForm.get('militaryServiceRequiredCtrl') as FormControl;
+  }
+
+  get IsUrgentCtrl(): FormControl {
+    return this.adForm.get('isUrgentCtrl') as FormControl;
   }
 
   get LocationCtrl(): FormControl {
@@ -97,12 +117,12 @@ export class CreateAdvertisementComponent implements OnInit, OnDestroy {
     return this.adForm.get('educationLevelCtrl') as FormControl;
   }
 
-  get SalaryFromCtrl(): FormControl {
-    return this.adForm.get('salaryFromCtrl') as FormControl;
+  get MinSalaryCtrl(): FormControl {
+    return this.adForm.get('minSalaryCtrl') as FormControl;
   }
 
-  get SalaryToCtrl(): FormControl {
-    return this.adForm.get('salaryToCtrl') as FormControl;
+  get MaxSalaryCtrl(): FormControl {
+    return this.adForm.get('maxSalaryCtrl') as FormControl;
   }
 
   get SkillsCtrl(): FormArray {
@@ -134,17 +154,21 @@ export class CreateAdvertisementComponent implements OnInit, OnDestroy {
       let advertisement: Advertisement = {
         companyName: this.CompanyNameCtrl.value,
         companyEmail: this.CompanyEmailCtrl.value,
-        title: this.TitleCtrl.value,
+        jobTitle: this.JobTitleCtrl.value,
         shortDescription: this.ShortDescriptionCtrl.value,
         details: this.DetailsCtrl.value,
+        category: this.CategoryCtrl.value,
+        gender: this.GenderCtrl.value,
+        militaryServiceRequired: this.MilitaryServiceRequiredCtrl.value,
+        isUrgent: this.IsUrgentCtrl.value,
         location: this.LocationCtrl.value,
         logoUrl: this.LogoUrlCtrl.value,
         isRemote: this.IsRemoteCtrl.value,
         employmentType: this.EmploymentTypeCtrl.value,
         experienceLevel: this.ExperienceLevelCtrl.value,
         educationLevel: this.EducationLevelCtrl.value,
-        salaryFrom: this.SalaryFromCtrl.value,
-        salaryTo: this.SalaryToCtrl.value,
+        minSalary: this.MinSalaryCtrl.value,
+        maxSalary: this.MaxSalaryCtrl.value,
         skills: this.SkillsCtrl.value,
         benefits: this.BenefitsCtrl.value,
         expiryDate: this.ExpiryDateCtrl.value,

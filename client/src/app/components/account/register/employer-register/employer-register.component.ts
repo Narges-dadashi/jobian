@@ -5,13 +5,15 @@ import { Subscription } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
 import { AccountService } from '../../../../services/account.service';
 import { EmployerRegister } from '../../../../models/employer-register.model';
+import { MatRadioModule } from '@angular/material/radio';
 
 @Component({
   selector: 'app-employer-register',
   standalone: true,
   imports: [
     RouterLink,
-    FormsModule, ReactiveFormsModule
+    FormsModule, ReactiveFormsModule,
+    MatRadioModule
   ],
   templateUrl: './employer-register.component.html',
   styleUrl: './employer-register.component.scss'
@@ -31,6 +33,7 @@ export class EmployerRegisterComponent {
   registerFg = this.fB.group({
     companyEmailCtrl: ['', [Validators.required, Validators.maxLength(50), Validators.pattern(/^([\w\.\-]+)@([\w\-]+)((\.(\w){2,5})+)$/)]],
     companyNameCtrl: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(50)]],
+    genderCtrl: ['', [Validators.required]],
     passwordCtrl: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(20)]],
     confirmPasswordCtrl: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(20)]]
   });
@@ -41,6 +44,10 @@ export class EmployerRegisterComponent {
 
   get CompanyNameCtrl(): FormControl {
     return this.registerFg.get('companyNameCtrl') as FormControl;
+  }
+
+  get GenderCtrl(): FormControl {
+    return this.registerFg.get('genderCtrl') as FormControl;
   }
 
   get PasswordCtrl(): FormControl {
@@ -56,6 +63,7 @@ export class EmployerRegisterComponent {
       let user: EmployerRegister = {
         companyEmail: this.CompanyEmailCtrl.value,
         companyName: this.CompanyNameCtrl.value,
+        gender: this.GenderCtrl.value,
         password: this.PasswordCtrl.value,
         confirmPassword: this.ConfirmPasswordCtrl.value
       }

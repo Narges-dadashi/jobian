@@ -20,9 +20,10 @@ public class AdvertisementRepository : IAdvertisementRepository
         Advertisement advObj = new()
         {
             CreatorId = userId,
+            CreatedAt = DateTime.UtcNow,
             CompanyName = advertisement.CompanyName,
             CompanyEmail = advertisement.CompanyEmail,
-            Title = advertisement.Title,
+            JobTitle = advertisement.JobTitle,
             ShortDescription = advertisement.ShortDescription,
             Details = advertisement.Details,
             Location = advertisement.Location,
@@ -30,8 +31,8 @@ public class AdvertisementRepository : IAdvertisementRepository
             EmploymentType = advertisement.EmploymentType,
             ExperienceLevel = advertisement.ExperienceLevel,
             EducationLevel = advertisement.EducationLevel,
-            SalaryFrom = advertisement.SalaryFrom,
-            SalaryTo = advertisement.SalaryTo,
+            MaxSalary = advertisement.MaxSalary,
+            MinSalary = advertisement.MinSalary,
             Skills = advertisement.Skills,
             Benefits = advertisement.Benefits,
             ExpiryDate = advertisement.ExpiryDate,
@@ -45,14 +46,44 @@ public class AdvertisementRepository : IAdvertisementRepository
         return Mappers.ConvertAdvertisementToAdvertisementResponseDto(advObj, employerDetailsDto!.CompanyName, employerDetailsDto.CompanyEmail);
     }
 
-    public async Task<PagedList<Advertisement>> GetAllAdvertisementsAsync(PaginationParams paginationParams, CancellationToken cancellationToken)
+    public async Task<PagedList<Advertisement>> GetAllAdvertisementsAsync(AdvertisementParams advertisementParams, CancellationToken cancellationToken)
     {
-        IQueryable<Advertisement> query = _collection.AsQueryable();
-
         PagedList<Advertisement> advertisements = await PagedList<Advertisement>.CreatePagedListAsync(
-            query, paginationParams.PageNumber, paginationParams.PageSize, cancellationToken
+            CreateQuery(advertisementParams), advertisementParams.PageNumber, advertisementParams.PageSize, cancellationToken
         );
 
         return advertisements;
+    }
+
+    public IQueryable<Advertisement> CreateQuery(AdvertisementParams advertisementParams)
+    {
+        IQueryable<Advertisement> query = _collection.AsQueryable();
+
+        // اینو اول میزاریم که فیلترهای بعدی فقط روی آگهی‌های تایید شده اعمال بشه
+        query = query.Where(ad => ad.Status == JobStatus.Published);
+
+        if (!string.IsNullOrEmpty(advertisementParams.Search))
+        {
+            advertisementParams.Search = advertisementParams.Search.ToLower();
+
+            query = query.Where(doc =>
+                doc.JobTitle.ToLower().Contains(advertisementParams.Search, StringComparison.CurrentCultureIgnoreCase) ||
+                doc.CompanyName.ToLower().Contains(advertisementParams.Search, StringComparison.CurrentCultureIgnoreCase) ||
+                doc.Location.ToLower().Contains(advertisementParams.Search, StringComparison.CurrentCultureIgnoreCase) ||
+                (doc.Skills != null && doc.Skills.Any(s => s.ToLower().Contains(advertisementParams.Search.ToLower())))
+            );
+        }
+
+        query = advertisementParams.OrderBy?.ToLower() switch
+        {
+            "jobtitle" => query.OrderBy(ad => ad.JobTitle).ThenBy(ad => ad.Id),
+            "salary" or "maxsalary" => query.OrderByDescending(ad => ad.MaxSalary).ThenBy(ad => ad.Id),
+            "companyname" => query.OrderBy(ad => ad.CompanyName).ThenBy(ad => ad.Id),
+            "location" => query.OrderBy(ad => ad.Location).ThenBy(ad => ad.Id),
+            "seniority" => query.OrderBy(ad => ad.ExperienceLevel).ThenBy(ad => ad.Id),
+            _ => query.OrderByDescending(ad => ad.CreatedAt).ThenBy(ad => ad.Id)
+        };
+
+        return query;
     }
 }

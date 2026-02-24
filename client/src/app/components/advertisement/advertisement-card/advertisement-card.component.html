@@ -14,7 +14,7 @@
 
   <mat-card-header>
     <div class="ad-title-area">
-      <mat-card-title class="purple-text">{{ advertisementIn.title }}</mat-card-title>
+      <mat-card-title class="purple-text">{{ advertisementIn.jobTitle }}</mat-card-title>
       <mat-card-subtitle>Posted by: {{ advertisementIn.creatorUserName }}</mat-card-subtitle>
     </div>
   </mat-card-header>
@@ -37,8 +37,8 @@
   </mat-card-content>
 
   <mat-card-footer class="p-2">
-    <div class="salary-range" *ngIf="advertisementIn.salaryFrom">
-      {{ advertisementIn.salaryFrom | number }} - {{ advertisementIn.salaryTo | number }} USD
+    <div class="salary-range" *ngIf="advertisementIn.minSalary">
+      {{ advertisementIn.minSalary | number }} - {{ advertisementIn.maxSalary | number }} USD
     </div>
   </mat-card-footer>
 </mat-card>

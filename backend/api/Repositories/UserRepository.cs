@@ -36,7 +36,7 @@ public class UserRepository : IUserRepository
         .Set(appUser => appUser.ResumeFileUrl, userInput.ResumeFileUrl.Trim())
         .Set(appUser => appUser.Bio, userInput.Bio.Trim())
         .Set(appUser => appUser.Skills, userInput.Skills)
-        .Set(appUser => appUser.EducationLevel, userInput.EducationLevel.Trim())
+        .Set(appUser => appUser.EducationLevel, userInput.EducationLevel)
         .Set(appUser => appUser.ExperienceYears, userInput.ExperienceYears)
         .Set(appUser => appUser.Location, userInput.Location.Trim())
         .Set(appUser => appUser.Province, userInput.Province.Trim());

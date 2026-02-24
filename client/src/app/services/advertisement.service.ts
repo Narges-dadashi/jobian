@@ -4,8 +4,8 @@ import { Advertisement } from '../models/advertisement.model';
 import { Observable } from 'rxjs';
 import { AdvertisementResponse } from '../models/advertisement-response';
 import { PaginationHandler } from '../extensions/paginationHandler';
-import { PaginationParams } from '../models/helpers/paginationParams.model';
 import { PaginatedResult } from '../models/helpers/paginatedResult';
+import { AdvertisementParams } from '../models/helpers/advertisement-params';
 
 @Injectable({
   providedIn: 'root'
@@ -18,12 +18,20 @@ export class AdvertisementService {
     return this._http.post<AdvertisementResponse>('http://localhost:5000/api/advertisement/create-advertisement', advertisement);
   }
 
-  getAllAdvertisements(paginationParams: PaginationParams): Observable<PaginatedResult<AdvertisementResponse[]>> {
-    let params = new HttpParams();
-
-    params = params.append('pageSize', paginationParams.pageSize);
-    params = params.append('pageNumber', paginationParams.pageNumber);
+  getAllAdvertisements(advertisementParams: AdvertisementParams): Observable<PaginatedResult<AdvertisementResponse[]>> {
+    const params = this.getHttpParams(advertisementParams);
 
     return this._paginationHandler.getPaginatedResult<AdvertisementResponse[]>('http://localhost:5000/api/advertisement/get-all', params);
+  }
+
+  private getHttpParams(advertisementParams: AdvertisementParams): HttpParams {
+    let params = new HttpParams();
+
+    if (advertisementParams) {
+      params = params.append('search', advertisementParams.search);
+      params = params.append('orderBy', advertisementParams.orderBy);
+    }
+
+    return params;
   }
 }

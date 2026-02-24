@@ -1,20 +1,25 @@
-import { EmploymentType, ExperienceLevel, JobStatus } from './advertisement.model';
+import { EducationLevel, EmploymentType, ExperienceLevel, Gender, JobStatus, MilitaryStatus } from './advertisement.model';
 
 export interface AdvertisementResponse {
-    title: string;
-    shortDescription?: string;
-    details: string;
     creatorUserName: string;
     companyEmail: string;
+    jobTitle: string;
+    shortDescription?: string;
+    details: string;
+    category: string;
+    gender: Gender;
+    militaryServiceRequired: MilitaryStatus;
+    isUrgent: boolean;
     location: string;
     isRemote: boolean;
     employmentType: EmploymentType;
     experienceLevel?: ExperienceLevel;
-    educationLevel: string;
-    salaryFrom?: number;
-    salaryTo?: number;
+    educationLevel: EducationLevel;
+    minSalary?: number;
+    maxSalary?: number;
     skills?: string[];
     benefits?: string[];
     expiryDate?: Date | string;
+    createdAt: Date | string;
     status: JobStatus;
 }

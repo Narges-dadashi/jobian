@@ -16,8 +16,8 @@
         </mat-form-field>
 
         <mat-form-field appearance="outline">
-            <mat-label>Title</mat-label>
-            <input type="text" [formControl]="TitleCtrl" matInput>
+            <mat-label>Job Title</mat-label>
+            <input type="text" [formControl]="JobTitleCtrl" matInput>
         </mat-form-field>
 
         <mat-form-field appearance="outline">
@@ -28,6 +28,26 @@
         <mat-form-field appearance="outline">
             <mat-label>Details</mat-label>
             <input type="text" [formControl]="DetailsCtrl" matInput>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Category</mat-label>
+            <input type="text" [formControl]="CategoryCtrl" matInput>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Gender</mat-label>
+            <input type="text" [formControl]="GenderCtrl" matInput>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Military Service Required</mat-label>
+            <input type="text" [formControl]="MilitaryServiceRequiredCtrl" matInput>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Is Urgent?</mat-label>
+            <input type="text" [formControl]="IsUrgentCtrl" matInput>
         </mat-form-field>
 
         <mat-form-field appearance="outline">
@@ -61,13 +81,13 @@
         </mat-form-field>
 
         <mat-form-field appearance="outline">
-            <mat-label>Salary From</mat-label>
-            <input type="text" [formControl]="SalaryFromCtrl" matInput>
+            <mat-label>Min Salary</mat-label>
+            <input type="text" [formControl]="MinSalaryCtrl" matInput>
         </mat-form-field>
 
         <mat-form-field appearance="outline">
-            <mat-label>Salary To</mat-label>
-            <input type="text" [formControl]="SalaryToCtrl" matInput>
+            <mat-label>Max Salary</mat-label>
+            <input type="text" [formControl]="MaxSalaryCtrl" matInput>
         </mat-form-field>
 
         <div class="skills-section" formArrayName="skillsCtrl">

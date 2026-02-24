@@ -10,7 +10,7 @@
     @if (accountService.loggedInUserSig(); as user) {
     <ul class="navbar-links">
 
-        @if (user.roles?.includes('admin')) {
+        @if (user.roles.includes('admin')) {
         @for (link of linksWithAdmin; track link) {
         <li routerLinkActive="active" #rla="routerLinkActive" [class.active]="rla.isActive">
             <a [routerLink]="['/' + link.toLowerCase().replace(' ', '-')]">

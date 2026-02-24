@@ -8,6 +8,7 @@ public static class Mappers
         {
             Email = jobSeekerRegisterDto.Email,
             UserName = jobSeekerRegisterDto.UserName,
+            Gender = jobSeekerRegisterDto.Gender
         };
     }
 
@@ -16,7 +17,8 @@ public static class Mappers
         return new AppUser
         {
             Email = employerRegisterDto.Email,
-            UserName = employerRegisterDto.UserName
+            UserName = employerRegisterDto.UserName,
+            Gender = employerRegisterDto.Gender
         };
     }
 
@@ -73,21 +75,27 @@ public static class Mappers
     public static AdvertisementResponseDto ConvertAdvertisementToAdvertisementResponseDto(Advertisement advertisement, string CompanyName, string CompanyEmail)
     {
         return new(
-            Title: advertisement.Title,
-            ShortDescription: advertisement.ShortDescription,
-            Details: advertisement.Details,
             CreatorUserName: string.IsNullOrEmpty(CompanyName) ? "Unknown Company" : CompanyName,
             CompanyEmail: CompanyEmail,
+            JobTitle: advertisement.JobTitle,
+            ShortDescription: advertisement.ShortDescription,
+            Details: advertisement.Details,
+            Category: advertisement.Category,
+            Gender: advertisement.Gender,
+            MilitaryServiceRequired: advertisement.MilitaryServiceRequired,
+            IsUrgent: advertisement.IsUrgent,
             Location: advertisement.Location,
+            LogoUrl: advertisement.LogoUrl,
             IsRemote: advertisement.IsRemote,
             EmploymentType: advertisement.EmploymentType,
             ExperienceLevel: advertisement.ExperienceLevel,
             EducationLevel: advertisement.EducationLevel!,
-            SalaryFrom: advertisement.SalaryFrom,
-            SalaryTo: advertisement.SalaryTo,
+            MinSalary: advertisement.MinSalary,
+            MaxSalary: advertisement.MaxSalary,
             Skills: advertisement.Skills,
             Benefits: advertisement.Benefits,
             ExpiryDate: advertisement.ExpiryDate,
+            CreatedAt: advertisement.CreatedAt,
             Status: advertisement.Status
         );
     }
