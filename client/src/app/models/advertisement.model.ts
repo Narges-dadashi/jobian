@@ -6,8 +6,8 @@ export enum EducationLevel { NotRequired, Diploma, Associate, Bachelor, Master, 
 export enum JobStatus { Draft, Published, Closed, Archived }
 
 export interface Advertisement {
-    id?: string;
-    creatorId?: string;
+    // id?: string;
+    // creatorId?: string; // چرا باید حذف بشه
     companyName: string;
     companyEmail: string;
     jobTitle: string;
@@ -28,6 +28,6 @@ export interface Advertisement {
     skills?: string[];
     benefits?: string[];
     expiryDate?: Date;
-    createdAt?: Date;
+    // createdAt?: Date;
     status: JobStatus;
 }

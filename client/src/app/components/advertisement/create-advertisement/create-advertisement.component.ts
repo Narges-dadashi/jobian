@@ -52,7 +52,7 @@ export class CreateAdvertisementComponent implements OnInit, OnDestroy {
     minSalaryCtrl: [0],
     maxSalaryCtrl: [0],
     skillsCtrl: this.fB.array([]),
-    benefitsCtrl: [''],
+    benefitsCtrl: this.fB.array([]),
     expiryDateCtrl: [null],
     statusCtrl: [1]
   });

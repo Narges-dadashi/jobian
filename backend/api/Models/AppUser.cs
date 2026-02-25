@@ -18,7 +18,9 @@ public class AppUser : MongoIdentityUser<ObjectId>
     public string ResumeFileUrl { get; init; } = string.Empty;
     public string Bio { get; init; } = string.Empty;
     public List<string> Skills { get; init; } = [];
-    public EducationLevel EducationLevel { get; init; } = EducationLevel.Diploma;
+    [BsonIgnoreIfNull] // اگر نال بود در دیتابیس ذخیره نشود
+    [BsonRepresentation(BsonType.String)]
+    public EducationLevel? EducationLevel { get; init; } = null;
     public int ExperienceYears { get; init; } = 0;
 
     // Employer

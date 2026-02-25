@@ -11,6 +11,7 @@ export interface AdvertisementResponse {
     militaryServiceRequired: MilitaryStatus;
     isUrgent: boolean;
     location: string;
+    logoUrl?: string;
     isRemote: boolean;
     employmentType: EmploymentType;
     experienceLevel?: ExperienceLevel;

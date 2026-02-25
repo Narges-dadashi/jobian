@@ -45,7 +45,7 @@ public static class Mappers
             ResumeFileUrl: appUser.ResumeFileUrl!,
             Bio: appUser.Bio!,
             Skills: appUser.Skills!,
-            EducationLevel: appUser.EducationLevel!,
+            EducationLevel: appUser.EducationLevel ?? EducationLevel.Diploma, // اگر نال بود مقدار پیش‌فرض دیپلم را قرار بده
             ExperienceYears: appUser.ExperienceYears,
             Location: appUser.Location!,
             Province: appUser.Province!,
@@ -92,8 +92,10 @@ public static class Mappers
             EducationLevel: advertisement.EducationLevel!,
             MinSalary: advertisement.MinSalary,
             MaxSalary: advertisement.MaxSalary,
-            Skills: advertisement.Skills,
-            Benefits: advertisement.Benefits,
+            // Skills: advertisement.Skills,
+            // Benefits: advertisement.Benefits,
+            Skills: advertisement.Skills ?? new List<string>(), // برای جلوگیری از نال بودن لیست در خروجی
+            Benefits: advertisement.Benefits ?? new List<string>(),
             ExpiryDate: advertisement.ExpiryDate,
             CreatedAt: advertisement.CreatedAt,
             Status: advertisement.Status
