@@ -16,11 +16,11 @@
             }
         </div>
 
-        @if (pagination && paginationParams) {
+        @if (pagination && advertisementParams) {
         <div class="pagination-section shadow-sm">
             <mat-paginator #paginator (page)="handlePageEvent($event)" [length]="pagination.totalItems"
-                [pageSize]="paginationParams.pageSize" [showFirstLastButtons]="true" [pageSizeOptions]="pageSizeOptions"
-                [pageIndex]="paginationParams.pageNumber - 1" class="purple-paginator">
+                [pageSize]="advertisementParams.pageSize" [showFirstLastButtons]="true" [pageSizeOptions]="pageSizeOptions"
+                [pageIndex]="advertisementParams.pageNumber - 1" class="purple-paginator">
             </mat-paginator>
         </div>
         }
