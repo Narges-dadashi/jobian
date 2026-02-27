@@ -25,7 +25,7 @@ export class AccountService {
         if (res) {
           this.setCurrentUser(res);
 
-          this.router.navigateByUrl('advertisements');
+          this.router.navigateByUrl('');
 
           return res;
         }
@@ -57,7 +57,13 @@ export class AccountService {
         if (res) {
           this.setCurrentUser(res);
 
-          this.router.navigateByUrl('create-advertisement');
+          if (res.roles.includes('employer')) {
+            this.router.navigateByUrl('create-advertisement');
+          } else {
+            this.router.navigateByUrl('');
+          }
+
+          // this.router.navigateByUrl('create-advertisement');
 
           return res;
         }
