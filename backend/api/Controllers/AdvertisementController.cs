@@ -2,20 +2,31 @@ namespace api.Controllers;
 
 public class AdvertisementController(IAdvertisementRepository advertisementRepository, IEmployerRepository employerRepository) : BaseApiController
 {
-    [Authorize(Roles = "Employer")]
+    // [Authorize(Roles = "Employer")]
     [HttpPost("create-advertisement")]
     public async Task<ActionResult<AdvertisementResponseDto>> CreateAdvertisement(Advertisement advertisement, CancellationToken cancellationToken)
     {
         string? userId = User.GetUserId();
 
-        if (!User.IsInRole("Employer"))
-        {
-            return Forbid();
-        }
+        // if (!User.IsInRole("Employer"))
+        // {
+        //     return Forbid();
+        // }
 
         AdvertisementResponseDto? advertisementResponseDto = await advertisementRepository.CreateAdvertisementAsync(advertisement, userId!, cancellationToken);
 
         return Ok(advertisementResponseDto);
+    }
+
+    [HttpGet("get-by-job-title/{jobTitle}")]
+    public async Task<ActionResult<AdvertisementResponseDto?>> GetByJobTitle(string jobTitle, CancellationToken cancellationToken)
+    {
+        AdvertisementResponseDto? advertisementResponseDto = await advertisementRepository.GetByJobTitleAsync(jobTitle, cancellationToken);
+
+        if (advertisementResponseDto is null)
+            return BadRequest("JobTitle not found");
+
+        return advertisementResponseDto;
     }
 
     [AllowAnonymous]

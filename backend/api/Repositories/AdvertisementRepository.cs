@@ -43,7 +43,30 @@ public class AdvertisementRepository : IAdvertisementRepository
 
         EmployerDetailsDto? employerDetailsDto = await _employerRepository.GetEmployerDetailsByIdAsync(advObj.CreatorId!, cancellationToken);
 
-        return Mappers.ConvertAdvertisementToAdvertisementResponseDto(advObj, employerDetailsDto!.CompanyName, employerDetailsDto.CompanyEmail);
+        return Mappers.ConvertAdvertisementToAdvertisementResponseDto(
+        advObj,
+        employerDetailsDto?.CompanyName ?? string.Empty,
+        employerDetailsDto?.CompanyEmail ?? string.Empty
+    );
+    }
+
+    public async Task<AdvertisementResponseDto?> GetByJobTitleAsync(string jobTitle, CancellationToken cancellationToken)
+    {
+        Advertisement? advertisement = await _collection.Find
+            (doc => doc.JobTitle == jobTitle).FirstOrDefaultAsync(cancellationToken);
+
+        if (advertisement is null)
+            return null;
+
+        EmployerDetailsDto? employerDetailsDto = await _employerRepository.GetEmployerDetailsByIdAsync(advertisement.CreatorId!, cancellationToken);
+
+        AdvertisementResponseDto advertisementResponseDto = Mappers.ConvertAdvertisementToAdvertisementResponseDto(
+            advertisement,
+            employerDetailsDto?.CompanyName ?? string.Empty,
+            employerDetailsDto?.CompanyEmail ?? string.Empty
+        );
+
+        return advertisementResponseDto;
     }
 
     public async Task<PagedList<Advertisement>> GetAllAdvertisementsAsync(AdvertisementParams advertisementParams, CancellationToken cancellationToken)
@@ -59,7 +82,7 @@ public class AdvertisementRepository : IAdvertisementRepository
     {
         IQueryable<Advertisement> query = _collection.AsQueryable();
 
-        // اینو اول میزاریم که فیلترهای بعدی فقط روی آگهی‌های تایید شده اعمال بشه
+        // اینو اول میزاریم که فیلترها فقط روی آگهی‌های تایید شده اعمال بشه
         query = query.Where(ad => ad.Status == JobStatus.Published);
 
         if (!string.IsNullOrEmpty(advertisementParams.Search))
