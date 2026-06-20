@@ -35,3 +35,5 @@ global using api.MiddleWares;
 global using api.Models.Helpers;
 global using api.Helpers;
 global using MongoDB.Bson.Serialization.Attributes;
+global using api.DTOs.Helpers;
+global using api.Enums;

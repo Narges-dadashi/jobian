@@ -1,6 +1,6 @@
 namespace api.Models;
 
-// public enum EducationLevelType { Diploma, Associate, Bachelor, Master, Doctorate }
+public enum EducationLevelType { Diploma, Associate, Bachelor, Master, Doctorate }
 
 [CollectionName("users")]
 public class AppUser : MongoIdentityUser<ObjectId>

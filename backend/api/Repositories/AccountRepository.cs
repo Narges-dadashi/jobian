@@ -17,7 +17,7 @@ public class AccountRepository : IAccountRepository
     }
     #endregion
 
-    public async Task<LoggedInDto?> RegisterJobSeekerAsync(JobSeekerRegisterDto userInput, CancellationToken cancellationToken)
+    public async Task<OperationResult<LoggedInDto>> RegisterJobSeekerAsync(JobSeekerRegisterDto userInput, CancellationToken cancellationToken)
     {
         AppUser appUser = Mappers.ConvertJobSeekerRegisterDtoToAppUser(userInput);
 
@@ -25,121 +25,153 @@ public class AccountRepository : IAccountRepository
 
         if (!userCreationResult.Succeeded)
         {
-            var errors = userCreationResult.Errors
-                .Select(e => e.Description)
-                .ToList();
-
-            return new LoggedInDto
-            {
-                Errors = errors,
-            };
+            return new OperationResult<LoggedInDto>(
+                IsSuccess: false,
+                Error: new CustomError(
+                    Code: ErrorCode.NetIdentityFailed,
+                    Message: userCreationResult.Errors.Select(e => e.Description).FirstOrDefault()
+                )
+            );
         }
 
         IdentityResult roleResult = await _userManager.AddToRoleAsync(appUser, "jobSeeker");
 
         if (!roleResult.Succeeded)
         {
-            var roleErrors = roleResult.Errors
-                .Select(e => e.Description)
-                .ToList();
-
-            return new LoggedInDto
-            {
-                Errors = roleErrors,
-            };
+            return new OperationResult<LoggedInDto>(
+                IsSuccess: false,
+                Error: new CustomError(
+                    ErrorCode.NetIdentityRoleFailed,
+                    Message: roleResult.Errors.Select(e => e.Description).FirstOrDefault()
+                )
+            );
         }
 
         string? token = await _tokenService.CreateToken(appUser);
 
         if (string.IsNullOrEmpty(token))
         {
-            return new LoggedInDto
-            {
-                Errors = new List<string> { "Failed to generate authentication token." },
-            };
+            return new OperationResult<LoggedInDto>(
+                IsSuccess: false,
+                Error: new CustomError(
+                    Code: ErrorCode.TokenGenerationFaild,
+                    Message: "Token generation failed."
+                )
+            );
         }
 
-        return Mappers.ConvertAppUserToLoggedInDto(appUser, token);
+        LoggedInDto loggedInDto = Mappers.ConvertAppUserToLoggedInDto(appUser, token);
+
+        return new OperationResult<LoggedInDto>(
+            IsSuccess: true,
+            Result: loggedInDto,
+            Error: null
+        );
     }
 
-    public async Task<LoggedInDto?> RegisterEmployerAsync(EmployerRegisterDto userInput, CancellationToken cancellationToken)
+    public async Task<OperationResult<LoggedInDto>> RegisterEmployerAsync(EmployerRegisterDto userInput, CancellationToken cancellationToken)
     {
-        var appUser = Mappers.ConvertEmployerRegisterDtoToAppUser(userInput);
+        AppUser appUser = Mappers.ConvertEmployerRegisterDtoToAppUser(userInput);
 
-        var userCreationResult = await _userManager.CreateAsync(appUser, userInput.Password);
+        IdentityResult userCreationResult = await _userManager.CreateAsync(appUser, userInput.Password);
 
         if (!userCreationResult.Succeeded)
         {
-            var errors = userCreationResult.Errors
-                .Select(e => e.Description)
-                .ToList();
-
-            return new LoggedInDto
-            {
-                Errors = errors,
-            };
+            return new OperationResult<LoggedInDto>(
+                IsSuccess: false,
+                Error: new CustomError(
+                    Code: ErrorCode.NetIdentityFailed,
+                    Message: userCreationResult.Errors.Select(e => e.Description).FirstOrDefault()
+                )
+            );
         }
 
-        var roleResult = await _userManager.AddToRoleAsync(appUser, "employer");
+        IdentityResult roleResult = await _userManager.AddToRoleAsync(appUser, "employer");
 
         if (!roleResult.Succeeded)
         {
-            var roleErrors = roleResult.Errors
-                .Select(e => e.Description)
-                .ToList();
-
-            return new LoggedInDto
-            {
-                Errors = roleErrors,
-            };
+            return new OperationResult<LoggedInDto>(
+                IsSuccess: false,
+                Error: new CustomError(
+                    ErrorCode.NetIdentityRoleFailed,
+                    Message: roleResult.Errors.Select(e => e.Description).FirstOrDefault()
+                )
+            );
         }
 
-        var token = await _tokenService.CreateToken(appUser);
+        string? token = await _tokenService.CreateToken(appUser);
 
         if (string.IsNullOrEmpty(token))
         {
-            return new LoggedInDto
-            {
-                Errors = new List<string> { "Failed to generate authentication token." },
-            };
+            return new OperationResult<LoggedInDto>(
+                IsSuccess: false,
+                Error: new CustomError(
+                    Code: ErrorCode.TokenGenerationFaild,
+                    Message: "Token generation failed."
+                )
+            );
         }
 
-        return Mappers.ConvertAppUserToLoggedInDto(appUser, token);
+        LoggedInDto loggedInDto = Mappers.ConvertAppUserToLoggedInDto(appUser, token);
+
+        return new OperationResult<LoggedInDto>(
+            IsSuccess: true,
+            Result: loggedInDto,
+            Error: null
+        );
     }
 
-    public async Task<LoggedInDto?> LoginAsync(LoginDto userInput, CancellationToken cancellationToken)
+    public async Task<OperationResult<LoggedInDto>> LoginAsync(LoginDto userInput, CancellationToken cancellationToken)
     {
         AppUser? appUser = await _userManager.FindByEmailAsync(userInput.Email!);
 
         if (appUser is null)
         {
-            return new LoggedInDto
-            {
-                IsWrongCreds = true
-            };
+            return new OperationResult<LoggedInDto>(
+                IsSuccess: false,
+                Error: new CustomError(
+                    Code: ErrorCode.WrongCreds,
+                    Message: "Wrong Creds!"
+                )
+            );
         }
 
         bool isPassCorrect = await _userManager.CheckPasswordAsync(appUser, userInput.Password);
 
         if (!isPassCorrect)
         {
-            return new LoggedInDto
-            {
-                IsWrongCreds = true
-            };
+            return new OperationResult<LoggedInDto>(
+                IsSuccess: false,
+                Error: new CustomError(
+                    Code: ErrorCode.WrongCreds,
+                    Message: "Wrong Creds!"
+                )
+            );
         }
 
         string? token = await _tokenService.CreateToken(appUser);
 
         if (string.IsNullOrEmpty(token))
         {
-            return null;
+            return new OperationResult<LoggedInDto>(
+                IsSuccess: false,
+                Error: new CustomError(
+                    Code: ErrorCode.TokenGenerationFaild,
+                    "Token generation faild!"
+                )
+            );
         }
 
-        return Mappers.ConvertAppUserToLoggedInDto(appUser, token);
+        LoggedInDto loggedInDto = Mappers.ConvertAppUserToLoggedInDto(appUser, token);
+
+        return new OperationResult<LoggedInDto>(
+            IsSuccess: true,
+            Result: loggedInDto,
+            Error: null
+        );
     }
 
-    public async Task<DeleteResult?> DeleteByIdAsync(string userId, CancellationToken cancellationToken)
+    public async Task<DeleteResult> DeleteByIdAsync(string userId, CancellationToken cancellationToken)
     {
         AppUser appUser = await _collection.Find<AppUser>(doc => doc.Id.ToString() == userId).FirstOrDefaultAsync(cancellationToken);
 
@@ -149,9 +181,10 @@ public class AccountRepository : IAccountRepository
         }
 
         return await _collection.DeleteOneAsync<AppUser>(doc => doc.Id.ToString() == userId, cancellationToken);
+
     }
 
-    public async Task<LoggedInDto?> ReloadLoggedInUserAsync(string userId, string token, CancellationToken cancellationToken)
+    public async Task<LoggedInDto> ReloadLoggedInUserAsync(string userId, string token, CancellationToken cancellationToken)
     {
         AppUser? appUser = await _collection.Find<AppUser>(doc => doc.Id.ToString() == userId).FirstOrDefaultAsync(cancellationToken);
 
